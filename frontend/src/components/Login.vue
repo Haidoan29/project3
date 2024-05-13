@@ -10,81 +10,105 @@
             <p :key="errorKey" v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
             
         </form> -->
-    <section class="vh-100">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6 text-black" style="background-color: #ace2e1">
-            <div class="px-5 ms-xl-4 pt-5">
-              <span class="h1 fw-bold mb-0" style="
-                  font-family: 'Roboto', 'Courier New', monospace;
-                  font-style: oblique;
-                ">Đường sắt Minh Hải</span>
-            </div>
-            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-              <form style="width: 23rem" @submit.prevent="login">
-                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
-                  Log in
-                </h3>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <label class="form-label" for="form2Example18">Username</label>
-                  <input id="form2Example18" class="form-control form-control-lg" v-model="loginForm.username"
-                    required />
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <label class="form-label" for="form2Example28">Password</label>
-                  <input type="password" id="form2Example28" class="form-control form-control-lg"
-                    v-model="loginForm.password" required />
+    <section class="vh-100" style="background-color: #1f1815">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem">
+              <div class="row g-0">
+                <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img
+                    src="https://halotravel.vn/wp-content/uploads/2019/10/duong-tau-ha-noi-08.jpg"
+                    alt="login form"
+                    class="img-fluid h-100 w-100"
+                    style="border-radius: 1rem 0 0 1rem"
+                  />
                 </div>
                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                   <div class="card-body p-4 p-lg-5 text-black">
                     <form @submit.prevent="login">
                       <div class="d-flex align-items-center mb-3 pb-1">
-                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
-                        <span class="h1 fw-bold mb-0" style="
+                        <i
+                          class="fas fa-cubes fa-2x me-3"
+                          style="color: #ff6219"
+                        ></i>
+                        <span
+                          class="h1 fw-bold mb-0"
+                          style="
                             font-family: 'Roboto', 'Courier New', monospace;
                             font-style: oblique;
-                          ">ĐƯỜNG SẮT HẢI MINH</span>
+                          "
+                          >ĐƯỜNG SẮT HẢI MINH</span
+                        >
                       </div>
 
-                      <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                      <h5
+                        class="fw-normal mb-3 pb-3"
+                        style="letter-spacing: 1px"
+                      >
                         Log In
                       </h5>
 
                       <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="form2Example17">Username</label>
-                        <input type="text" id="form2Example17" class="form-control form-control-lg"
-                          v-model="loginForm.username" required />
+                        <label class="form-label" for="form2Example17"
+                          >Username</label
+                        >
+                        <input
+                          type="text"
+                          id="form2Example17"
+                          class="form-control form-control-lg"
+                          v-model="loginForm.username"
+                          required
+                        />
                       </div>
 
                       <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="form2Example27">Password</label>
-                        <input type="password" id="form2Example27" class="form-control form-control-lg"
-                          v-model="loginForm.password" required />
+                        <label class="form-label" for="form2Example27"
+                          >Password</label
+                        >
+                        <input
+                          type="password"
+                          id="form2Example27"
+                          class="form-control form-control-lg"
+                          v-model="loginForm.password"
+                          required
+                        />
                       </div>
 
                       <div class="pt-1 mb-4">
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block"
-                          type="submit">
+                        <button
+                          data-mdb-button-init
+                          data-mdb-ripple-init
+                          class="btn btn-info btn-lg btn-block"
+                          type="submit"
+                        >
                           Login
                         </button>
                       </div>
 
-                      <a class="text-muted" href="/forgotpassword" @click="goToForgotpassword">Forgot password?</a>
+                      <a
+                        class="text-muted"
+                        href="/forgotpassword"
+                        @click="goToForgotpassword"
+                        >Forgot password?</a
+                      >
                       <p class="mb-5 pb-lg-2" style="color: #393f81">
                         Don't have an account?
-                        <a href="/register" @click="goToRegister" class="link-info">Register here</a>
+                        <a
+                          href="/register"
+                          @click="goToRegister"
+                          class="link-info"
+                          >Register here</a
+                        >
                       </p>
                     </form>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </section>
     <!-- <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p> -->
   </div>
