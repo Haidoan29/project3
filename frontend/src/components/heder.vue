@@ -1,44 +1,98 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <li @click="logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </li>
-            </ul>
+  <!-- Navbar -->
+  <nav
+    class="navbar navbar-expand-lg navbar-light text-lg-start bg-body-tertiary text-muted"
+    style="height: 75px"
+  >
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Navbar brand -->
+      <a class="navbar-brand align-items-center me-2" href="">
+        <h2
+          class="text-uppercase fw-bold mb-4"
+          style="
+            font-family: 'Roboto', 'Courier New', monospace;
+            font-style: oblique;
+            color: #fff;
+          "
+        >
+          <i
+            ><img
+              src="../assets/img/logo3.png"
+              class="img-fluid"
+              style="height: 20px; width: 40px; margin-right: 10px" /></i
+          >ĐƯỜNG SẮT HẢI MINH
+        </h2>
+      </a>
+
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+          </li>
+        </ul>
+
+        <!-- Left links -->
+
+        <div class="d-flex align-items-center">
+          <!-- <button
+            data-mdb-ripple-init
+            type="button"
+            class="btn btn-link px-3 me-2"
+          >
+            Login
+          </button> -->
+          <button
+            data-mdb-button-init
+            data-mdb-ripple-init
+            class="btn btn-info btn-lg btn-block"
+            type="submit"
+            style="background-color: #26a8bc"
+          >
+            <i class="fa-regular fa-user" style="margin-right: 5px"></i>
+            Đăng nhập
+          </button>
         </div>
-    </nav>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
 </template>
 
 <script>
 export default {
-    name: 'YourComponentName',
-    methods: {
-        logout() {
-            // Xử lý đăng xuất ở đây
-            // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
-            localStorage.removeItem('token');
-            this.$router.push('/login');
-            window.location.reload();
-        }
-    }
-}
+  name: "YourComponentName",
+  methods: {
+    logout() {
+      // Xử lý đăng xuất ở đây
+      // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
+      localStorage.removeItem("token");
+      this.$router.push("/login");
+      window.location.reload();
+    },
+  },
+};
 </script>

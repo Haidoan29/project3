@@ -1,42 +1,63 @@
 <template>
-  <section class="banner" id="top">
+  <section class="banner" id="top" style="margin-top: 90px">
     <div class="container">
       <div class="row">
         <div class="col-md-5">
           <div class="left-side">
             <div class="logo">
-              <img src="img/logo.png" alt="Flight Template" />
+              <img
+                src="../assets/img/banner-home1.jpg"
+                class="img-fluid"
+                style="height: 450px; width: 400px; margin-right: 10px"
+              />
             </div>
-            <div class="tabs-content">
-              <h4>Choose Your Direction:</h4>
+            <!-- <div class="tabs-content">
+              <h4>
+                Khuyến cáo khách hàng chú ý khi mua vé trực tuyến
+                <p>
+                  Hiện nay, trên mạng đã xuất hiện một số trang website bán vé
+                  tàu hỏa với giá đắt gấp nhiều lần so với giá vé của ngành ĐS.
+                  Các trang này có tên miền gần giống với website của ngành ĐS
+                  nên một số hành khách đặc biệt là khách nước ngoài đã hiểu
+                  nhầm và mua vé với giá rất cao.
+                </p>
+              </h4>
               <ul class="social-links">
                 <li>
-                  <a href="https://www.facebook.com/Share-Source-Code-Website-189970988225280/">Find us on
-                    <em>Facebook</em><i class="fa fa-facebook"></i></a>
+                  <a
+                    href="https://www.facebook.com/Share-Source-Code-Website-189970988225280/"
+                    >Find us on <em>Facebook</em><i class="fa fa-facebook"></i
+                  ></a>
                 </li>
                 <li>
-                  <a href="http://youtube.com/">Our <em>YouTube</em> Channel<i class="fa fa-youtube"></i></a>
+                  <a href="http://youtube.com/"
+                    >Our <em>YouTube</em> Channel<i class="fa fa-youtube"></i
+                  ></a>
                 </li>
                 <li>
-                  <a href="http://instagram.com/">Follow our <em>instagram</em><i class="fa fa-instagram"></i></a>
+                  <a href="http://instagram.com/"
+                    >Follow our <em>instagram</em><i class="fa fa-instagram"></i
+                  ></a>
                 </li>
               </ul>
-            </div>
-            <div class="page-direction-button">
-              <a href="contact.html"><i class="fa fa-phone"></i>Contact Us Now</a>
-            </div>
+            </div> -->
+            <!-- <div class="page-direction-button">
+              <a href="contact.html"
+                ><i class="fa fa-phone"></i>Contact Us Now</a
+              >
+            </div> -->
           </div>
         </div>
         <div class="col-md-5 col-md-offset-1">
           <section id="first-tab-group" class="tabgroup">
-            <div id="tab1">
+            <div id="tab1" style="box-shadow: 4px 4px 8px #feefad">
               <div class="submit-form">
-                <h4>Check availability for <em>direction</em>:</h4>
+                <h4>Thông tin hành trình:</h4>
                 <form id="form-submit" action="#" method="get">
                   <div class="row">
                     <div class="col-md-6">
                       <fieldset>
-                        <label for="from">From:</label>
+                        <label for="from">Ga đi:</label>
                         <select required name="from" onchange="this.form.()">
                           <option value="">Select a location...</option>
                           <option value="Cambodia">Cambodia</option>
@@ -54,7 +75,7 @@
                     </div>
                     <div class="col-md-6">
                       <fieldset>
-                        <label for="to">To:</label>
+                        <label for="to">Ga đến:</label>
                         <select required name="to" onchange="this.form.()">
                           <option value="">Select a location...</option>
                           <option value="Cambodia">Cambodia</option>
@@ -72,38 +93,41 @@
                     </div>
                     <div class="col-md-6">
                       <fieldset>
-                        <label for="departure">Departure date:</label>
-                        <input name="deparure" type="text" class="form-control date" id="deparure"
-                          placeholder="Select date..." required="" onchange="this.form.()" />
+                        <label for="departure">Ngày đi:</label>
+                        <input
+                          name="deparure"
+                          type="text"
+                          class="form-control date"
+                          id="deparure"
+                          placeholder="Select date..."
+                          required=""
+                          onchange="this.form.()"
+                        />
                       </fieldset>
                     </div>
-                    <div class="col-md-6">
+
+                    <!-- <div class="col-md-6"></div> -->
+
+                    <div class="col-md-6 mt-5">
                       <fieldset>
-                        <label for="return">Return date:</label>
-                        <input name="return" type="text" class="form-control date" id="return"
-                          placeholder="Select date..." required="" onchange="this.form.()" />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="radio-select">
-                        <div class="row">
-                          <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label for="round">Round</label>
-                            <input type="radio" name="trip" id="round" value="round" required="required"
-                              onchange="this.form.()" />
-                          </div>
-                          <div class="col-md-6 col-sm-6 col-xs-6">
-                            <label for="oneway">Oneway</label>
-                            <input type="radio" name="trip" id="oneway" value="one-way" required="required"
-                              onchange="this.form.()" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="btn">
-                          Order Ticket Now
+                        <button
+                          type="submit"
+                          id="form-submit"
+                          class="btn"
+                          style="background-color: #26a8bc; color: white"
+                        >
+                          <i
+                            ><img
+                              src="../assets/img/service-icon-03.png"
+                              class="img-fluid"
+                              style="
+                                height: 15px;
+                                width: 15px;
+                                margin-right: 5px;
+                              "
+                            />
+                          </i>
+                          Tìm vé
                         </button>
                       </fieldset>
                     </div>
@@ -117,7 +141,7 @@
     </div>
   </section>
 
-  <div class="tabs-content" id="weather">
+  <!-- <div class="tabs-content" id="weather">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -393,41 +417,39 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <section class="services">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
           <div class="service-item first-service">
-            <div class="service-icon"></div>
-            <h4>Easy Tooplate</h4>
+            <div class="fa-solid fa-plant-wilt" style="font-size: 70px"></div>
+            <h4>LÊN KẾ HOẠCH</h4>
             <p>
-              Donec varius porttitor iaculis. Integer sollicitudin erat et
-              ligula viverra vulputate. In in quam efficitur, pulvinar justo ut,
-              tempor nunc. Phasellus pharetra quis odio.
+              Tìm thấy tuyến đường tốt nhất cho bạn nhờ vào chúng tôi. Giúp bạn
+              lên kế hoạch cho những chuyến đi bất cứ khi nào và ở đâu.
             </p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="service-item second-service">
-            <div class="service-icon"></div>
-            <h4>Unique Ideas</h4>
+            <div class="fa-solid fa-ticket" style="font-size: 70px"></div>
+            <h4>ĐẶT VÉ</h4>
             <p>
-              Cras ligula diam, tristique at aliquam at, fermentum auctor
-              turpis. Proin leo massa, iaculis elementum massa et, consectetur
-              varius dolor. Fusce sed ipsum sit.
+              Đặt vé tàu trực tuyến giúp bạn tiết kiệm thời gian và công sức.
+              Chọn lịch trình, chỗ ngồi và thanh toán một cách thuận tiện ngay
+              trên trang web.
             </p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="service-item third-service">
-            <div class="service-icon"></div>
-            <h4>Best Support</h4>
+            <div class="fa-solid fa-train" style="font-size: 70px"></div>
+            <h4>SẴN SÀNG LÊN ĐƯỜNG</h4>
             <p>
-              Fusce leo dui. Mauris et justo eget arcu ultricies porta. Nulla
-              facilisi. Nulla nec risus sit amet magna hendrerit venenatis. Sed
-              porta tincidunt lectus eget ultrices.
+              Nhận hành trình và vé điện tử qua email. Bạn có thể in vé ra hoặc
+              mang theo trên điện thoại di động, sẵn sàng lên xe.
             </p>
           </div>
         </div>
@@ -693,11 +715,11 @@ export default {
     logout() {
       // Xử lý đăng xuất ở đây
       // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
-      localStorage.removeItem('token');
-      this.$router.push('/login');
+      localStorage.removeItem("token");
+      this.$router.push("/login");
       window.location.reload();
-    }
-  }
+    },
+  },
 };
 </script>
 
