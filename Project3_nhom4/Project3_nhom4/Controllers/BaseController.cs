@@ -37,7 +37,7 @@ namespace Project3_nhom4.Controllers
         }
         [Authorize(Roles = "ADMIN , SUBADMIN , CUSTOMER")]
         [HttpGet("GetById/{id}")]
-        public async Task<ActionResult<PassengerDetail>> GetById(int id)
+        public async Task<ActionResult<ForgotPasswordController>> GetById(int id)
         {
             var result = await (_repository.GetById(id));
             return Ok(result);
@@ -45,7 +45,7 @@ namespace Project3_nhom4.Controllers
         [Authorize(Roles = "ADMIN , SUBADMIN")]
         [HttpPost]
         [Route("Create")]
-        public async Task<ActionResult<PassengerDetail>> Create(T entity)
+        public async Task<ActionResult<ForgotPasswordController>> Create(T entity)
         {
             var result = await _repository.Create(entity);
             return Ok(result);
@@ -53,7 +53,7 @@ namespace Project3_nhom4.Controllers
         [Authorize(Roles = "ADMIN , SUBADMIN")]
         [HttpPut]
         [Route("Update")]
-        public async Task<ActionResult<PassengerDetail>> Update(T entity)
+        public async Task<ActionResult<ForgotPasswordController>> Update(T entity)
         {
             var result = await (_repository.Update(entity));
             return Ok(result);
@@ -61,7 +61,7 @@ namespace Project3_nhom4.Controllers
         [Authorize(Roles = "ADMIN , SUBADMIN")]
         [HttpDelete]
         [Route("Delete")]
-        public async Task<ActionResult<PassengerDetail>> Delete(int id)
+        public async Task<ActionResult<ForgotPasswordController>> Delete(int id)
         {
             var result = await (_repository.Delete(id));
             return Ok(result);

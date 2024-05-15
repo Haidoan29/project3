@@ -7,9 +7,9 @@ namespace Project3_nhom4.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainDetailController : BaseController<TrainDetail>
+    public class StationController : BaseController<Station>
     {
-        public TrainDetailController(IBaseRepository<TrainDetail> repository) : base(repository)
+        public StationController(IBaseRepository<Station> repository) : base(repository)
         {
         }
     }

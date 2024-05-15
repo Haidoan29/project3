@@ -4305,11 +4305,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\QuanLyDuongSat\\Project3_nhom4\\Project3_nhom4\\Project3_nhom4.csproj",
+      "projectUniqueName": "E:\\project3\\Project3_nhom4\\Project3_nhom4\\Project3_nhom4.csproj",
       "projectName": "Project3_nhom4",
-      "projectPath": "E:\\QuanLyDuongSat\\Project3_nhom4\\Project3_nhom4\\Project3_nhom4.csproj",
+      "projectPath": "E:\\project3\\Project3_nhom4\\Project3_nhom4\\Project3_nhom4.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\QuanLyDuongSat\\Project3_nhom4\\Project3_nhom4\\obj\\",
+      "outputPath": "E:\\project3\\Project3_nhom4\\Project3_nhom4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

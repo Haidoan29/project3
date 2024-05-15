@@ -100,7 +100,7 @@
                             </table>
 
                         </div>
-                        <div class="modal fade" ref="productModal" id="productModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" ref="ProductModal" id="ProductModal" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -249,7 +249,7 @@ export default {
     data() {
         return {
             productData: [],
-            productModal: null,
+            ProductModal: null,
             currentProduct: {
                 id: 0,
                 className: "Name",
@@ -277,7 +277,7 @@ export default {
                 let startIndex = (this.currentPage - 1) * this.pageSize;
                 let endIndex = this.currentPage * this.pageSize;
 
-                // Cắt lát productData để chỉ lấy số lượng sản phẩm tương ứng với pageSize
+                // Cắt lát productData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
                 this.productData = response.data.slice(startIndex, endIndex);
                 // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
 
@@ -308,11 +308,11 @@ export default {
                 className: "Name",
 
             }
-            this.productModal.show();
+            this.ProductModal.show();
         },
         onUpdateClick(p) {
             this.currentProduct = Object.assign({}, p);// clone d
-            this.productModal.show();
+            this.ProductModal.show();
         },
         onSaveClick() {
             if (this.currentProduct.id == 0) {
@@ -333,7 +333,7 @@ export default {
                         this.success();
 
                         // Ẩn modal
-                        this.productModal.hide();
+                        this.ProductModal.hide();
 
                         // Tải lại dữ liệu sản phẩm
                         this.loadProductData();
@@ -362,7 +362,7 @@ export default {
                         // Hiển thị thông báo thành công
                         this.success();
                         // Ẩn modal
-                        this.productModal.hide();
+                        this.ProductModal.hide();
                         // Tải lại dữ liệu sản phẩm
                         this.loadProductData();
                     })
@@ -442,7 +442,7 @@ export default {
         this.loadProductData();
         console.log(this.totalPages);
         //load Modal
-        this.productModal = new Modal(this.$refs.productModal);
+        this.ProductModal = new Modal(this.$refs.ProductModal);
     }
 }
 </script>

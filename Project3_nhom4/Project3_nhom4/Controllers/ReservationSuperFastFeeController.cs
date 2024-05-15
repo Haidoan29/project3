@@ -7,9 +7,9 @@ namespace Project3_nhom4.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PassengerDetailController : BaseController<PassengerDetail>
+    public class ReservationSuperFastFeeController : BaseController<ReservationSuperFastFee>
     {
-        public PassengerDetailController(IBaseRepository<PassengerDetail> repository) : base(repository)
+        public ReservationSuperFastFeeController(IBaseRepository<ReservationSuperFastFee> repository) : base(repository)
         {
         }
     }
