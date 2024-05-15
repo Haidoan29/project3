@@ -48,7 +48,7 @@ builder.Services.AddScoped<IDailyCashTransactionRepository, DailyCashTransaction
 builder.Services.AddScoped<IDayMasterRepository, DayMasterRepository>();
 builder.Services.AddScoped<IFareRuleRepository, FareRuleRepository>();
 builder.Services.AddScoped<IReservationSuperFastFeeRepository, ReservationSuperFastFeeRepository>();
-builder.Services.AddScoped<IRouteReponsitory, RouteReponsitory>();
+builder.Services.AddScoped<IRouteReponsitory, RoutesReponsitory>();
 builder.Services.AddScoped<IStationReponsitory, StationReponsitory>();
 builder.Services.AddScoped<ITrainReponsitory, TrainReponsitory>();
 builder.Services.AddScoped<ITrainScheduleRepository, TrainScheduleRepository>();

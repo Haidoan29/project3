@@ -17,7 +17,7 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i
+                                    <a class="btn btn-add btn-sm" href="/admin/employee/add-train" title="Thêm"><i
                                             class="fas fa-plus"></i>
                                         Tạo mới tàu</a>
                                 </div>
@@ -61,7 +61,7 @@
                                         <th>Giới tính</th>
                                         <th>SĐT</th>
                                         <th>Chức vụ</th> -->
-                                        <th width="2    00">Tính năng</th>
+                                        <th width="200">Tính năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>

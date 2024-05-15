@@ -17,5 +17,7 @@ namespace Project3_nhom4.Models
         public virtual Station? EndStation { get; set; }
 
         public ICollection<Train>? Trains { get; set; }
+        // Constructor
+       
     }
 }
