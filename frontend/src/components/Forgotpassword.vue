@@ -29,10 +29,13 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header">
                     <div class="d-flex align-items-center mb-3 pb-1">
-                      <i
-                        class="fas fa-cubes fa-2x me-3"
-                        style="color: #ff6219"
-                      ></i>
+                      <i>
+                        <img
+                          src="../assets/img/logo3.png"
+                          class="img-fluid"
+                          style="height: 35px; width: 70px; margin-right: 10px"
+                        />
+                      </i>
                       <span
                         class="h1 fw-bold mb-0"
                         style="
@@ -43,7 +46,7 @@
                       >
                     </div>
                     <h3 class="fw-normal mb-5" style="letter-spacing: 1px">
-                      Password Recovery
+                      KHÔI PHỤC MẬT KHẨU
                     </h3>
                   </div>
                   <div class="card-body">
@@ -51,17 +54,17 @@
                       v-if="!showCodeInput && !showPasswordInput"
                       class="small mb-3 text-muted"
                     >
-                      Enter your email address and we will send you a link to
-                      reset your password.
+                      Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một
+                      liên kết để đặt lại mật khẩu của bạn.
                     </div>
                     <div
                       v-if="showCodeInput && !showPasswordInput"
                       class="small mb-3 text-muted"
                     >
-                      Enter the confirmation code sent to your email.
+                      Nhập mã xác nhận được gửi tới email của bạn.
                     </div>
                     <div v-if="showPasswordInput" class="small mb-3 text-muted">
-                      Enter your new password.
+                      Nhập mật khẩu mới của bạn.
                     </div>
                     <form @submit.prevent="submitForm">
                       <div
@@ -75,7 +78,7 @@
                           v-model="email"
                           placeholder="name@example.com"
                         />
-                        <label for="inputEmail">Email address</label>
+                        <label for="inputEmail"></label>
                       </div>
                       <div
                         v-if="showCodeInput && !showPasswordInput"
@@ -88,7 +91,7 @@
                           v-model="code"
                           placeholder="Confirmation code"
                         />
-                        <label for="inputCode">Confirmation Code</label>
+                        <label for="inputCode">Mã xác nhận</label>
                       </div>
                       <div v-if="showPasswordInput" class="form-floating mb-3">
                         <input
@@ -98,7 +101,7 @@
                           v-model="newPassword"
                           placeholder="New Password"
                         />
-                        <label for="inputPassword">New Password</label>
+                        <label for="inputPassword">Mật khẩu mới</label>
                       </div>
                       <div
                         class="d-flex align-items-center justify-content-between mt-4 mb-0"
@@ -107,7 +110,7 @@
                           v-if="showCodeInput || showPasswordInput"
                           class="small"
                           to="/login"
-                          >Return to login</router-link
+                          >Trở về trang đăng nhập</router-link
                         >
                         <button
                           type="submit"
@@ -123,7 +126,7 @@
                   </div>
                   <div class="card-footer text-center py-3">
                     <div class="small">
-                      <a href="register.html">Need an account? Sign up!</a>
+                      <a href="register.html">Cần một tài khoản? Đăng ký!</a>
                     </div>
                   </div>
                 </div>

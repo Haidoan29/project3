@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <!-- <div>
     <Heders />
-  </div>
+  </div> -->
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <Login />
@@ -12,13 +12,13 @@
 <script>
 // @ is an alias to /src
 import Login from "@/components/Login.vue";
-import Heders from "@/components/heder.vue";
+// import Heders from "@/components/heder.vue";
 
 export default {
   name: "HomeView",
   components: {
     Login,
-    Heders,
+    // Heders,
   },
 };
 </script>

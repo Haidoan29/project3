@@ -42,10 +42,17 @@
                   <div class="card-body p-4 p-lg-5 text-black">
                     <form @submit.prevent="register">
                       <div class="d-flex align-items-center mb-3 pb-1">
-                        <i
-                          class="fas fa-cubes fa-2x me-3"
-                          style="color: #ff6219"
-                        ></i>
+                        <i>
+                          <img
+                            src="../assets/img/logo3.png"
+                            class="img-fluid"
+                            style="
+                              height: 35px;
+                              width: 70px;
+                              margin-right: 10px;
+                            "
+                          />
+                        </i>
                         <span
                           class="h1 fw-bold mb-0"
                           style="
@@ -60,12 +67,12 @@
                         class="fw-normal mb-3 pb-3"
                         style="letter-spacing: 1px"
                       >
-                        Register
+                        ĐĂNG KÍ
                       </h5>
 
                       <div data-mdb-input-init class="form-outline">
                         <label class="form-label" for="form2Example17"
-                          >Username</label
+                          >Tên tài khoản</label
                         >
                         <input
                           type="text"
@@ -76,7 +83,7 @@
                         />
                       </div>
 
-                      <div data-mdb-input-init class="form-outline">
+                      <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form2Example17"
                           >Email</label
                         >
@@ -92,7 +99,7 @@
 
                       <div data-mdb-input-init class="form-outline">
                         <label class="form-label" for="form2Example27"
-                          >Password</label
+                          >Mật khẩu</label
                         >
                         <input
                           type="password"
@@ -107,7 +114,7 @@
 
                       <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form2Example27"
-                          >Repeat Password</label
+                          >Nhập lại mật khẩu</label
                         >
                         <input
                           type="password"
@@ -132,7 +139,7 @@
                           type="submit"
                           style="background-color: #26a8bc"
                         >
-                          Submit
+                          Đăng kí
                         </button>
                       </div>
                     </form>
