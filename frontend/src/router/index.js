@@ -9,6 +9,7 @@ import Dashboard from '@/views/admin/Dashboard.vue'
 import Customer from '@/views/admin/Customer.vue'
 import Order from '@/views/admin/Order.vue'
 import Singinsss from '@/views/admin/singinsss.vue'
+import AddTrain from '@/views/admin/AddTrain.vue'
 
 const routes = [
   {
@@ -75,6 +76,11 @@ const routes = [
     path: '/admin/singin',
     name: 'singin',
     component: Singinsss
+  },
+  {
+    path: '/admin/employee/add-train',
+    name: 'AddTrain',
+    component: AddTrain
   },
 ]
 
