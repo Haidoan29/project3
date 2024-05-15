@@ -34,16 +34,17 @@
             <li><a class="app-menu__item active" href="/admin/dashboard"><i
                         class='app-menu__icon bx bx-tachometer'></i><span class="app-menu__label">Bảng điều
                         khiển</span></a></li>
-            <li><a class="app-menu__item " href="/admin/employee"><i class='app-menu__icon bx bx-id-card'></i>
-                    <span class="app-menu__label">Quản lý nhân viên</span></a></li>
             <li><a class="app-menu__item" href="/admin/customer"><i class='app-menu__icon bx bx-user-voice'></i><span
                         class="app-menu__label">Quản lý khách hàng</span></a></li>
+            <li><a class="app-menu__item " href="/admin/employee"><i class='app-menu__icon bx bx-id-card'></i>
+                    <span class="app-menu__label">Quản lý Tàu</span></a></li>
+
             <li><a class="app-menu__item" href="/admin/product"><i
-                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản
-                        phẩm</span></a>
+                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý nhà
+                        Ga</span></a>
             </li>
             <li><a class="app-menu__item" href="/admin/order"><i class='app-menu__icon bx bx-task'></i><span
-                        class="app-menu__label">Quản lý đơn hàng</span></a></li>
+                        class="app-menu__label">Quản lý Vé</span></a></li>
             <!-- <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
                         class="app-menu__label">Quản lý nội bộ
                     </span></a></li> -->

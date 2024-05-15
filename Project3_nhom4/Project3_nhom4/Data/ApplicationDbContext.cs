@@ -15,9 +15,17 @@ namespace Project3_nhom4.Data
 
             //this.Data();
         }
-        public virtual DbSet<PassengerDetail> PassengerDetails { get; set; }
-        public virtual DbSet<TrainDetail> TrainDetails { get; set; }
-        public virtual DbSet<FareDetail> FareDetails { get; set; }
+        public virtual DbSet<Cancellation> Cancellations { get; set; }
+        public virtual DbSet<CancellationFeeRule> CancellationFeeRules { get; set; }
+        public virtual DbSet<DailyCashTransaction> DailyCashTransactions { get; set; }
+        public virtual DbSet<DayMaster> DayMasters { get; set; }
+        public virtual DbSet<FareRule> FareRules { get; set; }
+        public virtual DbSet<ReservationSuperFastFee> ReservationSuperFastFees { get; set; }
+        public virtual DbSet<Routes> Routes { get; set; }
+        public virtual DbSet<Station> Stations { get; set; }
+        public virtual DbSet<Train> Trains { get; set; }
+        public virtual DbSet<TrainSchedule> TrainSchedules { get; set;}
+        public virtual DbSet<Transaction> Transactions { get; set; }   
         //private async void Data()
         //{
         //    if (this.Class.Count() <= 0)

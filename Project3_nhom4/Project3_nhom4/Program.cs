@@ -42,9 +42,19 @@ builder.Services.AddAuthentication(option =>
 });
 // Dang ky vong doi cua 1 Repositoty de co the DI duoc
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IFareDetailRepository, FareDetailRepository>();
-builder.Services.AddScoped<IPassengerDetailRepository, PassengerDetailRepository>();
-builder.Services.AddScoped<ITrainDetailRepository, TrainDetailRepository>();
+builder.Services.AddScoped<ICancellationRepository, CancellationRepository>();
+builder.Services.AddScoped<ICancellationFeeRuleRepository, CancellationFeeRuleRepository>();
+builder.Services.AddScoped<IDailyCashTransactionRepository, DailyCashTransactionRepository>();
+builder.Services.AddScoped<IDayMasterRepository, DayMasterRepository>();
+builder.Services.AddScoped<IFareRuleRepository, FareRuleRepository>();
+builder.Services.AddScoped<IReservationSuperFastFeeRepository, ReservationSuperFastFeeRepository>();
+builder.Services.AddScoped<IRouteReponsitory, RouteReponsitory>();
+builder.Services.AddScoped<IStationReponsitory, StationReponsitory>();
+builder.Services.AddScoped<ITrainReponsitory, TrainReponsitory>();
+builder.Services.AddScoped<ITrainScheduleRepository, TrainScheduleRepository>();
+builder.Services.AddScoped<ICustomerRopository, CustomerRopository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
 {
