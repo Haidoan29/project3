@@ -36,10 +36,10 @@
                         khiển</span></a></li>
             <li><a class="app-menu__item" href="/admin/customer"><i class='app-menu__icon bx bx-user-voice'></i><span
                         class="app-menu__label">Quản lý khách hàng</span></a></li>
-            <li><a class="app-menu__item " href="/admin/employee"><i class='app-menu__icon bx bx-id-card'></i>
+            <li><a class="app-menu__item " href="/admin/train"><i class='app-menu__icon bx bx-train  '></i>
                     <span class="app-menu__label">Quản lý Tàu</span></a></li>
 
-            <li><a class="app-menu__item" href="/admin/product"><i
+            <li><a class="app-menu__item" href="/admin/station"><i
                         class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý nhà
                         Ga</span></a>
             </li>

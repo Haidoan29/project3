@@ -16,7 +16,7 @@
 
                                     <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i
                                             class="fas fa-plus"></i>
-                                        Tạo mới đơn hàng</a>
+                                        Tạo mới Ga</a>
                                 </div>
                                 <!-- <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"

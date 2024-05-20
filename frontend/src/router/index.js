@@ -3,13 +3,14 @@ import Register from '@/views/Register.vue'
 import Home from '@/views/HomePage.vue'
 import Forgotpassword from '@/views/ForgotpasswordView.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
-import Employee from '@/views/admin/employee.vue'
-import Product from '@/views/admin/Product.vue'
+import Train from '@/views/admin/Train.vue'
+import Station from '@/views/admin/Station.vue'
 import Dashboard from '@/views/admin/Dashboard.vue'
 import Customer from '@/views/admin/Customer.vue'
 import Order from '@/views/admin/Order.vue'
 import Singinsss from '@/views/admin/singinsss.vue'
 import AddTrain from '@/views/admin/AddTrain.vue'
+import AddStations from '@/views/admin/AddStation.vue'
 
 const routes = [
   {
@@ -43,15 +44,15 @@ const routes = [
     meta: { requiresAuth: true } // Thêm meta data để chỉ định rằng trang cần đăng nhập
   },
   {
-    path: '/admin/employee',
+    path: '/admin/train',
     name: 'EmployeeStaff',
-    component: Employee,
+    component: Train,
     meta: { requiresAuth: true }
   },
   {
-    path: '/admin/product',
-    name: 'ProductList',
-    component: Product,
+    path: '/admin/station',
+    name: 'StationList',
+    component: Station,
     meta: { requiresAuth: true }
   },
   {
@@ -78,9 +79,14 @@ const routes = [
     component: Singinsss
   },
   {
-    path: '/admin/employee/add-train',
+    path: '/admin/train/add-train',
     name: 'AddTrain',
     component: AddTrain
+  },
+  {
+    path: '/admin/station/add-station',
+    name: 'AddStation',
+    component: AddStations
   },
 ]
 
