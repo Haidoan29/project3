@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Project3.Data;
+using Project3.Repository;
+
 //using Project3.Repository;
 using Project3.Services;
 using System.Text;
@@ -41,19 +43,19 @@ builder.Services.AddAuthentication(option =>
     };
 });
 // Dang ky vong doi cua 1 Repositoty de co the DI duoc
-//builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-//builder.Services.AddScoped<ICancellationRepository, CancellationRepository>();
-//builder.Services.AddScoped<ICancellationFeeRuleRepository, CancellationFeeRuleRepository>();
-//builder.Services.AddScoped<IDailyCashTransactionRepository, DailyCashTransactionRepository>();
-//builder.Services.AddScoped<IDayMasterRepository, DayMasterRepository>();
-//builder.Services.AddScoped<IFareRuleRepository, FareRuleRepository>();
-//builder.Services.AddScoped<IReservationSuperFastFeeRepository, ReservationSuperFastFeeRepository>();
-//builder.Services.AddScoped<IRoutesReponsitory, RoutesReponsitory>();
-//builder.Services.AddScoped<IStationReponsitory, StationReponsitory>();
-//builder.Services.AddScoped<ITrainReponsitory, TrainReponsitory>();
-//builder.Services.AddScoped<ITrainScheduleRepository, TrainScheduleRepository>();
-//builder.Services.AddScoped<ICustomerRopository, CustomerRopository>();
-//builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<ICancellationRepository, CancellationRepository>();
+builder.Services.AddScoped<ICancellationFeeRuleRepository, CancellationFeeRuleRepository>();
+builder.Services.AddScoped<IDailyCashTransactionRepository, DailyCashTransactionRepository>();
+builder.Services.AddScoped<IDayMasterRepository, DayMasterRepository>();
+builder.Services.AddScoped<IFareRuleRepository, FareRuleRepository>();
+builder.Services.AddScoped<IReservationSuperFastFeeRepository, ReservationSuperFastFeeRepository>();
+builder.Services.AddScoped<IRoutesReponsitory, RoutesReponsitory>();
+builder.Services.AddScoped<IStationReponsitory, StationReponsitory>();
+builder.Services.AddScoped<ITrainReponsitory, TrainReponsitory>();
+builder.Services.AddScoped<ITrainScheduleRepository, TrainScheduleRepository>();
+builder.Services.AddScoped<ICustomerRopository, CustomerRopository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
