@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project3.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -184,28 +184,6 @@ namespace Project3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Routers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RouteName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartStationID = table.Column<int>(type: "int", nullable: false),
-                    EndStation = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Routers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Stations",
                 columns: table => new
                 {
@@ -334,7 +312,41 @@ namespace Project3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Train",
+                name: "Routers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RouteName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartStationID = table.Column<int>(type: "int", nullable: false),
+                    EndStation = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Routers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Routers_Stations_EndStation",
+                        column: x => x.EndStation,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Routers_Stations_StartStationID",
+                        column: x => x.StartStationID,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trains",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -355,9 +367,9 @@ namespace Project3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Train", x => x.Id);
+                    table.PrimaryKey("PK_Trains", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Train_Routers_RouteID",
+                        name: "FK_Trains_Routers_RouteID",
                         column: x => x.RouteID,
                         principalTable: "Routers",
                         principalColumn: "Id",
@@ -385,15 +397,15 @@ namespace Project3.Migrations
                 {
                     table.PrimaryKey("PK_DayMasters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DayMasters_Train_TrainID",
+                        name: "FK_DayMasters_Trains_TrainID",
                         column: x => x.TrainID,
-                        principalTable: "Train",
+                        principalTable: "Trains",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TrainSchedule",
+                name: "TrainSchedules",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -415,16 +427,28 @@ namespace Project3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainSchedule", x => x.Id);
+                    table.PrimaryKey("PK_TrainSchedules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TrainSchedule_Train_TrainNo",
+                        name: "FK_TrainSchedules_Stations_EndStationID",
+                        column: x => x.EndStationID,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TrainSchedules_Stations_StartStationID",
+                        column: x => x.StartStationID,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TrainSchedules_Trains_TrainNo",
                         column: x => x.TrainNo,
-                        principalTable: "Train",
+                        principalTable: "Trains",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transaction",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -448,17 +472,29 @@ namespace Project3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transaction", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transaction_Customers_CustomerID",
+                        name: "FK_Transactions_Customers_CustomerID",
                         column: x => x.CustomerID,
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transaction_Train_TrainID",
+                        name: "FK_Transactions_Stations_FromStationID",
+                        column: x => x.FromStationID,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Stations_ToStationID",
+                        column: x => x.ToStationID,
+                        principalTable: "Stations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Trains_TrainID",
                         column: x => x.TrainID,
-                        principalTable: "Train",
+                        principalTable: "Trains",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -508,23 +544,53 @@ namespace Project3.Migrations
                 column: "TrainID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Train_RouteID",
-                table: "Train",
+                name: "IX_Routers_EndStation",
+                table: "Routers",
+                column: "EndStation");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Routers_StartStationID",
+                table: "Routers",
+                column: "StartStationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trains_RouteID",
+                table: "Trains",
                 column: "RouteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TrainSchedule_TrainNo",
-                table: "TrainSchedule",
+                name: "IX_TrainSchedules_EndStationID",
+                table: "TrainSchedules",
+                column: "EndStationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainSchedules_StartStationID",
+                table: "TrainSchedules",
+                column: "StartStationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainSchedules_TrainNo",
+                table: "TrainSchedules",
                 column: "TrainNo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_CustomerID",
-                table: "Transaction",
+                name: "IX_Transactions_CustomerID",
+                table: "Transactions",
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_TrainID",
-                table: "Transaction",
+                name: "IX_Transactions_FromStationID",
+                table: "Transactions",
+                column: "FromStationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_ToStationID",
+                table: "Transactions",
+                column: "ToStationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_TrainID",
+                table: "Transactions",
                 column: "TrainID");
         }
 
@@ -565,13 +631,10 @@ namespace Project3.Migrations
                 name: "ReservationSuperFastFees");
 
             migrationBuilder.DropTable(
-                name: "Stations");
+                name: "TrainSchedules");
 
             migrationBuilder.DropTable(
-                name: "TrainSchedule");
-
-            migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -583,10 +646,13 @@ namespace Project3.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Train");
+                name: "Trains");
 
             migrationBuilder.DropTable(
                 name: "Routers");
+
+            migrationBuilder.DropTable(
+                name: "Stations");
         }
     }
 }

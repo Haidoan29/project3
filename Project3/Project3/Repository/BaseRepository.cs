@@ -47,7 +47,7 @@ namespace Project3.Repository
             if (entity != null)
             {
                 entity.CreatedDate = DateTime.Now;
-                entity.CreatedBy = GetCurrentUserId();
+                
                 _dbSet.Add(entity);
                 await _context.SaveChangesAsync();
                 return entity;
@@ -65,8 +65,7 @@ namespace Project3.Repository
             if (result != null)
             {
                 result.IsDeleted = true;
-                result.DeletedAt = DateTime.Now;
-                result.DeletedBy = GetCurrentUserId();
+                
                 _dbSet.Update(result);
                 await _context.SaveChangesAsync();
                 return result;
@@ -180,7 +179,7 @@ namespace Project3.Repository
             if (entity != null)
             {
                 entity.UpdatedAt = DateTime.Now;
-                entity.UpdatedBy = GetCurrentUserId();
+                
                 _dbSet.Update(entity);
                 await _context.SaveChangesAsync();
                 return entity;

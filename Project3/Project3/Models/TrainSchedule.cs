@@ -13,10 +13,10 @@ namespace Project3.Models
         public TimeSpan ArrivalTime { get; set; }
         [ForeignKey("TrainNo")]
         public virtual Train? Train { get; set; }
-    //    [ForeignKey("StartStationID")]
+        [ForeignKey("StartStationID")]
 
-    //    public virtual Station? StartStation { get; set; }
-    //    [ForeignKey("EndStationID")]
-    //    public virtual Station? EndStation { get; set; }
+        public virtual Station? StartStation { get; set; }
+        [ForeignKey("EndStationID")]
+        public virtual Station? EndStation { get; set; }
     }
 }

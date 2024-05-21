@@ -16,10 +16,10 @@ namespace Project3.Models
         public decimal ReservationFee { get; set; }
         [ForeignKey("TrainID")]
         public virtual Train? Train { get; set; }
-        //[ForeignKey("FromStationID")]
-        //public virtual Station? FromStation { get; set; }
-        //[ForeignKey("ToStationID")]
-        //public virtual Station? ToStation { get; set; }
+        [ForeignKey("FromStationID")]
+        public virtual Station? FromStation { get; set; }
+        [ForeignKey("ToStationID")]
+        public virtual Station? ToStation { get; set; }
         [ForeignKey("CustomerID")]
         public virtual Customer? Customer { get; set; }
     }
