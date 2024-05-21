@@ -24,59 +24,19 @@ namespace Project3.Data
         public virtual DbSet<DailyCashTransaction> DailyCashTransactions { get; set; }
         public virtual DbSet<DayMaster> DayMasters { get; set; }
         public virtual DbSet<FareRule> FareRules { get; set; }
+        public virtual DbSet<Train> Trains { get; set; }
+        public virtual DbSet<TrainSchedule> TrainSchedules { get; set; }
         public virtual DbSet<ReservationSuperFastFee> ReservationSuperFastFees { get; set; }
-        public virtual DbSet<Station> Stations { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Routers> Routers { get; set; }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    // Cấu hình khóa ngoại cho Routers
-        //    modelBuilder.Entity<Routers>()
-        //        .HasOne(r => r.StartStation)
-        //        .WithMany(s => s.StartRoutes)
-        //        .HasForeignKey(r => r.StartStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
-
-        //    modelBuilder.Entity<Routers>()
-        //        .HasOne(r => r.EndStations)
-        //        .WithMany(s => s.EndRoutes)
-        //        .HasForeignKey(r => r.EndStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
-        //    // Cấu hình khóa ngoại cho Transactions
-        //    modelBuilder.Entity<Transaction>()
-        //        .HasOne(t => t.FromStation)
-        //        .WithMany(s => s.FromTransaction)
-        //        .HasForeignKey(t => t.FromStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
-
-        //    modelBuilder.Entity<Transaction>()
-        //        .HasOne(t => t.ToStation)
-        //        .WithMany(s => s.ToTransaction)
-        //        .HasForeignKey(t => t.ToStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
-        //    // Cấu hình khóa ngoại cho TrainSchedule
-        //    modelBuilder.Entity<TrainSchedule>()
-        //        .HasOne(t => t.StartStation)
-        //        .WithMany(s => s.StartTrainSchedules)
-        //        .HasForeignKey(t => t.StartStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
-
-        //    modelBuilder.Entity<TrainSchedule>()
-        //        .HasOne(t => t.EndStation)
-        //        .WithMany(s => s.EndTrainSchedules)
-        //        .HasForeignKey(t => t.EndStationID)
-        //        .OnDelete(DeleteBehavior.Restrict);
+        public virtual DbSet<Station> Stations { get; set; }
+       
+        
+      
+        
 
 
-
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
-
-
-
-        //public virtual DbSet<Train> Trains { get; set; }
-        //public virtual DbSet<TrainSchedule> TrainSchedules { get; set; }
-        //public virtual DbSet<Transaction> Transactions { get; set; }
+        
         //private async void Data()
         //{
         //    if (this.Class.Count() <= 0)

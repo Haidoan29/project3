@@ -117,7 +117,7 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Product Name:</label>
+                                    <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
                                     <input type="text" class="form-control" id="recipient-name"
                                         v-model="currentProduct.productName">
                                 </div>
