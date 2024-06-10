@@ -47,7 +47,7 @@ namespace Project3.Repository
             if (entity != null)
             {
                 entity.CreatedDate = DateTime.Now;
-                entity.CreatedBy = GetCurrentUserId();
+                
                 _dbSet.Add(entity);
                 await _context.SaveChangesAsync();
                 return entity;
@@ -61,20 +61,16 @@ namespace Project3.Repository
         }
         public async Task<T> Delete(int id)
         {
-            var result = await _dbSet.FindAsync(id);
-            if (result != null)
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
             {
-                result.IsDeleted = true;
-                result.DeletedAt = DateTime.Now;
-                result.DeletedBy = GetCurrentUserId();
-                _dbSet.Update(result);
-                await _context.SaveChangesAsync();
-                return result;
-
+                _dbSet.Remove(entity); // Xóa bản ghi khỏi DbSet
+                await _context.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
+                return entity;
             }
             return null;
-
         }
+
 
         public async Task<List<T>> GetAll(bool isAsc = true, int index = 1, int size = 3)
         {
@@ -180,7 +176,7 @@ namespace Project3.Repository
             if (entity != null)
             {
                 entity.UpdatedAt = DateTime.Now;
-                entity.UpdatedBy = GetCurrentUserId();
+                
                 _dbSet.Update(entity);
                 await _context.SaveChangesAsync();
                 return entity;

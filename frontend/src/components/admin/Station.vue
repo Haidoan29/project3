@@ -32,6 +32,7 @@
                                 <thead>
                                     <tr>
                                         <th width="10"><input type="checkbox" id="all"></th>
+                                        <th>Id</th>
                                         <th>Mã nhà ga</th>
                                         <th>Tên nhà ga</th>
                                         <th>Khu vực</th>
@@ -39,72 +40,50 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <tr v-for="p in productData" :key="p.id">
+                                    <tr v-for="p in stationData" :key="p.id">
+                                        <th width="10"><input type="checkbox" id="all"></th>
                                         <td>{{ p.id }}</td>
-                                        <td>{{ p.productName }}</td>
-                                        <td><img :src="p.imageProduct" width="80"></td>
-                                        <td>{{ p.price }}</td>
-                                        <td>{{ p.barCode }}</td>
+                                        <td>{{ p.stationCode }}</td>
+
+                                        <td>{{ p.stationName }}</td>
+                                        <td>{{ p.divisionName }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
                                                     @click="onUpdateClick(p)">Update</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    @click="onDelete()">Delete</button>
                                             </div>
                                         </td>
-                                    </tr> -->
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>HNO</td>
-                                        <td>Hà Nội</td>
-                                        <td>Northern Division</td>
-                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"
-                                                @click="onCreateClick()"><i class="fas fa-edit"></i></button>
-
-                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>DNG</td>
-                                        <td>Đà Nẵng</td>
-                                        <td>Central Division</td>
-                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"><i
-                                                    class="fas fa-edit"></i></button>
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>SGN</td>
-                                        <td>Sài Gòn</td>
-                                        <td>Southern Division</td>
-                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"><i
-                                                    class="fas fa-edit"></i></button>
-
-                                        </td>
-                                    </tr>
                                 </tbody>
+                                <div class="khoi-phan-trang">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous"
+                                                    @click="previousPage">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" v-for="page in totalPages" :key="page">
+                                                <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next" @click="nextPage">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-            <!-- <div class="control-box">
-                <button class="btn btn-success" @click="onCreateClick()">Create</button>
-            </div> -->
+
 
             <!-- Modal -->
             <div class="modal" ref="stationModal" id="stationModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -117,25 +96,41 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Product Name:</label>
+                                    <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
                                     <input type="text" class="form-control" id="recipient-name"
-                                        v-model="currentProduct.productName">
+                                        v-model="currentStation.stationCode">
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="imageProduct" class="col-form-label">Product Image:</label>
-                                    <input type="file" class="form-control" id="imageProduct" @change="onFileChange">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Price:</label>
-                                    <input type="number" class="form-control" id="recipient-name"
-                                        v-model="currentProduct.price">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Bar Code:</label>
+                                    <label for="recipient-name" class="col-form-label">Tên nhà ga:</label>
                                     <input type="text" class="form-control" id="recipient-name"
-                                        v-model="currentProduct.barCode">
+                                        v-model="currentStation.stationName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Khu vực:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                        v-model="currentStation.divisionName">
                                 </div>
                             </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" @click="onSaveClick()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--modal delete-->
+            <div class="modal" ref="deleteModal" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -144,12 +139,13 @@
                     </div>
                 </div>
             </div>
+            <!--End modal delete-->
         </main>
     </div>
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 import { Modal } from 'bootstrap';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -167,37 +163,157 @@ export default {
 
     data() {
         return {
-            productData: [],
+            stationData: [],
             stationModal: null,
-            currentProduct: {
+            deleteModal: null,
+            currentStation: {
                 id: 0,
-                productName: "Name",
-                imageProduct: "Image",
-                price: 0,
-                barCode: "Bar Code"
+                stationCode: "stationCode",
+                // stationName: "",
+                // divisionName: ""
             },
+            searchKeyword: '',
+            currentPage: 1, // Trang hiện tại
+            pageSize: 3,   // Kích thước trang (số lượng sản phẩm trên mỗi trang)
+            totalItems: 0,  // Tổng số sản phẩm
+            totalPages: 0,
 
         }
     },
     methods: {
-        onCreateClick() {
-            this.currentProduct = {
-                id: 0,
-                productName: "Name",
-                imageProduct: "",
-                price: 0,
-                barCode: "Bar Code"
+        loadstationData() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/GetAll`;
+            axios.get(url).then((response) => {
+                console.log(response);
+                //this.stationData = response.data;
+                this.totalItems = response.data.length; // Số lượng sản phẩm trong dữ liệu nhận được
+                this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                if (this.totalItems % this.pageSize !== 0) {
+                    this.totalPages++; // Nếu còn dư sản phẩm, tăng totalPages lên 1
+                }
+
+                let startIndex = (this.currentPage - 1) * this.pageSize;
+                let endIndex = this.currentPage * this.pageSize;
+
+                // Cắt lát stationData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
+                this.stationData = response.data.slice(startIndex, endIndex);
+                // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
+
+            }).catch((error) => {
+                console.log(error.response);
+            })
+        },
+        onSaveClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/Update`;
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.put(url, this.currentStation, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.stationModal && typeof this.stationModal.hide === 'function') {
+                        this.stationModal.hide();
+                    } else {
+                        console.log('stationModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu sản phẩm
+                    if (typeof this.loadstationData === 'function') {
+                        this.loadstationData();
+                    } else {
+                        console.log('Hàm loadstationData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
+
+
+        changePage(page) {
+            this.currentPage = page;
+            this.loadstationData();
+        },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.loadstationData();
             }
-            if (this.stationModal && this.stationModal.show) {
-                this.stationModal.show();
-            } else {
-                console.error("someObject không tồn tại hoặc thuộc tính show không tồn tại");
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.loadstationData();
             }
+        },
+
+        onDeleteClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.delete(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
+                        this.deleteModal.hide();
+                    } else {
+                        console.log('DeleteModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu trạm
+                    if (typeof this.loadstationData === 'function') {
+                        this.loadstationData();
+                    } else {
+                        console.log('Hàm loadstationData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
+        onDelete() {
+            this.deleteModal.show();
         },
         onUpdateClick(p) {
-            this.currentProduct = Object.assign({}, p);// clone d
+            this.currentRouter = Object.assign({}, p);// clone truyền dữ liệu
             this.stationModal.show();
         },
+
 
         logout() {
             // Xử lý đăng xuất ở đây
@@ -207,10 +323,11 @@ export default {
         },
     },
     mounted() {
-        // this.loadProductData();
+        this.loadstationData();
         console.log(this.totalPages);
         //load Modal
         this.stationModal = new Modal(this.$refs.stationModal);
+        this.deleteModal = new Modal(this.$refs.deleteModal)
     }
 
 }

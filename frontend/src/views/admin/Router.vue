@@ -4,7 +4,7 @@
     </header>
     <div class="home">
         <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-        <Customer />
+        <Router />
         <!-- msg="Welcome to Your Vue.js App" -->
     </div>
 
@@ -12,14 +12,14 @@
 
 <script>
 // @ is an alias to /src
-import Customer from '@/components/admin/Customer.vue';
+import Router from '@/components/admin/Router.vue';
 import Headers from '@/components/admin/Header.vue'; // Corrected the component name
 
 
 export default {
-    name: 'EmployeeCustomer',
+    name: 'EmployeeRouter',
     components: {
-        Customer,
+        Router,
         Headers,  // Corrected the component name
 
     }

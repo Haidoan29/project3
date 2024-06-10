@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project3.Models
 {
+    public enum UpDownStatus
+    {
+        Up,
+        Down
+    }
     public class Train : Base
     {
         public string TrainName { get; set; }
@@ -12,14 +17,11 @@ namespace Project3.Models
         public UpDownStatus UpDownStatus { get; set; }
         public int RouteID { get; set; }
         [ForeignKey("RouteID")]
-        public virtual Routers? Routers { get; set; }
+        public virtual MyRouter? Routers { get; set; }
         public ICollection<TrainSchedule>? TrainSchedules { get; set; }
         public ICollection<DayMaster>? DayMasters { get; set; }
-        public ICollection<Transaction>? Transactions { get; set; }
+        //public ICollection<Transaction>? Transactions { get; set; }
+        public ICollection<Seat>? Seat { get; set; }
     }
-    public enum UpDownStatus
-    {
-        Up,
-        Down
-    }
+    
 }

@@ -7,9 +7,9 @@ namespace Project3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoutesController : BaseController<MyRouter>
+    public class SeatController : BaseController<Seat>
     {
-        public RoutesController(IBaseRepository<MyRouter> repository) : base(repository)
+        public SeatController(IBaseRepository<Seat> repository) : base(repository)
         {
         }
     }

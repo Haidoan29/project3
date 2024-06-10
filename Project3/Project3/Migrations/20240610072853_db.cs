@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project3.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,12 +59,8 @@ namespace Project3.Migrations
                     Class = table.Column<int>(type: "int", nullable: false),
                     CancellationFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,12 +77,8 @@ namespace Project3.Migrations
                     CancellationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CancellationFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,12 +97,8 @@ namespace Project3.Migrations
                     CCCD = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,38 +115,12 @@ namespace Project3.Migrations
                     MoneyReceived = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     MoneyRefund = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DailyCashTransactions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FareRules",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Class = table.Column<int>(type: "int", nullable: false),
-                    Distance = table.Column<int>(type: "int", nullable: false),
-                    Fare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FareRules", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,12 +133,8 @@ namespace Project3.Migrations
                     ReservationFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SuperFastFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,7 +142,7 @@ namespace Project3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Routers",
+                name: "Router",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -193,16 +151,12 @@ namespace Project3.Migrations
                     StartStationID = table.Column<int>(type: "int", nullable: false),
                     EndStation = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Routers", x => x.Id);
+                    table.PrimaryKey("PK_Router", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,12 +169,8 @@ namespace Project3.Migrations
                     StationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DivisionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -334,7 +284,31 @@ namespace Project3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Train",
+                name: "FareRules",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Class = table.Column<int>(type: "int", nullable: false),
+                    RouterID = table.Column<int>(type: "int", nullable: false),
+                    Fare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FareRules", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FareRules_Router_RouterID",
+                        column: x => x.RouterID,
+                        principalTable: "Router",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trains",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -346,20 +320,16 @@ namespace Project3.Migrations
                     UpDownStatus = table.Column<int>(type: "int", nullable: false),
                     RouteID = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Train", x => x.Id);
+                    table.PrimaryKey("PK_Trains", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Train_Routers_RouteID",
+                        name: "FK_Trains_Router_RouteID",
                         column: x => x.RouteID,
-                        principalTable: "Routers",
+                        principalTable: "Router",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -374,26 +344,47 @@ namespace Project3.Migrations
                     TrainID = table.Column<int>(type: "int", nullable: false),
                     DayOfWeek = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DayMasters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DayMasters_Train_TrainID",
+                        name: "FK_DayMasters_Trains_TrainID",
                         column: x => x.TrainID,
-                        principalTable: "Train",
+                        principalTable: "Trains",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TrainSchedule",
+                name: "Seats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrainID = table.Column<int>(type: "int", nullable: false),
+                    SeatNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TicketClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Seats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Seats_Trains_TrainID",
+                        column: x => x.TrainID,
+                        principalTable: "Trains",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrainSchedules",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -406,25 +397,21 @@ namespace Project3.Migrations
                     ArrivalTime = table.Column<TimeSpan>(type: "time", nullable: false),
                     TrainNo = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainSchedule", x => x.Id);
+                    table.PrimaryKey("PK_TrainSchedules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TrainSchedule_Train_TrainNo",
+                        name: "FK_TrainSchedules_Trains_TrainNo",
                         column: x => x.TrainNo,
-                        principalTable: "Train",
+                        principalTable: "Trains",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transaction",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -435,30 +422,25 @@ namespace Project3.Migrations
                     JourneyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FromStationID = table.Column<int>(type: "int", nullable: false),
                     ToStationID = table.Column<int>(type: "int", nullable: false),
-                    SeatNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoachNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReservationFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SeatID = table.Column<int>(type: "int", nullable: false),
+                    FareRuleID = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transaction", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transaction_Customers_CustomerID",
+                        name: "FK_Transactions_Customers_CustomerID",
                         column: x => x.CustomerID,
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transaction_Train_TrainID",
-                        column: x => x.TrainID,
-                        principalTable: "Train",
+                        name: "FK_Transactions_Seats_SeatID",
+                        column: x => x.SeatID,
+                        principalTable: "Seats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -508,24 +490,34 @@ namespace Project3.Migrations
                 column: "TrainID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Train_RouteID",
-                table: "Train",
+                name: "IX_FareRules_RouterID",
+                table: "FareRules",
+                column: "RouterID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Seats_TrainID",
+                table: "Seats",
+                column: "TrainID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trains_RouteID",
+                table: "Trains",
                 column: "RouteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TrainSchedule_TrainNo",
-                table: "TrainSchedule",
+                name: "IX_TrainSchedules_TrainNo",
+                table: "TrainSchedules",
                 column: "TrainNo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_CustomerID",
-                table: "Transaction",
+                name: "IX_Transactions_CustomerID",
+                table: "Transactions",
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_TrainID",
-                table: "Transaction",
-                column: "TrainID");
+                name: "IX_Transactions_SeatID",
+                table: "Transactions",
+                column: "SeatID");
         }
 
         /// <inheritdoc />
@@ -568,10 +560,10 @@ namespace Project3.Migrations
                 name: "Stations");
 
             migrationBuilder.DropTable(
-                name: "TrainSchedule");
+                name: "TrainSchedules");
 
             migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -583,10 +575,13 @@ namespace Project3.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Train");
+                name: "Seats");
 
             migrationBuilder.DropTable(
-                name: "Routers");
+                name: "Trains");
+
+            migrationBuilder.DropTable(
+                name: "Router");
         }
     }
 }

@@ -7,10 +7,11 @@ namespace Project3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainContraoller : BaseController<Train>
+    public class TrainController : BaseController<Train>
     {
-        public TrainContraoller(IBaseRepository<Train> repository) : base(repository)
+        public TrainController(IBaseRepository<Train> repository) : base(repository)
         {
         }
+
     }
 }
