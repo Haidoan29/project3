@@ -12,11 +12,11 @@ namespace Project3.Models
         public int StartStationID { get; set; }
         public int EndStation { get; set; }
 
-        [ForeignKey("StartStationID")]
-        public virtual Station? StartStation { get; set; }
+        //[ForeignKey("StartStationID")]
+        //public virtual Station? StartStation { get; set; }
 
-        [ForeignKey("EndStation")]
-        public virtual Station? EndStations { get; set; }
+        //[ForeignKey("EndStation")]
+        //public virtual Station? EndStations { get; set; }
 
         public ICollection<Train>? Trains { get; set; }
     }

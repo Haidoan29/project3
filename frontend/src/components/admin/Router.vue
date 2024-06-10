@@ -1,10 +1,12 @@
 <template>
     <div>
-        <!-- <h1>footers</h1> -->
+
+
+
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="/admin/train"><b>Danh sách tàu</b></a></li>
+                    <li class="breadcrumb-item active"><a href="/admin/router"><b>Danh sách tuyến đường</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -13,40 +15,38 @@
                 <div class="col-md-12">
                     <div class="tile">
                         <div class="tile-body">
-
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <a class="btn btn-add btn-sm" href="/admin/train/add-train" title="Thêm"><i
+                                    <a class="btn btn-add btn-sm" href="/admin/router/add-router" title="Thêm"><i
                                             class="fas fa-plus"></i>
-                                        Tạo mới tàu</a>
+                                        Tạo mới tuyến đường</a>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <a class="btn btn-delete btn-sm" type="button" title="Xóa"
+                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
                                 </div>
                             </div>
-                            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0"
-                                cellspacing="0" border="0" id="sampleTable">
+                            <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th width="10"><input type="checkbox" id="all"></th>
-                                        <th with="50">ID</th>
-                                        <th with="50">Tên tàu</th>
-                                        <th width="200">Số lượng ghế hạng AC3 </th>
-                                        <th width="200">Số lượng ghế hạng First Class</th>
-                                        <th width="200">Số lượng ghế hạng Sleeper</th>
-
-                                        <th width="200">Tuyến đường</th>
-
-                                        <th width="200">Tính năng</th>
+                                        <th>Id</th>
+                                        <th>Tên thuyến đường</th>
+                                        <th>Ga xuất phát</th>
+                                        <th>Ga kết thúc</th>
+                                        <th>Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="t in trainData" :key="t.id">
+                                    <tr v-for="p in routerData" :key="p.id">
                                         <th width="10"><input type="checkbox" id="all"></th>
-                                        <td>{{ t.id }}</td>
-                                        <td>{{ t.trainName }}</td>
-                                        <td>{{ t.numCoachesAC3 }}</td>
-                                        <td>{{ t.numCoachesFirstClass }}</td>
-                                        <td>{{ t.numCoachesSleeper }}</td>
-                                        <td>{{ getRouteName(t.routeID) }}</td>
+                                        <td>{{ p.id }}</td>
+                                        <td>{{ p.routeName }}</td>
+
+                                        <td>{{ getStationName(p.startStationID) }}</td>
+                                        <td>{{ getStationName(p.endStation) }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
@@ -56,71 +56,90 @@
                                             </div>
                                         </td>
                                     </tr>
+
                                 </tbody>
+                                <div class="khoi-phan-trang">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous"
+                                                    @click="previousPage">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" v-for="page in totalPages" :key="page">
+                                                <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next" @click="nextPage">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <!-- Modal -->
+            <div class="modal" ref="stationModal" id="stationModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                        v-model="currentRouter.stationCode">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Tên nhà ga:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                        v-model="currentRouter.stationName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Khu vực:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                        v-model="currentRouter.divisionName">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" @click="onSaveClick()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--modal delete-->
+            <div class="modal" ref="deleteModal" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End modal delete-->
         </main>
-
-        <!-- Modal -->
-        <div class="modal" ref="trainModal" id="trainModal" tabindex="-1" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.stationCode">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Tên nhà ga:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.stationName">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Khu vực:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.divisionName">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" @click="onSaveClick()">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <!--modal delete-->
-        <div class="modal" ref="deleteModal" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--End modal delete-->
-
-
     </div>
 </template>
 
@@ -135,7 +154,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // import { RouterLink } from 'vue-router';
 
 export default {
-    name: "TrainS",
+    name: "StationS",
     components: {
         // eslint-disable-next-line vue/no-unused-components
         Modal, toast
@@ -143,12 +162,12 @@ export default {
 
     data() {
         return {
-            trainData: [],
-            trainModal: null,
-            deletModal: null,
+            routerData: [],
+            stationModal: null,
+            deleteModal: null,
             stationData: [],
-            routes: [],
-            currentTrain: {
+            stations: [],
+            currentRouter: {
                 id: 0,
                 stationCode: "stationCode",
                 // stationName: "",
@@ -163,23 +182,23 @@ export default {
         }
     },
     methods: {
-        fetchtrains() {
-            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Routes/GetAll`; // Thay thế bằng API thực tế của bạn
+        fetchStations() {
+            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
 
             fetch(stationApiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    this.routes = data;
+                    this.stations = data;
                 })
                 .catch(error => {
-                    console.error('Error fetching trains:', error);
+                    console.error('Error fetching stations:', error);
                 });
         },
-        loadtrainData() {
-            var url = process.env.VUE_APP_BASE_URL + `Train/GetAll`;
+        loadrouterData() {
+            var url = process.env.VUE_APP_BASE_URL + `Routes/GetAll`;
             axios.get(url).then((response) => {
                 console.log(response);
-                //this.trainData = response.data;
+                //this.routerData = response.data;
                 this.totalItems = response.data.length; // Số lượng sản phẩm trong dữ liệu nhận được
                 this.totalPages = Math.floor(this.totalItems / this.pageSize);
                 if (this.totalItems % this.pageSize !== 0) {
@@ -189,8 +208,8 @@ export default {
                 let startIndex = (this.currentPage - 1) * this.pageSize;
                 let endIndex = this.currentPage * this.pageSize;
 
-                // Cắt lát trainData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
-                this.trainData = response.data.slice(startIndex, endIndex);
+                // Cắt lát routerData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
+                this.routerData = response.data.slice(startIndex, endIndex);
                 // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
 
             }).catch((error) => {
@@ -202,7 +221,7 @@ export default {
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
-            axios.put(url, this.currentTrain, {
+            axios.put(url, this.currentRouter, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -216,16 +235,16 @@ export default {
                         console.log('Hàm success không tồn tại.');
                     }
                     // Ẩn modal
-                    if (this.trainModal && typeof this.trainModal.hide === 'function') {
-                        this.trainModal.hide();
+                    if (this.stationModal && typeof this.stationModal.hide === 'function') {
+                        this.stationModal.hide();
                     } else {
-                        console.log('trainModal hoặc hàm hide không tồn tại.');
+                        console.log('stationModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu sản phẩm
-                    if (typeof this.loadtrainData === 'function') {
-                        this.loadtrainData();
+                    if (typeof this.loadrouterData === 'function') {
+                        this.loadrouterData();
                     } else {
-                        console.log('Hàm loadtrainData không tồn tại.');
+                        console.log('Hàm loadrouterData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -240,25 +259,24 @@ export default {
                 });
         },
 
-        getRouteName(id) {
-            if (!this.routes) return 'Unknown';
-            const route = this.routes.find(r => r.id === id);
-            return route ? route.routeName : 'Unknown';
+        getStationName(id) {
+            const station = this.stations.find(station => station.id === id);
+            return station ? station.stationName : 'Unknown';
         },
         changePage(page) {
             this.currentPage = page;
-            this.loadtrainData();
+            this.loadrouterData();
         },
         previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
-                this.loadtrainData();
+                this.loadrouterData();
             }
         },
         nextPage() {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
-                this.loadtrainData();
+                this.loadrouterData();
             }
         },
         onDeleteClick() {
@@ -308,8 +326,8 @@ export default {
         },
 
         onUpdateClick(p) {
-            this.currentTrain = Object.assign({}, p);// clone d
-            this.trainModal.show();
+            this.currentRouter = Object.assign({}, p);// clone d
+            this.stationModal.show();
         },
 
         logout() {
@@ -320,12 +338,12 @@ export default {
         },
     },
     mounted() {
-        this.loadtrainData();
+        this.loadrouterData();
         console.log(this.totalPages);
-        this.fetchtrains();
+        this.fetchStations();
         //load Modal
-        this.trainModal = new Modal(this.$refs.trainModal);
-        this.deletModal = new Modal(this.$refs.deletModal);
+        this.stationModal = new Modal(this.$refs.stationModal);
+        this.deleteModal = new Modal(this.$refs.deleteModal);
     }
 
 }

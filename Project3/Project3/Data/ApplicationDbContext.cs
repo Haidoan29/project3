@@ -27,8 +27,9 @@ namespace Project3.Data
         public virtual DbSet<Train> Trains { get; set; }
         public virtual DbSet<TrainSchedule> TrainSchedules { get; set; }
         public virtual DbSet<ReservationSuperFastFee> ReservationSuperFastFees { get; set; }
+        public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        public virtual DbSet<Routers> Routers { get; set; }
+        public virtual DbSet<MyRouter> MyRouters { get; set; }
         public virtual DbSet<Station> Stations { get; set; }
        
         

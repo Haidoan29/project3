@@ -7,23 +7,23 @@
         <Order />
         <!-- msg="Welcome to Your Vue.js App" -->
     </div>
-    <footer>
+    <!-- <footer>
         <Footer></Footer>
-    </footer>
+    </footer> -->
 </template>
 
 <script>
 // @ is an alias to /src
 import Order from '@/components/admin/Order.vue';
 import Headers from '@/components/admin/Header.vue'; // Corrected the component name
-import Footer from '@/components/admin/Footer.vue';  // Corrected the component name
+// import Footer from '@/components/admin/Footer.vue';  // Corrected the component name
 
 export default {
     name: 'OrderManagement',
     components: {
         Order,
         Headers,  // Corrected the component name
-        Footer
+        // Footer
     }
 }
 </script>

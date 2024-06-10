@@ -17,9 +17,9 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <!-- <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i
-                                            class="fas fa-plus"></i> -->
-                                    <button class="btn btn-success" @click="onCreateClick()">Create</button>
+                                    <a class="btn btn-add btn-sm" href="/admin/customer/add-customer" title="Thêm"><i
+                                            class="fas fa-plus"></i>
+                                        Tạo mới khách hàng</a>
                                 </div>
 
                                 <div class="col-sm-2">
@@ -48,12 +48,11 @@
                                         <th width="10"><input width="10" type="checkbox" id="all"></th>
                                         <th>Mã khách hàng</th>
                                         <th width="150">Họ và tên</th>
-                                        <th width="20">Ảnh thẻ</th>
-                                        <th width="300">Địa chỉ</th>
-                                        <th>Ngày sinh</th>
-                                        <th>Giới tính</th>
-                                        <th>SĐT</th>
-                                        <th>Chức vụ</th>
+                                        <th width="20">email</th>
+                                        <th width="300">phone</th>
+                                        <th>cccd</th>
+                                        <th>address</th>
+
                                         <th width="100">Tính năng</th>
                                     </tr>
                                 </thead>
@@ -61,19 +60,27 @@
                                     <tr v-for="p in productData" :key="p.id">
                                         <th width="10"><input type="checkbox" id="all"></th>
                                         <td>{{ p.id }}</td>
-                                        <td>{{ p.className }}</td>
-                                        <td><img :src="p.imageProduct" width="80"></td>
-                                        <td>{{ p.price }}</td>
-                                        <td>{{ p.barCode }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
+                                        <td>{{ p.name }}</td>
+
+                                        <td>{{ p.email }}</td>
+                                        <td>{{ p.phone }}</td>
+                                        <td>{{ p.cccd }}</td>
+                                        <td>{{ p.address }}</td>
+
+                                        <!-- <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
                                                     @click="onUpdateClick(p)">Update</button>
                                                 <button type="button" class="btn btn-danger">Delete</button>
                                             </div>
+                                        </td> -->
+                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                @click="onDelete()"><i class="fas fa-trash-alt"></i>
+                                            </button>
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"
+                                                @click="onUpdateClick(p)"><i class="fas fa-edit"></i></button>
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -100,127 +107,86 @@
                             </table>
 
                         </div>
-                        <div class="modal fade" ref="ProductModal" id="ProductModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <!-- Modal -->
+                        <div class="modal" ref="customerModal" id="customerModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Create New Product</h5>
+                                        <h5 class="modal-title">Modal title</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close">
-                                        </button>
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Product Name:</label>
+                                                <label for="recipient-name" class="col-form-label">Họ và tên</label>
                                                 <input type="text" class="form-control" id="recipient-name"
-                                                    v-model="currentProduct.className">
+                                                    v-model="currentProduct.name">
                                             </div>
                                             <!-- <div class="form-group">
-                                                <label for="imageProduct" class="col-form-label">Product Image:</label>
-                                                <input type="file" class="form-control" id="imageProduct"
-                                                    @change="onFileChange">
-                                            </div>
+                                <label for="imageProduct" class="col-form-label">Product Image:</label>
+                                <input type="file" class="form-control" id="imageProduct" @change="onFileChange">
+                            </div> -->
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Price:</label>
-                                                <input type="number" class="form-control" id="recipient-name"
-                                                    v-model="currentProduct.price">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Bar Code:</label>
+                                                <label for="recipient-name" class="col-form-label">email:</label>
                                                 <input type="text" class="form-control" id="recipient-name"
-                                                    v-model="currentProduct.barCode">
-                                            </div> -->
+                                                    v-model="currentProduct.email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">phone:</label>
+                                                <input type="text" class="form-control" id="recipient-name"
+                                                    v-model="currentProduct.phone">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">CCCD:</label>
+                                                <input type="text" class="form-control" id="recipient-name"
+                                                    v-model="currentProduct.cccd">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">address:</label>
+                                                <input type="text" class="form-control" id="recipient-name"
+                                                    v-model="currentProduct.address">
+                                            </div>
+
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary"
-                                            @click="onSaveClick()">Save</button>
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!--MODAL-->
+                        <!--modal delete-->
+                        <div class="modal" ref="deleteModal" id="deleteModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Modal body text goes here.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End modal delete-->
                     </div>
                 </div>
             </div>
         </main>
 
-        <!--
-  MODAL
--->
-        <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-            data-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group  col-md-12">
-                                <span class="thong-tin-thanh-toan">
-                                    <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label class="control-label">ID nhân viên</label>
-                                <input class="form-control" type="text" required value="#CD2187" disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Họ và tên</label>
-                                <input class="form-control" type="text" required value="Võ Trường">
-                            </div>
-                            <div class="form-group  col-md-6">
-                                <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" required value="09267312388">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Địa chỉ email</label>
-                                <input class="form-control" type="text" required value="truong.vd2000@gmail.com">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Ngày sinh</label>
-                                <input class="form-control" type="date" value="15/03/2000">
-                            </div>
-                            <div class="form-group  col-md-6">
-                                <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>Bán hàng</option>
-                                    <option>Tư vấn</option>
-                                    <option>Dịch vụ</option>
-                                    <option>Thu Ngân</option>
-                                    <option>Quản kho</option>
-                                    <option>Bảo trì</option>
-                                    <option>Kiểm hàng</option>
-                                    <option>Bảo vệ</option>
-                                    <option>Tạp vụ</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- <BR> -->
-                        <a href="#" style="    float: right;
-        font-weight: 600;
-        color: #ea0000;">Chỉnh sửa nâng cao</a>
-                        <!-- <BR> -->
-                        <!-- <BR> -->
-                        <div>
-                            <button class="btn btn-save" type="button">Lưu lại</button>
-                            <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                        </div>
-
-                        <!-- <BR> -->
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--
-  MODAL
--->
     </div>
 </template>
 
@@ -228,15 +194,15 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import { toast } from 'vue3-toastify';
-
 import 'vue3-toastify/dist/index.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 export default {
     name: 'EmployeeCustomer',
 
-    // components: {
-    //     Modal, toast
-    // },
+    components: {
+        // eslint-disable-next-line vue/no-unused-components
+        Modal, toast
+    },
     setup() {
         const success = () => {
             toast("Success !", {
@@ -249,10 +215,11 @@ export default {
     data() {
         return {
             productData: [],
-            ProductModal: null,
+            customerModal: null,
+            deleteModal: null,
             currentProduct: {
                 id: 0,
-                className: "Name",
+                name: "Name",
 
             },
             searchKeyword: '',
@@ -264,7 +231,7 @@ export default {
     },
     methods: {
         loadProductData() {
-            var url = process.env.VUE_APP_BASE_URL + `Class/GetAll`;
+            var url = process.env.VUE_APP_BASE_URL + `Customer/GetAll`;
             axios.get(url).then((response) => {
                 console.log(response);
                 //this.productData = response.data;
@@ -308,11 +275,15 @@ export default {
                 className: "Name",
 
             }
-            this.ProductModal.show();
+            if (this.customerModal && this.customerModal.show) {
+                this.customerModal.show();
+            } else {
+                console.error("someObject không tồn tại hoặc thuộc tính show không tồn tại");
+            }
         },
         onUpdateClick(p) {
             this.currentProduct = Object.assign({}, p);// clone d
-            this.ProductModal.show();
+            this.customerModal.show();
         },
         onSaveClick() {
             if (this.currentProduct.id == 0) {
@@ -380,6 +351,51 @@ export default {
             }
 
         },
+        onDeleteClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.delete(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
+                        this.deleteModal.hide();
+                    } else {
+                        console.log('DeleteModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu trạm
+                    if (typeof this.loadstationData === 'function') {
+                        this.loadstationData();
+                    } else {
+                        console.log('Hàm loadstationData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
+        onDelete() {
+            this.deleteModal.show();
+        },
         logout() {
             // Xử lý đăng xuất ở đây
             // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
@@ -442,7 +458,8 @@ export default {
         this.loadProductData();
         console.log(this.totalPages);
         //load Modal
-        this.ProductModal = new Modal(this.$refs.ProductModal);
+        this.customerModal = new Modal(this.$refs.customerModal);
+        this.deleteModal = new Modal(this.$refs.deleteModal);
     }
 }
 </script>
