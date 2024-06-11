@@ -15,4 +15,8 @@
         public string? _RightSize { get; set; }
         public string? _operator { get; set; }
     }
+    public class DeleteRequest
+    {
+        public int Id { get; set; }
+    }
 }

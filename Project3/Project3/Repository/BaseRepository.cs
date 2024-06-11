@@ -61,19 +61,16 @@ namespace Project3.Repository
         }
         public async Task<T> Delete(int id)
         {
-            var result = await _dbSet.FindAsync(id);
-            if (result != null)
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
             {
-                result.IsDeleted = true;
-                
-                _dbSet.Update(result);
-                await _context.SaveChangesAsync();
-                return result;
-
+                _dbSet.Remove(entity); // Xóa bản ghi khỏi DbSet
+                await _context.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
+                return entity;
             }
             return null;
-
         }
+
 
         public async Task<List<T>> GetAll(bool isAsc = true, int index = 1, int size = 3)
         {

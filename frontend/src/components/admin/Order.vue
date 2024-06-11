@@ -3,7 +3,7 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách vé</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -14,32 +14,10 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i
+                                    <a class="btn btn-add btn-sm" href="/admin/order/add-order" title="Thêm"><i
                                             class="fas fa-plus"></i>
-                                        Tạo mới Ga</a>
+                                        Tạo mới vé</a>
                                 </div>
-                                <!-- <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                                        onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                                        onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                                        title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i>
-                                        Xuất Excel</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                                        onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                                </div> -->
                                 <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
@@ -49,143 +27,144 @@
                                 <thead>
                                     <tr>
                                         <th width="10"><input type="checkbox" id="all"></th>
-                                        <th>ID đơn hàng</th>
-                                        <th>Khách hàng</th>
-                                        <th>Đơn hàng</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Tình trạng</th>
+                                        <th>ID</th>
+                                        <th>Mã Đặt Vé (PRNNo)</th>
+                                        <th>Tàu</th>
+                                        <th>Khách Hàng</th>
+                                        <th>Ngày Khởi Hành</th>
+                                        <th>Ga Đi</th>
+                                        <th>Ga Đến</th>
+                                        <th>Số Ghế</th>
+                                        <th>Số Toa</th>
+                                        <th>Phí Đặt Vé</th>
+                                        <th>Ngày Tạo</th>
                                         <th>Tính năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="o in orderData" :key="o.id">
                                         <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>MD0837</td>
-                                        <td>Triệu Thanh Phú</td>
-                                        <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                                        <td>2</td>
-                                        <td>9.400.000 đ</td>
-                                        <td><span class="badge bg-success">Hoàn thành</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
+                                        <td>{{ o.id }}</td>
+                                        <td>{{ o.prnNo }}</td>
+                                        <td>{{ o.trainID }}</td>
+                                        <td>{{ o.customerID }}</td>
+                                        <td>{{ o.journeyDate }}</td>
+                                        <td>{{ o.fromStationID }}</td>
+                                        <td>{{ o.toStationID }}</td>
+                                        <td>{{ o.seatNo }}</td>
+                                        <td>{{ o.coachNo }}</td>
+                                        <td>{{ o.reservationFee }}</td>
+
+                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                                @click="onDelete()"><i class="fas fa-trash-alt"></i>
+                                            </button>
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"
+                                                @click="onUpdateClick(p)"><i class="fas fa-edit"></i></button>
+
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>MĐ8265</td>
-                                        <td>Nguyễn Thị Ngọc Cẩm</td>
-                                        <td>Ghế ăn gỗ Lucy màu trắng</td>
-                                        <td>1</td>
-                                        <td>3.800.000 đ</td>
-                                        <td><span class="badge bg-success">Hoàn thành</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>MT9835</td>
-                                        <td>Đặng Hoàng Phúc</td>
-                                        <td>Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm việc Zuno</td>
-                                        <td>3 </td>
-                                        <td>40.650.000 đ</td>
-                                        <td><span class="badge bg-success">Hoàn thành</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>ER3835</td>
-                                        <td>Nguyễn Thị Mỹ Yến</td>
-                                        <td>Bàn ăn mở rộng Gepa</td>
-                                        <td>1 </td>
-                                        <td>16.770.000 đ</td>
-                                        <td><span class="badge bg-info">Chờ thanh toán</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>AL3947</td>
-                                        <td>Phạm Thị Ngọc</td>
-                                        <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                                        <td>2 </td>
-                                        <td>19.770.000 đ</td>
-                                        <td><span class="badge bg-warning">Đang giao hàng</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>QY8723</td>
-                                        <td>Ngô Thái An</td>
-                                        <td>Giường ngủ Kara 1.6x2m</td>
-                                        <td>1 </td>
-                                        <td>14.500.000 đ</td>
-                                        <td><span class="badge bg-danger">Đã hủy</span></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary btn-sm trash" title="Xóa"
-                                                    onclick="myFunction()">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp"
-                                                    data-toggle="modal" data-target="#ModalUP">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
+                                <div class="khoi-phan-trang">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous"
+                                                    @click="previousPage">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" v-for="page in totalPages" :key="page">
+                                                <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next" @click="nextPage">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal" ref="orderModal" id="orderModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">Họ và
+                                                            tên</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                            v-model="currentProduct.name">
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                <label for="imageProduct" class="col-form-label">Product Image:</label>
+                                <input type="file" class="form-control" id="imageProduct" @change="onFileChange">
+                            </div> -->
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label">email:</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                            v-model="currentProduct.email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label">phone:</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                            v-model="currentProduct.phone">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">CCCD:</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                            v-model="currentProduct.cccd">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label">address:</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                            v-model="currentProduct.address">
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--MODAL-->
+                                <!--modal delete-->
+                                <div class="modal" ref="deleteModal" id="deleteModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Modal body text goes here.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End modal delete-->
                             </table>
                         </div>
                     </div>
@@ -196,12 +175,206 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { Modal } from 'bootstrap';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// Import JavaScript
+// import '@/assets/js/scripts';
+// import { RouterLink } from 'vue-router';
+
 export default {
-    name: 'EmployeeCustomer',
+    name: "OrDer",
+    components: {
+        // eslint-disable-next-line vue/no-unused-components
+        Modal, toast
+    },
 
+    data() {
+        return {
+            orderData: [],
+            orderModal: null,
+            stationData: [],
+            stations: [],
+            currentOrder: {
+                id: 0,
+
+                // stationName: "",
+                // divisionName: ""
+            },
+            searchKeyword: '',
+            currentPage: 1, // Trang hiện tại
+            pageSize: 3,   // Kích thước trang (số lượng sản phẩm trên mỗi trang)
+            totalItems: 0,  // Tổng số sản phẩm
+            totalPages: 0,
+
+        }
+    },
+    methods: {
+        fetchStations() {
+            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(stationApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    this.stations = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching stations:', error);
+                });
+        },
+        loadorderData() {
+            var url = process.env.VUE_APP_BASE_URL + `Transaction/GetAll`;
+            axios.get(url).then((response) => {
+                console.log(response);
+                //this.orderData = response.data;
+                this.totalItems = response.data.length; // Số lượng sản phẩm trong dữ liệu nhận được
+                this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                if (this.totalItems % this.pageSize !== 0) {
+                    this.totalPages++; // Nếu còn dư sản phẩm, tăng totalPages lên 1
+                }
+
+                let startIndex = (this.currentPage - 1) * this.pageSize;
+                let endIndex = this.currentPage * this.pageSize;
+
+                // Cắt lát orderData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
+                this.orderData = response.data.slice(startIndex, endIndex);
+                // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
+
+            }).catch((error) => {
+                console.log(error.response);
+            })
+        },
+        onSaveClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/Update`;
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.put(url, this.currentOrder, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.orderModal && typeof this.orderModal.hide === 'function') {
+                        this.orderModal.hide();
+                    } else {
+                        console.log('orderModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu sản phẩm
+                    if (typeof this.loadorderData === 'function') {
+                        this.loadorderData();
+                    } else {
+                        console.log('Hàm loadorderData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
+
+        getStationName(id) {
+            const station = this.stations.find(station => station.id === id);
+            return station ? station.stationName : 'Unknown';
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.loadorderData();
+        },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.loadorderData();
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.loadorderData();
+            }
+        },
+        onDeleteClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.delete(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
+                        this.deleteModal.hide();
+                    } else {
+                        console.log('DeleteModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu trạm
+                    if (typeof this.loadstationData === 'function') {
+                        this.loadstationData();
+                    } else {
+                        console.log('Hàm loadstationData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
+        onDelete() {
+            this.deleteModal.show();
+        },
+
+        onUpdateClick(p) {
+            this.currentOrder = Object.assign({}, p);// clone d
+            this.orderModal.show();
+        },
+
+        logout() {
+            // Xử lý đăng xuất ở đây
+            // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
+            localStorage.removeItem('token');
+            this.$router.push('/login');
+        },
+    },
     mounted() {
-        // Code của bạn ở đây
-
+        this.loadorderData();
+        console.log(this.totalPages);
+        // this.fetchStations();
+        //load Modal
+        this.orderModal = new Modal(this.$refs.orderModal);
+        this.deleteModal = new Modal(this.$refs.deleteModal);
     }
+
 }
 </script>

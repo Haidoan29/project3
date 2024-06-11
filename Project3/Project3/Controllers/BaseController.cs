@@ -11,10 +11,10 @@ namespace Project3.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T> : ControllerBase where T : Base
+    public  class BaseController<T> : ControllerBase where T : Base
     {
         private IBaseRepository<T> _repository;
-        public BaseController(IBaseRepository<T> repository)
+        public  BaseController(IBaseRepository<T> repository)
         {
             _repository = repository;
         }
@@ -59,14 +59,15 @@ namespace Project3.Controllers
             var result = await (_repository.Update(entity));
             return Ok(result);
         }
-        [Authorize(Roles = "ADMIN , SUBADMIN")]
+        //[Authorize(Roles = "ADMIN , SUBADMIN")]
         [HttpDelete]
         [Route("Delete")]
-        public async Task<ActionResult<CustomerController>> Delete(int id)
+        public async Task<ActionResult> Delete([FromBody] DeleteRequest request)
         {
-            var result = await (_repository.Delete(id));
+            var result = await _repository.Delete(request.Id);
             return Ok(result);
         }
+
 
 
     }

@@ -11,6 +11,10 @@ import Order from '@/views/admin/Order.vue'
 import Singinsss from '@/views/admin/singinsss.vue'
 import AddTrain from '@/views/admin/AddTrain.vue'
 import AddStations from '@/views/admin/AddStation.vue'
+import AddCustomer from '@/views/admin/AddCustomer.vue'
+import AddOrder from '@/views/admin/AddOrder.vue'
+import Router from '@/views/admin/Router.vue'
+import AddRouter from '@/views/admin/AddRouter.vue'
 
 const routes = [
   {
@@ -74,6 +78,24 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/admin/order/add-order',
+    name: 'AddOrder',
+    component: AddOrder,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/router',
+    name: 'RouterManagement',
+    component: Router,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/router/add-router',
+    name: 'AddRouter',
+    component: AddRouter,
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/admin/singin',
     name: 'singin',
     component: Singinsss
@@ -87,6 +109,11 @@ const routes = [
     path: '/admin/station/add-station',
     name: 'AddStation',
     component: AddStations
+  },
+  {
+    path: '/admin/customer/add-customer',
+    name: 'AddCustomer',
+    component: AddCustomer
   },
 ]
 
