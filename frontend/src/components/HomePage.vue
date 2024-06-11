@@ -1,56 +1,13 @@
 <template>
-  <section class="banner" id="top" style="margin-top: 90px">
+  <section class="banner" id="top" style="margin-top: 75px">
     <div class="container">
       <div class="row">
-        <div class="col-md-5">
-          <div class="left-side">
-            <div class="logo">
-              <img
-                src="../assets/img/banner-home1.jpg"
-                class="img-fluid"
-                style="height: 450px; width: 400px; margin-right: 10px"
-              />
-            </div>
-            <!-- <div class="tabs-content">
-              <h4>
-                Khuyến cáo khách hàng chú ý khi mua vé trực tuyến
-                <p>
-                  Hiện nay, trên mạng đã xuất hiện một số trang website bán vé
-                  tàu hỏa với giá đắt gấp nhiều lần so với giá vé của ngành ĐS.
-                  Các trang này có tên miền gần giống với website của ngành ĐS
-                  nên một số hành khách đặc biệt là khách nước ngoài đã hiểu
-                  nhầm và mua vé với giá rất cao.
-                </p>
-              </h4>
-              <ul class="social-links">
-                <li>
-                  <a
-                    href="https://www.facebook.com/Share-Source-Code-Website-189970988225280/"
-                    >Find us on <em>Facebook</em><i class="fa fa-facebook"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="http://youtube.com/"
-                    >Our <em>YouTube</em> Channel<i class="fa fa-youtube"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="http://instagram.com/"
-                    >Follow our <em>instagram</em><i class="fa fa-instagram"></i
-                  ></a>
-                </li>
-              </ul>
-            </div> -->
-            <!-- <div class="page-direction-button">
-              <a href="contact.html"
-                ><i class="fa fa-phone"></i>Contact Us Now</a
-              >
-            </div> -->
-          </div>
+        <div class="col-md-5" style="margin-left: 80px">
+          <div class="left-side"></div>
         </div>
         <div class="col-md-5 col-md-offset-1">
           <section id="first-tab-group" class="tabgroup">
-            <div id="tab1" style="box-shadow: 4px 4px 8px #feefad">
+            <div id="tab1" style="box-shadow: 4px 4px 8px #f48fb7">
               <div class="submit-form">
                 <h4>Thông tin hành trình:</h4>
                 <form id="form-submit" action="#" method="get">
@@ -140,290 +97,14 @@
       </div>
     </div>
   </section>
-
-  <!-- <div class="tabs-content" id="weather">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>Check Weather For 5 NEXT Days</h2>
-          </div>
-        </div>
-        <div class="wrapper">
-          <div class="col-md-12">
-            <div class="weather-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <ul class="tabs clearfix" data-tabgroup="second-tab-group">
-                    <li><a href="#monday" class="active">Monday</a></li>
-                    <li><a href="#tuesday">Tuesday</a></li>
-                    <li><a href="#wednesday">Wednesday</a></li>
-                    <li><a href="#thursday">Thursday</a></li>
-                    <li><a href="#friday">Friday</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-12">
-                  <section id="second-tab-group" class="weathergroup">
-                    <div id="monday">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Myanmar</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-03.png" alt="" />
-                            </div>
-                            <span>32&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>26&deg;</span></li>
-                              <li>12PM <span>32&deg;</span></li>
-                              <li>6PM <span>28&deg;</span></li>
-                              <li>12AM <span>22&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Thailand</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-02.png" alt="" />
-                            </div>
-                            <span>28&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>20&deg;</span></li>
-                              <li>12PM <span>28&deg;</span></li>
-                              <li>6PM <span>26&deg;</span></li>
-                              <li>12AM <span>18&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>India</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-01.png" alt="" />
-                            </div>
-                            <span>33&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>26&deg;</span></li>
-                              <li>12PM <span>33&deg;</span></li>
-                              <li>6PM <span>29&deg;</span></li>
-                              <li>12AM <span>27&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="tuesday">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Myanmar</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-02.png" alt="" />
-                            </div>
-                            <span>28&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>18&deg;</span></li>
-                              <li>12PM <span>27&deg;</span></li>
-                              <li>6PM <span>25&deg;</span></li>
-                              <li>12AM <span>17&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Thailand</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-03.png" alt="" />
-                            </div>
-                            <span>31&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>19&deg;</span></li>
-                              <li>12PM <span>28&deg;</span></li>
-                              <li>6PM <span>22&deg;</span></li>
-                              <li>12AM <span>18&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>India</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-01.png" alt="" />
-                            </div>
-                            <span>26&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>19&deg;</span></li>
-                              <li>12PM <span>26&deg;</span></li>
-                              <li>6PM <span>22&deg;</span></li>
-                              <li>12AM <span>20&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="wednesday">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Myanmar</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-03.png" alt="" />
-                            </div>
-                            <span>31&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>19&deg;</span></li>
-                              <li>12PM <span>28&deg;</span></li>
-                              <li>6PM <span>22&deg;</span></li>
-                              <li>12AM <span>18&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Thailand</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-01.png" alt="" />
-                            </div>
-                            <span>34&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>28&deg;</span></li>
-                              <li>12PM <span>34&deg;</span></li>
-                              <li>6PM <span>30&deg;</span></li>
-                              <li>12AM <span>29&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>India</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-02.png" alt="" />
-                            </div>
-                            <span>28&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>18&deg;</span></li>
-                              <li>12PM <span>27&deg;</span></li>
-                              <li>6PM <span>25&deg;</span></li>
-                              <li>12AM <span>17&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="thursday">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Myanmar</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-01.png" alt="" />
-                            </div>
-                            <span>27&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>21&deg;</span></li>
-                              <li>12PM <span>27&deg;</span></li>
-                              <li>6PM <span>22&deg;</span></li>
-                              <li>12AM <span>18&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Thailand</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-02.png" alt="" />
-                            </div>
-                            <span>28&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>18&deg;</span></li>
-                              <li>12PM <span>27&deg;</span></li>
-                              <li>6PM <span>25&deg;</span></li>
-                              <li>12AM <span>17&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>India</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-03.png" alt="" />
-                            </div>
-                            <span>31&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>19&deg;</span></li>
-                              <li>12PM <span>28&deg;</span></li>
-                              <li>6PM <span>22&deg;</span></li>
-                              <li>12AM <span>18&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="friday">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Myanmar</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-03.png" alt="" />
-                            </div>
-                            <span>33&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>28&deg;</span></li>
-                              <li>12PM <span>33&deg;</span></li>
-                              <li>6PM <span>29&deg;</span></li>
-                              <li>12AM <span>27&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>Thailand</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-02.png" alt="" />
-                            </div>
-                            <span>31&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>24&deg;</span></li>
-                              <li>12PM <span>31&deg;</span></li>
-                              <li>6PM <span>26&deg;</span></li>
-                              <li>12AM <span>23&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="weather-item">
-                            <h6>India</h6>
-                            <div class="weather-icon">
-                              <img src="img/weather-icon-01.png" alt="" />
-                            </div>
-                            <span>28&deg;C</span>
-                            <ul class="time-weather">
-                              <li>6AM <span>24&deg;</span></li>
-                              <li>12PM <span>28&deg;</span></li>
-                              <li>6PM <span>26&deg;</span></li>
-                              <li>12AM <span>22&deg;</span></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <section class="services">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="service-item first-service">
+          <div
+            class="service-item first-service"
+            style="border-radius: 25px; box-shadow: 4px 4px 8px #f48fb7"
+          >
             <div class="fa-solid fa-plant-wilt" style="font-size: 70px"></div>
             <h4>LÊN KẾ HOẠCH</h4>
             <p>
@@ -433,7 +114,10 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="service-item second-service">
+          <div
+            class="service-item second-service"
+            style="border-radius: 25px; box-shadow: 4px 4px 8px #f48fb7"
+          >
             <div class="fa-solid fa-ticket" style="font-size: 70px"></div>
             <h4>ĐẶT VÉ</h4>
             <p>
@@ -444,7 +128,10 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="service-item third-service">
+          <div
+            class="service-item third-service"
+            style="border-radius: 25px; box-shadow: 4px 4px 8px #f48fb7"
+          >
             <div class="fa-solid fa-train" style="font-size: 70px"></div>
             <h4>SẴN SÀNG LÊN ĐƯỜNG</h4>
             <p>

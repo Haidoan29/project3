@@ -154,7 +154,7 @@ p {
 }
 
 .banner {
-  background-image: url(../img/banner-bg.jpg);
+  background-image: url(../img/homepage1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -163,7 +163,6 @@ p {
 
 .banner .left-side {
   text-align: left;
-  background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   margin-left: -100vh;
   padding-left: 100vh;
@@ -729,7 +728,7 @@ p {
 
 footer {
   text-align: center;
-  background-color: #1f3646;
+  background-color: #171717;
   padding: 40px 0px;
 }
 

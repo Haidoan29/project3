@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+    <footer
+      class="text-center text-lg-start bg-body-tertiary text-muted"
+      style="background: #171717"
+    >
       <!-- Section: Links  -->
       <section class="">
         <div class="container text-center text-md-start">
@@ -10,7 +13,10 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
               <!-- Content -->
-              <h6 class="text-uppercase fw-bold mb-4">
+              <h6
+                class="text-uppercase fw-bold mb-4"
+                style="font-size: 10px; color: #d82d8b"
+              >
                 <i
                   ><img
                     src="../assets/img/logo3.png"
@@ -30,15 +36,32 @@
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">dịch vụ</h6>
+              <h6
+                class="text-uppercase fw-bold mb-4"
+                style="font-size: 10px; color: #d82d8b"
+              >
+                dịch vụ
+              </h6>
               <p>
-                <a href="#!" class="text-reset">Tìm vé</a>
+                <a
+                  href="/timve"
+                  class="text-reset"
+                  style="text-decoration: none"
+                  >Tìm vé</a
+                >
               </p>
               <p>
-                <a href="#!" class="text-reset">Đặt vé</a>
+                <a
+                  href="/datve"
+                  class="text-reset"
+                  style="text-decoration: none"
+                  >Đặt vé</a
+                >
               </p>
               <p>
-                <a href="#!" class="text-reset">Huỷ vé</a>
+                <a href="#!" class="text-reset" style="text-decoration: none"
+                  >Huỷ vé</a
+                >
               </p>
             </div>
             <!-- Grid column -->
@@ -46,7 +69,12 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">tải ứng dụng</h6>
+              <h6
+                class="text-uppercase fw-bold mb-4"
+                style="font-size: 10px; color: #d82d8b"
+              >
+                tải ứng dụng
+              </h6>
               <p>
                 <a href="#!" class="text-reset"
                   ><img src="../assets/img/app-store.webp" alt=""
@@ -63,7 +91,12 @@
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Liên hệ</h6>
+              <h6
+                class="text-uppercase fw-bold mb-4"
+                style="font-size: 10px; color: #d82d8b"
+              >
+                Liên hệ
+              </h6>
               <p>
                 <i class="fas fa-home me-3"></i>Số 118 đường Lê Duẩn, Phường Cửa
                 Nam, Quận Hoàn Kiếm, Thành phố Hà Nội, Việt Nam.

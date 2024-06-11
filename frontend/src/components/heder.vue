@@ -2,7 +2,7 @@
   <!-- Navbar -->
   <nav
     class="navbar navbar-expand-lg navbar-light text-lg-start bg-body-tertiary text-muted"
-    style="height: 75px"
+    style="height: 75px; background: #fff0f6; border-bottom: 1px solid black"
   >
     <!-- Container wrapper -->
     <div class="container">
@@ -13,7 +13,8 @@
           style="
             font-family: 'Roboto', 'Courier New', monospace;
             font-style: oblique;
-            color: #fff;
+            color: #e262a8;
+            letter-spacing: 2px;
           "
         >
           <i
@@ -43,13 +44,43 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+            <a
+              class="nav-link"
+              href="/"
+              style="
+                color: #696969;
+                font-weight: bold;
+                font-family: Roboto;
+                letter-spacing: 2px;
+              "
+              >Trang chủ</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+            <a
+              class="nav-link"
+              href="/timve"
+              style="
+                color: #696969;
+                font-weight: bold;
+                font-family: Roboto;
+                letter-spacing: 2px;
+              "
+              >Tìm vé</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff">Trang chủ</a>
+            <a
+              class="nav-link"
+              href="/datve"
+              style="
+                color: #696969;
+                font-weight: bold;
+                font-family: Roboto;
+                letter-spacing: 2px;
+              "
+              >Đặt vé</a
+            >
           </li>
         </ul>
 
