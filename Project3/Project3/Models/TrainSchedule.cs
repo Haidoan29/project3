@@ -5,7 +5,7 @@ namespace Project3.Models
 {
     public class TrainSchedule : Base
     {
-        public int ScheduleID { get; set; }
+        //public int ScheduleID { get; set; }
         public int TrainID { get; set; }
         public int StartStationID { get; set; }
         public int EndStationID { get; set; }
