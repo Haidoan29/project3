@@ -101,35 +101,26 @@
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="col-form-label">Họ và
                                                             tên</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                            v-model="currentProduct.name">
+                                                        <input type="text" class="form-control" id="recipient-name">
                                                     </div>
-                                                    <!-- <div class="form-group">
-                                <label for="imageProduct" class="col-form-label">Product Image:</label>
-                                <input type="file" class="form-control" id="imageProduct" @change="onFileChange">
-                            </div> -->
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                             class="col-form-label">email:</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                            v-model="currentProduct.email">
+                                                        <input type="text" class="form-control" id="recipient-name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                             class="col-form-label">phone:</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                            v-model="currentProduct.phone">
+                                                        <input type="text" class="form-control" id="recipient-name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="col-form-label">CCCD:</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                            v-model="currentProduct.cccd">
+                                                        <input type="text" class="form-control" id="recipient-name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name"
                                                             class="col-form-label">address:</label>
-                                                        <input type="text" class="form-control" id="recipient-name"
-                                                            v-model="currentProduct.address">
+                                                        <input type="text" class="form-control" id="recipient-name">
                                                     </div>
 
                                                 </form>
