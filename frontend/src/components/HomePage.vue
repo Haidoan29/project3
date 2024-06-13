@@ -15,7 +15,12 @@
                     <div class="col-md-6">
                       <fieldset>
                         <label for="from">Ga đi:</label>
-                        <select required name="from" onchange="this.form.()">
+                        <select
+                          required
+                          name="from"
+                          onchange="this.form.()"
+                          style="border: 1px solid black"
+                        >
                           <option value="">Select a location...</option>
                           <option value="Cambodia">Cambodia</option>
                           <option value="Hong Kong">Hong Kong</option>
@@ -33,7 +38,12 @@
                     <div class="col-md-6">
                       <fieldset>
                         <label for="to">Ga đến:</label>
-                        <select required name="to" onchange="this.form.()">
+                        <select
+                          required
+                          name="to"
+                          onchange="this.form.()"
+                          style="border: 1px solid black"
+                        >
                           <option value="">Select a location...</option>
                           <option value="Cambodia">Cambodia</option>
                           <option value="Hong Kong">Hong Kong</option>
@@ -53,12 +63,13 @@
                         <label for="departure">Ngày đi:</label>
                         <input
                           name="deparure"
-                          type="text"
+                          type="date"
                           class="form-control date"
                           id="deparure"
                           placeholder="Select date..."
                           required=""
                           onchange="this.form.()"
+                          style="border: 1px solid black"
                         />
                       </fieldset>
                     </div>
