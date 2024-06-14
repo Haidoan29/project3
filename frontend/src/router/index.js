@@ -35,9 +35,12 @@ const routes = [
     component: DatVe,
   },
   {
-    path: "/timve",
+    path: "/timve/:searchResult",
     name: "TimVe",
     component: TimVe,
+    props: true,
+    //props: true, // Bật chế độ truyền props từ route
+    //props: { newsletterPopup: false }
   },
   {
     path: "/login",
@@ -132,6 +135,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
 // router.beforeEach((to, from, next) => {
 //   // Kiểm tra meta data của trang khach hang
 //   if (to.meta.requiresAuth && to.path !== '/login') {
