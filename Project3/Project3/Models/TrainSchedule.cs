@@ -12,8 +12,8 @@ namespace Project3.Models
         [NotMapped]
         public DateOnly JourneyDate { get; set; }
 
-        public TimeSpan DepartureTime { get; set; }
-        public TimeSpan ArrivalTime { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
         [ForeignKey("TrainNo")]
         public virtual Train? Train { get; set; }
         //[ForeignKey("startstationid")]
