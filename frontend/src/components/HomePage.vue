@@ -44,7 +44,7 @@
                         <label for="departure">Ngày đi:</label>
                         <input name="deparure" type="date" class="form-control date" id="deparure"
                           placeholder="Select date..." required="" onchange="this.form.()"
-                          style="border: 1px solid black;" />
+                          style="border: 1px solid black" />
                       </fieldset>
                     </div>
 

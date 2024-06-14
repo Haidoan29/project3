@@ -1,164 +1,107 @@
 <template>
-  <div id="app">
-    <!-- <form form @submit.prevent="register" action="action_page.php" class="register" style="border:1px solid #ccc">
-      <div class="container">
-        <h1>Sign Up</h1>
-        <hr>
-        <label for="username"><b>username</b></label>
-        <input type="text" id="username" v-model="registerForm.username" required>
-        <label for="email"><b>Email</b></label>
-        <input type="text" id="username" v-model="registerForm.email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" id="password" v-model="registerForm.password" required pattern=".{6,}"
-          title="Mật khẩu phải chứa ít nhất 6 ký tự">
-
-
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" id="retypePassword" v-model="registerForm.retypePassword" required>
-        <div>
-          <span v-if="passwordMismatch" class="error-message">Mật khẩu và mật khẩu nhập lại không khớp.</span>
-        </div>
-
-        <label>
-          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-        </label>
-
-        <div class="clearfix">
-
-          <button type="button" class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Đăng Ký</button>
-          <router-link to="/login">Đăng nhập</router-link>|
-        </div>
-      </div>
-    </form> -->
-    <section class="vh-100" style="background-color: #1f1815">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-xl-10">
-            <div class="card" style="border-radius: 1rem">
-              <div class="row g-0">
-                <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                  <div class="card-body p-4 p-lg-5 text-black">
-                    <form @submit.prevent="register">
-                      <div class="d-flex align-items-center mb-3 pb-1">
-                        <i>
-                          <img
-                            src="../assets/img/logo3.png"
-                            class="img-fluid"
-                            style="
-                              height: 35px;
-                              width: 70px;
-                              margin-right: 10px;
-                            "
-                          />
-                        </i>
-                        <span
-                          class="h1 fw-bold mb-0"
-                          style="
-                            font-family: 'Roboto', 'Courier New', monospace;
-                            font-style: oblique;
-                          "
-                          >ĐƯỜNG SẮT HẢI MINH</span
-                        >
-                      </div>
-
-                      <h5
-                        class="fw-normal mb-3 pb-3"
-                        style="letter-spacing: 1px"
-                      >
-                        ĐĂNG KÍ
-                      </h5>
-
-                      <div data-mdb-input-init class="form-outline">
-                        <label class="form-label" for="form2Example17"
-                          >Tên tài khoản</label
-                        >
-                        <input
-                          type="text"
-                          id="form2Example17"
-                          class="form-control form-control-lg"
-                          v-model="registerForm.username"
-                          required
-                        />
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="form2Example17"
-                          >Email</label
-                        >
-                        <input
-                          type="email"
-                          id="form2Example17"
-                          class="form-control form-control-lg"
-                          v-model="registerForm.email"
-                          requiredv-model="registerForm.email"
-                          required
-                        />
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline">
-                        <label class="form-label" for="form2Example27"
-                          >Mật khẩu</label
-                        >
-                        <input
-                          type="password"
-                          id="form2Example27"
-                          class="form-control form-control-lg"
-                          v-model="registerForm.password"
-                          required
-                          pattern=".{6,}"
-                          title="Mật khẩu phải chứa ít nhất 6 ký tự"
-                        />
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="form2Example27"
-                          >Nhập lại mật khẩu</label
-                        >
-                        <input
-                          type="password"
-                          id="form2Example27"
-                          class="form-control form-control-lg"
-                          v-model="registerForm.retypePassword"
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <span v-if="passwordMismatch" class="error-message"
-                          >Mật khẩu và mật khẩu nhập lại không khớp.</span
-                        >
-                      </div>
-
-                      <div class="pt-1">
-                        <button
-                          data-mdb-button-init
-                          data-mdb-ripple-init
-                          class="btn btn-info btn-lg btn-block"
-                          type="submit"
-                          style="background-color: #26a8bc"
-                        >
-                          Đăng kí
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-5 d-none d-md-block">
-                  <img
-                    src="https://halotravel.vn/wp-content/uploads/2019/10/duong-tau-ha-noi-08.jpg"
-                    alt="login form"
-                    class="img-fluid h-100"
-                    style="border-radius: 0 1rem 1rem 0"
-                  />
-                </div>
-              </div>
-            </div>
+  <div class="row g-0 vh-100">
+    <div class="col-md-6 col-lg-5 d-none d-md-block">
+      <img
+        src="https://halotravel.vn/wp-content/uploads/2019/10/duong-tau-ha-noi-08.jpg"
+        alt="login form"
+        class="img-fluid h-100"
+        style="border-radius: 0 1rem 1rem 0"
+      />
+    </div>
+    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+      <div class="card-body p-4 p-lg-5 text-black">
+        <form @submit.prevent="register">
+          <div class="d-flex align-items-center mb-3 pb-1">
+            <i>
+              <img
+                src="../assets/img/logo3.png"
+                class="img-fluid"
+                style="height: 35px; width: 70px; margin-right: 10px"
+              />
+            </i>
+            <span
+              class="h1 fw-bold mb-0"
+              style="
+                font-family: 'Roboto', 'Courier New', monospace;
+                font-style: oblique;
+              "
+              >ĐƯỜNG SẮT HẢI MINH</span
+            >
           </div>
-        </div>
+
+          <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+            ĐĂNG KÍ
+          </h5>
+
+          <div data-mdb-input-init class="form-outline">
+            <label class="form-label" for="form2Example17">Tên tài khoản</label>
+            <input
+              type="text"
+              id="form2Example17"
+              class="form-control form-control-lg"
+              v-model="registerForm.username"
+              required
+            />
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Email</label>
+            <input
+              type="email"
+              id="form2Example17"
+              class="form-control form-control-lg"
+              v-model="registerForm.email"
+              requiredv-model="registerForm.email"
+              required
+            />
+          </div>
+
+          <div data-mdb-input-init class="form-outline">
+            <label class="form-label" for="form2Example27">Mật khẩu</label>
+            <input
+              type="password"
+              id="form2Example27"
+              class="form-control form-control-lg"
+              v-model="registerForm.password"
+              required
+              pattern=".{6,}"
+              title="Mật khẩu phải chứa ít nhất 6 ký tự"
+            />
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="form2Example27"
+              >Nhập lại mật khẩu</label
+            >
+            <input
+              type="password"
+              id="form2Example27"
+              class="form-control form-control-lg"
+              v-model="registerForm.retypePassword"
+              required
+            />
+          </div>
+
+          <div>
+            <span v-if="passwordMismatch" class="error-message"
+              >Mật khẩu và mật khẩu nhập lại không khớp.</span
+            >
+          </div>
+
+          <div class="pt-1">
+            <button
+              data-mdb-button-init
+              data-mdb-ripple-init
+              class="btn btn-info btn-lg btn-block"
+              type="submit"
+              style="background-color: #26a8bc"
+            >
+              Đăng kí
+            </button>
+          </div>
+        </form>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 <script>

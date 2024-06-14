@@ -1,28 +1,18 @@
-<!-- <template>
-    <h1>Đây là trang quên mật khẩu</h1>
-
-    <div class="card text-center containers" style="width: 300px;">
-        <div class="card-header h5 text-white bg-primary">Password Reset</div>
-        <div class="card-body px-5">
-            <form @submit.prevent="submitForm">
-                <label for="email">Email:</label>
-                <input type="email" v-model="email" required>
-                <button type="submit">Gửi yêu cầu</button>
-            </form>
-            <div class="d-flex justify-content-between mt-4">
-                <a class="" href="/login">Login</a>
-                <a class="" href="/register">Register</a>
-            </div>
-        </div>
-    </div>
-
-
-</template> -->
 <template>
-  <div class="" style="background-color: #1f1815">
+  <div
+    class=""
+    style="
+      background-image: url(https://halotravel.vn/wp-content/uploads/2019/10/duong-tau-ha-noi-08.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    "
+  >
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
-        <main>
+        <main
+          class="justify-content-center d-flex align-items-center"
+          style="min-height: 100vh"
+        >
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-5">
