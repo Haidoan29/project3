@@ -35,12 +35,10 @@ const routes = [
     component: DatVe,
   },
   {
-    path: "/timve/:searchResult",
+    path: "/timve/:startStationID/:endStationID",
     name: "TimVe",
     component: TimVe,
-    props: true,
-    //props: true, // Bật chế độ truyền props từ route
-    //props: { newsletterPopup: false }
+    props: true
   },
   {
     path: "/login",

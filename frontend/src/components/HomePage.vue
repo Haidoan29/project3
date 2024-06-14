@@ -426,41 +426,13 @@ export default {
         // Chuyển đổi this.selectedFrom và this.selectedTo thành chuỗi
         const selectedFromAsString = this.selectedFrom.toString();
         const selectedToAsString = this.selectedTo.toString();
-
-        // Gọi API FullFilter để tìm kiếm vé
-        axios.post(process.env.VUE_APP_BASE_URL + 'TrainSchedule/FullFilter', {
-          filterRequests: [
-            { colName: 'StartStationID', _RightSize: selectedFromAsString, _operator: 'like' },
-            { colName: 'EndStationID', _RightSize: selectedToAsString, _operator: 'like' },
-            //{ colName: 'JourneyDate', _RightSize: this.departureDate.toString(), _operator: 'equal' }
-          ],
-
-        }).then((response) => {
-          debugger
-          console.log('Kết quả tìm kiếm:', response.data);
-
-          // Lưu kết quả tìm kiếm vào state hoặc biến của component
-          this.searchResult = response.data;
-
-          // Điều hướng sang trang tìm vé và truyền dữ liệu tìm kiếm    
-          //console.log('truyen di:' + JSON.stringify)
-          this.$router.push({ name: 'TimVe', params: { searchResult: this.searchResult } });
-          // this.$router.push({ name: 'TimVe', params: { x: "haha" } });
-
-          if (this.searchResult && this.searchResult.length > 0) {
-            console.log('Dữ liệu searchResult:', this.searchResult);
-            // Tiếp tục xử lý dữ liệu nếu cần thiết
-          } else {
-            console.log('searchResult không có dữ liệu.');
-          }
-
-
-
-        }).catch((error) => {
-          debugger
-          console.error('Lỗi khi tìm kiếm vé:', error);
-          // Xử lý lỗi nếu cần thiết
+        console.log(`selectedFromAsString = ${selectedFromAsString},selectedToAsString = ${selectedToAsString} `);
+        this.$router.push({
+          name: 'TimVe',
+          params: { startStationID: selectedFromAsString, endStationID: selectedToAsString }
         });
+
+
 
       } catch (error) {
         debugger
