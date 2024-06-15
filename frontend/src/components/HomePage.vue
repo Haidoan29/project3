@@ -18,8 +18,8 @@
                         <select required name="from" @change="handleChangeFrom" v-model="selectedFrom"
                           style="border: 1px solid black;">
                           <option value="">Select a location...</option>
-                          <option v-for="t in trainSchedule" :key="t.id" :value="t.startStationID">
-                            {{ getStationName(t.startStationID) }}
+                          <option v-for="t in uniqueStartStations" :key="t" :value="t">
+                            {{ getStationName(t) }}
                           </option>
                         </select>
                       </fieldset>
@@ -32,8 +32,8 @@
                         <select required name="to" @change="handleChangeTo" v-model="selectedTo"
                           style="border: 1px solid black;">
                           <option value="">Select a location...</option>
-                          <option v-for=" t in trainSchedule" :key="t.id" :value="t.endStationID">
-                            {{ getStationName(t.endStationID) }}
+                          <option v-for="t in uniqueEndStations" :key="t" :value="t">
+                            {{ getStationName(t) }}
                           </option>
                         </select>
                       </fieldset>
@@ -377,6 +377,31 @@ export default {
 
     }
   },
+  computed: {
+    uniqueStartStations() {
+      const seen = new Set();
+      return this.trainSchedule
+        .filter(t => t.startStationID)  // Lọc ra các phần tử có startStationID hợp lệ
+        .filter(t => {
+          const duplicate = seen.has(t.startStationID);
+          seen.add(t.startStationID);
+          return !duplicate;
+        })
+        .map(t => t.startStationID);
+    },
+    uniqueEndStations() {
+      const seen = new Set();
+      return this.trainSchedule
+        .filter(t => t.endStationID)  // Lọc ra các phần tử có startStationID hợp lệ
+        .filter(t => {
+          const duplicate = seen.has(t.endStationID);
+          seen.add(t.endStationID);
+          return !duplicate;
+        })
+        .map(t => t.endStationID);
+    },
+  },
+
   methods: {
 
     loadtrainData() {
@@ -418,7 +443,6 @@ export default {
     },
     getStationName(id) {
       const station = this.stations.find(s => s.id === id);
-
       return station ? station.stationName : 'Unknown Station';
     },
     searchTickets() {

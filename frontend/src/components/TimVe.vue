@@ -14,181 +14,79 @@
               <i class="fa-solid fa-arrow-right" style="padding-right: 5px"></i>TÌM VÉ
             </h5>
             <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <template v-if="searchResult.length > 0">
-                  <div class="detail-tour-list" style="background: #eeeeee" v-for="ticket in searchResult"
-                    :key="ticket.id">
-                    <div class="img-tour">
-                      <a href="ve-tau-chang-di-vinh-ha-noi/index.html">
-                        <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
-                          alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
-                      </a>
-                    </div>
-                    <div class="info-tour" style="padding: 15px">
-                      <h4>
-                        <a href="" style="text-decoration: none; font-size: 15px"> Vé tàu chặng đi
-                          {{ ticket.startStationID }} – {{ ticket.endStationID }}</a>
-                      </h4>
-                      <p class="price" style="
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" v-for="ticket in searchResult" :key="ticket.id">
+
+                <div class="detail-tour-list" style="background: #eeeeee">
+                  <div class="img-tour">
+                    <a href="#" @click="onClick()">
+                      <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
+                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
+                    </a>
+                  </div>
+                  <div class="info-tour" style="padding: 15px">
+                    <h4>
+                      <a href="#" @click.stop="onClick()" style="text-decoration: none; font-size: 15px"> Vé tàu chặng
+                        đi
+                        {{ getStationName(ticket.startStationID) }} – {{ getStationName(ticket.endStationID) }}</a>
+                    </h4>
+                    <p class="price" style="
                           color: #e00;
                           font: 400 18px / normal Utm-Avo-bold, sans-serif;
                           font-weight: bold;
                           padding-top: 10px;
                         ">
-                        tên tàu
-                      </p>
-                      <p>
-                        <i class="fa fa-clock-o" style="color: red"></i>
-                        Khởi hành:
-                        <span style="
+                      {{ getTrainName(ticket.trainID) }}
+                    </p>
+                    <p>
+                      <i class="fa fa-clock-o" style="color: red"></i>
+                      Khởi hành:
+                      <span style="
               font-weight: 500;
               font-family: Roboto;
               color: #000;
-            ">9:28 AM</span>
-                      </p>
-                      <p>
-                        <i class="fa fa-star" style="color: red"></i> Hạng vé:
-                        <span style="
+            ">{{ formatTime(ticket.departureTime) }}</span>
+                    </p>
+                    <p>
+                      <i class="fa fa-calendar" style="color: red"></i>
+                      Khởi hành:
+                      <span style="
               font-weight: 500;
               font-family: Roboto;
               color: #000;
-            ">Ngồi mềm điều hòa</span>
-                      </p>
-                    </div>
+            ">{{ formatDate(ticket.departureTime) }}</span>
+                    </p>
                   </div>
-                </template>
-                <template v-else>
-                  <div>
-                    <p>Không có kết quả tìm kiếm nào.</p>
-                  </div>
-                </template>
-              </div>
+                </div>
 
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <div class="detail-tour-list" style="background: #eeeeee">
-                  <div class="img-tour">
-                    <a href="ve-tau-chang-di-vinh-ha-noi/index.html">
-                      <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
-                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
-                    </a>
-                  </div>
-                  <div class="info-tour" style="padding: 15px">
-                    <h4>
-                      <a href="ve-tau-chang-di-vinh-ha-noi/index.html" style="text-decoration: none; font-size: 15px">Vé
-                        tàu chặng đi Vinh &#8211; Hà Nội</a>
-                    </h4>
-                    <p class="price" style="
-                        color: #e00;
-                        font: 400 18px / normal Utm-Avo-bold, sans-serif;
-                        font-weight: bold;
-                        padding-top: 10px;
-                      ">
-                      253.000 VNĐ
-                    </p>
-                    <p>
-                      <i class="fa fa-clock-o" style="color: red"></i>
-                      Khởi hành:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">9:28 AM</span>
-                    </p>
-                    <p>
-                      <i class="fa fa-star" style="color: red"></i> Hạng vé:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">Ngồi mềm điều hòa</span>
-                    </p>
-                  </div>
-                </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <div class="detail-tour-list" style="background: #eeeeee">
-                  <div class="img-tour">
-                    <a href="ve-tau-chang-di-vinh-ha-noi/index.html">
-                      <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
-                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
-                    </a>
+            </div>
+            <!-- Modal -->
+            <div class="modal" :class="{ 'show': showModal }" id="Modal" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Tiêu đề modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"
+                      @click.prevent></button>
+
+                    <!-- <button type="button" class="btn-close" aria-label="Đóng" @click="closeModal"></button> -->
                   </div>
-                  <div class="info-tour" style="padding: 15px">
-                    <h4>
-                      <a href="" style="text-decoration: none; font-size: 15px">Vé
-                        tàu chặng đi Vinh &#8211; Hà Nội</a>
-                    </h4>
-                    <p class="price" style="
-                        color: #e00;
-                        font: 400 18px / normal Utm-Avo-bold, sans-serif;
-                        font-weight: bold;
-                        padding-top: 10px;
-                      ">
-                      253.000 VNĐ
-                    </p>
-                    <p>
-                      <i class="fa fa-clock-o" style="color: red"></i>
-                      Khởi hành:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">9:28 AM</span>
-                    </p>
-                    <p>
-                      <i class="fa fa-star" style="color: red"></i> Hạng vé:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">Ngồi mềm điều hòa</span>
-                    </p>
+                  <div class="modal-body">
+                    <p>Nội dung modal điền vào đây.</p>
                   </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <div class="detail-tour-list" style="background: #eeeeee">
-                  <div class="img-tour">
-                    <a href="ve-tau-chang-di-vinh-ha-noi/index.html">
-                      <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
-                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
-                    </a>
-                  </div>
-                  <div class="info-tour" style="padding: 15px">
-                    <h4>
-                      <a href="" style="text-decoration: none; font-size: 15px">Vé
-                        tàu chặng đi Vinh &#8211; Hà Nội</a>
-                    </h4>
-                    <p class="price" style="
-                        color: #e00;
-                        font: 400 18px / normal Utm-Avo-bold, sans-serif;
-                        font-weight: bold;
-                        padding-top: 10px;
-                      ">
-                      253.000 VNĐ
-                    </p>
-                    <p>
-                      <i class="fa fa-clock-o" style="color: red"></i>
-                      Khởi hành:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">9:28 AM</span>
-                    </p>
-                    <p>
-                      <i class="fa fa-star" style="color: red"></i> Hạng vé:
-                      <span style="
-                          font-weight: 500;
-                          font-family: Roboto;
-                          color: #000;
-                        ">Ngồi mềm điều hòa</span>
-                    </p>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click.prevent="closeModal">Đóng</button>
+                    <button type="button" class="btn btn-primary" @click="onSaveClick()">Tiếp tục</button>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- Modal -->
+
           </div>
+
+
         </div>
       </div>
     </div>
@@ -196,62 +94,108 @@
 </template>
 <script>
 import axios from 'axios';
+import { Modal } from 'bootstrap';
 export default {
   name: 'TimVe',
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    Modal
+  },
+
   props: ['startStationID', 'endStationID'],
   data() {
     return {
-      searchResult: []
+      searchResult: [],
+      stations: [],
+      trains: [],
+      Modal: null,
+      showModal: false // Trạng thái hiển thị modal
+
     }
   },
 
   created() {
-    //Gọi API FullFilter để tìm kiếm vé
-    const { startStationID, endStationID } = this.$router.currentRoute._rawValue.params;
-    console.log(`this.startStationID = ${startStationID}, this.endStationID = ${endStationID}`);
-
-    //console.log(JSON.stringify(this.$router))
-    //const params = this.$router.currentRoute._rawValue.params;
-    axios.post(process.env.VUE_APP_BASE_URL + 'TrainSchedule/FullFilter', {
-      filterRequests: [
-        { colName: 'StartStationID', _RightSize: startStationID, _operator: 'like' },
-        { colName: 'EndStationID', _RightSize: endStationID, _operator: 'like' },
-        //{ colName: 'JourneyDate', _RightSize: this.departureDate.toString(), _operator: 'equal' }
-      ],
-
-    }).then((response) => {
-
-      console.log('Kết quả tìm kiếm:', response.data);
-
-      // Lưu kết quả tìm kiếm vào state hoặc biến của component
-      this.searchResult = response.data;
-      if (this.searchResult && this.searchResult.length > 0) {
-        console.log('Dữ liệu searchResult:', this.searchResult);
-        // Tiếp tục xử lý dữ liệu nếu cần thiết
-      } else {
-        console.log('searchResult không có dữ liệu.');
-      }
-
-
-
-    }).catch((error) => {
-      debugger
-      console.error('Lỗi khi tìm kiếm vé:', error);
-      // Xử lý lỗi nếu cần thiết
+    this.loadStations().then(() => {
+      // Sau khi tải dữ liệu thành công, bạn có thể gọi API tìm kiếm vé
+      const { startStationID, endStationID } = this.$router.currentRoute._rawValue.params;
+      axios.post(process.env.VUE_APP_BASE_URL + 'TrainSchedule/FullFilter', {
+        filterRequests: [
+          { colName: 'StartStationID', _RightSize: startStationID, _operator: 'equal' },
+          { colName: 'EndStationID', _RightSize: endStationID, _operator: 'equal' },
+          // { colName: 'JourneyDate', _RightSize: this.departureDate.toString(), _operator: 'equal' }
+        ],
+      }).then((response) => {
+        console.log('Kết quả tìm kiếm:', response.data);
+        this.searchResult = response.data;
+      }).catch((error) => {
+        console.error('Lỗi khi tìm kiếm vé:', error);
+      });
     });
+    this.loadTrains();
+
   },
 
-  // computed: {
-  //   parsedSearchResult() {
-  //     return JSON.parse(this.searchResult);
-  //   }
-  // },
-  // created() {
-  //   // Kiểm tra dữ liệu đã nhận từ props
-  //   console.log('Dữ liệu searchResult:', this.parsedSearchResult);
-  // },
   methods: {
+    formatTime(dateTimeString) {
+      const date = new Date(dateTimeString);
+      const options = {
+        // year: 'numeric',
+        // month: '2-digit',
+        // day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
 
+      return date.toLocaleString('vi-VN', options);
+    },
+    formatDate(dateTimeString) {
+      const date = new Date(dateTimeString);
+      const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        // hour: '2-digit',
+        // minute: '2-digit'
+      };
+
+      return date.toLocaleString('vi-VN', options);
+    },
+    async loadStations() {
+      try {
+        const url = process.env.VUE_APP_BASE_URL + 'Station/GetAll';
+        const response = await axios.get(url);
+        console.log("Stations API response:", response);
+        this.stations = response.data;
+      } catch (error) {
+        console.error("Error loading stations:", error.response || error);
+      }
+    },
+    getStationName(id) {
+      const station = this.stations.find(s => s.id === id);
+      return station ? station.stationName : 'Unknown Station';
+    },
+    async loadTrains() {
+      try {
+        const url = process.env.VUE_APP_BASE_URL + 'Train/GetAll'; // Thay đổi URL API tương ứng
+        const response = await axios.get(url);
+        this.trains = response.data; // Lưu thông tin tàu từ API vào mảng trains
+        console.log('Trains API response:', this.trains);
+      } catch (error) {
+        console.error('Error loading trains:', error.response || error);
+      }
+    },
+    getTrainName(trainID) {
+      const train = this.trains.find(t => t.id === trainID);
+      return train ? train.trainName : 'Unknown Train'; // Trả về tên của tàu hoặc thông báo "Unknown Train" nếu không tìm thấy
+    },
+    onClick() {
+      // this.currentTrain = Object.assign({}, p);// clone d
+      this.showModal = true; // Mở modal
+
+    },
+    closeModal() {
+      this.showModal = false; // Đóng modal
+    },
     logout() {
       // Xử lý đăng xuất ở đây
       // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
@@ -260,5 +204,8 @@ export default {
       window.location.reload();
     },
   },
+  // mounted() {
+  //   this.Modal = new Modal(this.$refs.Modal);
+  // }
 };
 </script>
