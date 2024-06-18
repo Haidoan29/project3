@@ -31,13 +31,14 @@ namespace Project3.Data
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<MyRouter> MyRouters { get; set; }
         public virtual DbSet<Station> Stations { get; set; }
-       
-        
-      
-        
+        public virtual DbSet<Class> Classes { get; set; }
 
 
-        
+
+
+
+
+
         //private async void Data()
         //{
         //    if (this.Class.Count() <= 0)

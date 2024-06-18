@@ -22,6 +22,14 @@
                                         Tạo mới tàu</a>
                                 </div>
                             </div>
+                            <div class=" d-flex">
+                                <form @submit.prevent="onSearchClick" class="form-input d-flex">
+                                    <input class="form-control" style="margin-right: 5px;" type="search"
+                                        placeholder="Search..." v-model="searchKeyword">
+                                    <button type="submit" class="btn" style="background-color: #27ad15;"
+                                        @click="onSearchClick()"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
                             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0"
                                 cellspacing="0" border="0" id="sampleTable">
                                 <thead>
@@ -50,9 +58,10 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
-                                                    @click="onUpdateClick(p)">Update</button>
-                                                <button type="button" class="btn btn-danger"
-                                                    @click="onDelete()">Delete</button>
+                                                    style="margin-right: 5px ;" @click=" onUpdateClick(t)"><i class="fas
+                                                    fa-edit"></i>Update</button>
+                                                <button type="button" class="btn btn-danger" @click="onDelete(t.id)"><i
+                                                        class="fas fa-trash-alt"></i>Delete</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -75,20 +84,38 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
+                                <label for="recipient-name" class="col-form-label">Tên tàu:</label>
                                 <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.stationCode">
+                                    v-model="currentTrain.trainName">
                             </div>
 
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Tên nhà ga:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.stationName">
+                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng AC3:</label>
+                                <input type="number" class="form-control" id="recipient-name"
+                                    v-model="currentTrain.numCoachesAC3">
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Khu vực:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.divisionName">
+                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng First Class</label>
+                                <input type="number" class="form-control" id="recipient-name"
+                                    v-model="currentTrain.numCoachesFirstClass">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng Sleeper</label>
+                                <input type="number" class="form-control" id="recipient-name"
+                                    v-model="currentTrain.numCoachesSleeper">
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="startStationID" class="col-form-label">Tuyến đường:</label>
+                                </div>
+                                <div>
+                                    <select class="form-select form-select-lg mb-3 col-form-label"
+                                        v-model="currentTrain.routeID" required>
+                                        <option disabled value="">Chọn tuyến đường</option>
+                                        <option v-for="r in routes" :key="r.id" :value="r.id">{{ r.routeName }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -109,11 +136,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Modal body text goes here.</p>
+                        <p>Bạn có chắc chắn muốn xóa ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" @click="onDeleteClick()">Đồng ý</button>
                     </div>
                 </div>
             </div>
@@ -145,8 +172,8 @@ export default {
         return {
             trainData: [],
             trainModal: null,
-            deletModal: null,
-            stationData: [],
+            deleteModal: null,
+
             routes: [],
             currentTrain: {
                 id: 0,
@@ -154,6 +181,7 @@ export default {
                 // stationName: "",
                 // divisionName: ""
             },
+
             searchKeyword: '',
             currentPage: 1, // Trang hiện tại
             pageSize: 3,   // Kích thước trang (số lượng sản phẩm trên mỗi trang)
@@ -162,6 +190,8 @@ export default {
 
         }
     },
+
+
     methods: {
         fetchtrains() {
             const stationApiUrl = process.env.VUE_APP_BASE_URL + `Routes/GetAll`; // Thay thế bằng API thực tế của bạn
@@ -198,7 +228,7 @@ export default {
             })
         },
         onSaveClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Update`;
+            var url = process.env.VUE_APP_BASE_URL + `Train/Update`;
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -245,6 +275,8 @@ export default {
             const route = this.routes.find(r => r.id === id);
             return route ? route.routeName : 'Unknown';
         },
+
+
         changePage(page) {
             this.currentPage = page;
             this.loadtrainData();
@@ -262,7 +294,8 @@ export default {
             }
         },
         onDeleteClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+
+            var url = process.env.VUE_APP_BASE_URL + `Train/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -282,14 +315,15 @@ export default {
                     // Ẩn modal
                     if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
                         this.deleteModal.hide();
+                        this.loadtrainData();
                     } else {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu trạm
-                    if (typeof this.loadstationData === 'function') {
-                        this.loadstationData();
+                    if (typeof this.loadtrainData === 'function') {
+                        this.loadtrainData();
                     } else {
-                        console.log('Hàm loadstationData không tồn tại.');
+                        console.log('Hàm loadtrainData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -303,14 +337,47 @@ export default {
                     }
                 });
         },
-        onDelete() {
+        onDelete(id) {
+            this.delete = id;
+            console.log(this.delete);
             this.deleteModal.show();
         },
 
-        onUpdateClick(p) {
-            this.currentTrain = Object.assign({}, p);// clone d
+        onUpdateClick(t) {
+            this.currentTrain = Object.assign({}, t);// clone d
             this.trainModal.show();
         },
+        onSearchClick() {
+            if (this.searchKeyword.trim() === '') {
+                this.loadProductData();
+            } else {
+                var url = process.env.VUE_APP_BASE_URL + `Train/FullFilter`;
+                var requestData = {
+                    filterRequests: [
+                        {
+                            colName: "name",
+                            _operator: "like",
+                            _RightSize: this.searchKeyword
+                        }
+                    ]
+                };
+
+                axios.post(url, requestData)
+                    .then(response => {
+                        this.productData = response.data;
+                        this.totalItems = this.productData.length;
+                        this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                        if (this.totalItems % this.pageSize !== 0) {
+                            this.totalPages++;
+                        }
+                        this.currentPage = 1;
+                    })
+                    .catch(error => {
+                        console.error('Error during search:', error);
+                    });
+            }
+        },
+
 
         logout() {
             // Xử lý đăng xuất ở đây
@@ -319,13 +386,14 @@ export default {
             this.$router.push('/login');
         },
     },
+
     mounted() {
         this.loadtrainData();
         console.log(this.totalPages);
         this.fetchtrains();
         //load Modal
         this.trainModal = new Modal(this.$refs.trainModal);
-        this.deletModal = new Modal(this.$refs.deletModal);
+        this.deleteModal = new Modal(this.$refs.deleteModal);
     }
 
 }

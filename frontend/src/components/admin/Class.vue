@@ -3,7 +3,7 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách vé</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách hạng ghế</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -14,9 +14,9 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <a class="btn btn-add btn-sm" href="/admin/order/add-order" title="Thêm"><i
+                                    <a class="btn btn-add btn-sm" href="/admin/class/add-class" title="Thêm"><i
                                             class="fas fa-plus"></i>
-                                        Tạo mới vé</a>
+                                        Tạo hạng ghế</a>
                                 </div>
                                 <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm" type="button" title="Xóa"
@@ -36,32 +36,18 @@
                                     <tr>
                                         <th width="10"><input type="checkbox" id="all"></th>
                                         <th>ID</th>
-                                        <th>Mã Đặt Vé (PRNNo)</th>
-                                        <th>Tàu</th>
-                                        <th>Khách Hàng</th>
-                                        <th>Ngày Khởi Hành</th>
-                                        <th>Ga Đi</th>
-                                        <th>Ga Đến</th>
-                                        <th>Số Ghế</th>
-                                        <th>Số Toa</th>
-                                        <th>Phí Đặt Vé</th>
-                                        <th>Ngày Tạo</th>
+                                        <th>Hạng ghế</th>
                                         <th>Tính năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="o in orderData" :key="o.id">
+                                    <tr v-for="o in classData" :key="o.id">
                                         <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                         <td>{{ o.id }}</td>
-                                        <td>{{ o.prnNo }}</td>
-                                        <td>{{ o.trainID }}</td>
-                                        <td>{{ o.customerID }}</td>
-                                        <td>{{ o.journeyDate }}</td>
-                                        <td>{{ o.fromStationID }}</td>
-                                        <td>{{ o.toStationID }}</td>
-                                        <td>{{ o.seatNo }}</td>
-                                        <td>{{ o.coachNo }}</td>
-                                        <td>{{ o.reservationFee }}</td>
+
+                                        <td>{{ o.className }}</td>
+
+
 
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -105,7 +91,7 @@
                 </div>
             </div>
             <!-- Modal -->
-            <div class="modal" ref="orderModal" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+            <div class="modal" ref="seatModal" id="seatModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -115,32 +101,19 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Họ và
-                                        tên</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Hạng Ghế
+                                    </label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                        v-model="currentClass.className">
                                 </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">email:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">phone:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">CCCD:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">address:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
+
 
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" @click="onSaveClick()">Save changes</button>
+                            <button type="button" class="btn btn-primary" @click="onSaveClick()">Save
+                                changes</button>
                         </div>
                     </div>
                 </div>
@@ -188,15 +161,14 @@ export default {
 
     data() {
         return {
-            orderData: [],
-            orderModal: null,
-            stationData: [],
-            stations: [],
-            currentOrder: {
-                id: 0,
+            classData: [],
+            seatModal: null,
 
-                // stationName: "",
-                // divisionName: ""
+            trains: [],
+            Class: [],
+
+            currentClass: {
+                id: 0,
             },
             searchKeyword: '',
             currentPage: 1, // Trang hiện tại
@@ -207,23 +179,12 @@ export default {
         }
     },
     methods: {
-        fetchStations() {
-            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
 
-            fetch(stationApiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    this.stations = data;
-                })
-                .catch(error => {
-                    console.error('Error fetching stations:', error);
-                });
-        },
-        loadorderData() {
-            var url = process.env.VUE_APP_BASE_URL + `Transaction/GetAll`;
+        loadclassData() {
+            var url = process.env.VUE_APP_BASE_URL + `Class/GetAll`;
             axios.get(url).then((response) => {
                 console.log(response);
-                //this.orderData = response.data;
+                //this.classData = response.data;
                 this.totalItems = response.data.length; // Số lượng sản phẩm trong dữ liệu nhận được
                 this.totalPages = Math.floor(this.totalItems / this.pageSize);
                 if (this.totalItems % this.pageSize !== 0) {
@@ -233,8 +194,8 @@ export default {
                 let startIndex = (this.currentPage - 1) * this.pageSize;
                 let endIndex = this.currentPage * this.pageSize;
 
-                // Cắt lát orderData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
-                this.orderData = response.data.slice(startIndex, endIndex);
+                // Cắt lát classData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
+                this.classData = response.data.slice(startIndex, endIndex);
                 // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
 
             }).catch((error) => {
@@ -242,11 +203,11 @@ export default {
             })
         },
         onSaveClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Transaction/Update`;
+            var url = process.env.VUE_APP_BASE_URL + `Class/Update`;
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
-            axios.put(url, this.currentOrder, {
+            axios.put(url, this.currentClass, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -260,16 +221,16 @@ export default {
                         console.log('Hàm success không tồn tại.');
                     }
                     // Ẩn modal
-                    if (this.orderModal && typeof this.orderModal.hide === 'function') {
-                        this.orderModal.hide();
+                    if (this.seatModal && typeof this.seatModal.hide === 'function') {
+                        this.seatModal.hide();
                     } else {
-                        console.log('orderModal hoặc hàm hide không tồn tại.');
+                        console.log('seatModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu sản phẩm
-                    if (typeof this.loadorderData === 'function') {
-                        this.loadorderData();
+                    if (typeof this.loadclassData === 'function') {
+                        this.loadclassData();
                     } else {
-                        console.log('Hàm loadorderData không tồn tại.');
+                        console.log('Hàm loadclassData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -284,28 +245,36 @@ export default {
                 });
         },
 
-        getStationName(id) {
-            const station = this.stations.find(station => station.id === id);
-            return station ? station.stationName : 'Unknown';
+        getTrainName(id) {
+            console.log('ID cần tìm:', id);
+            const train = this.trains.find(train => train.id === id);
+            console.log('Kết quả tìm kiếm:', train);
+            return train ? train.trainName : 'Unknown';
+        },
+        getClassName(id) {
+            console.log('ID cần tìm:', id);
+            const classs = this.Class.find(classs => classs.id === id);
+            console.log('Kết quả tìm kiếm:', classs);
+            return classs ? classs.className : 'Unknown';
         },
         changePage(page) {
             this.currentPage = page;
-            this.loadorderData();
+            this.loadclassData();
         },
         previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
-                this.loadorderData();
+                this.loadclassData();
             }
         },
         nextPage() {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
-                this.loadorderData();
+                this.loadclassData();
             }
         },
         onDeleteClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Transaction/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+            var url = process.env.VUE_APP_BASE_URL + `Seat/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -325,7 +294,7 @@ export default {
                     // Ẩn modal
                     if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
                         this.deleteModal.hide();
-                        this.loadorderData();
+                        this.loadclassData();
                     } else {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
@@ -385,8 +354,8 @@ export default {
         },
 
         onUpdateClick(o) {
-            this.currentOrder = Object.assign({}, o);// clone d
-            this.orderModal.show();
+            this.currentClass = Object.assign({}, o);// clone d
+            this.seatModal.show();
         },
 
         logout() {
@@ -397,11 +366,12 @@ export default {
         },
     },
     mounted() {
-        this.loadorderData();
+        this.loadclassData();
+
         console.log(this.totalPages);
-        // this.fetchStations();
+        // this.fetchtrain();
         //load Modal
-        this.orderModal = new Modal(this.$refs.orderModal);
+        this.seatModal = new Modal(this.$refs.seatModal);
         this.deleteModal = new Modal(this.$refs.deleteModal);
     }
 
