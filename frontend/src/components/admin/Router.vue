@@ -352,13 +352,13 @@ export default {
         },
         onSearchClick() {
             if (this.searchKeyword.trim() === '') {
-                this.loadProductData();
+                this.loadrouterData();
             } else {
                 var url = process.env.VUE_APP_BASE_URL + `Routes/FullFilter`;
                 var requestData = {
                     filterRequests: [
                         {
-                            colName: "name",
+                            colName: "routerName",
                             _operator: "like",
                             _RightSize: this.searchKeyword
                         }
@@ -367,8 +367,8 @@ export default {
 
                 axios.post(url, requestData)
                     .then(response => {
-                        this.productData = response.data;
-                        this.totalItems = this.productData.length;
+                        this.routerData = response.data;
+                        this.totalItems = this.routerData.length;
                         this.totalPages = Math.floor(this.totalItems / this.pageSize);
                         if (this.totalItems % this.pageSize !== 0) {
                             this.totalPages++;

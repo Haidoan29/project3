@@ -319,13 +319,13 @@ export default {
         },
         onSearchClick() {
             if (this.searchKeyword.trim() === '') {
-                this.loadProductData();
+                this.loadstationData();
             } else {
                 var url = process.env.VUE_APP_BASE_URL + `Station/FullFilter`;
                 var requestData = {
                     filterRequests: [
                         {
-                            colName: "name",
+                            colName: "stationName",
                             _operator: "like",
                             _RightSize: this.searchKeyword
                         }
@@ -334,8 +334,8 @@ export default {
 
                 axios.post(url, requestData)
                     .then(response => {
-                        this.productData = response.data;
-                        this.totalItems = this.productData.length;
+                        this.stationData = response.data;
+                        this.totalItems = this.stationData.length;
                         this.totalPages = Math.floor(this.totalItems / this.pageSize);
                         if (this.totalItems % this.pageSize !== 0) {
                             this.totalPages++;

@@ -375,13 +375,13 @@ export default {
         },
         onSearchClick() {
             if (this.searchKeyword.trim() === '') {
-                this.loadProductData();
+                this.loadSeatData();
             } else {
-                var url = process.env.VUE_APP_BASE_URL + `Transaction/FullFilter`;
+                var url = process.env.VUE_APP_BASE_URL + `Seat/FullFilter`;
                 var requestData = {
                     filterRequests: [
                         {
-                            colName: "name",
+                            colName: "seatNo",
                             _operator: "like",
                             _RightSize: this.searchKeyword
                         }
@@ -390,8 +390,8 @@ export default {
 
                 axios.post(url, requestData)
                     .then(response => {
-                        this.productData = response.data;
-                        this.totalItems = this.productData.length;
+                        this.seatData = response.data;
+                        this.totalItems = this.seatData.length;
                         this.totalPages = Math.floor(this.totalItems / this.pageSize);
                         if (this.totalItems % this.pageSize !== 0) {
                             this.totalPages++;
