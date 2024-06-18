@@ -59,9 +59,10 @@
                                         <td>{{ o.journeyDate }}</td>
                                         <td>{{ o.fromStationID }}</td>
                                         <td>{{ o.toStationID }}</td>
-                                        <td>{{ o.seatNo }}</td>
+                                        <td>{{ o.seatID }}</td>
                                         <td>{{ o.coachNo }}</td>
-                                        <td>{{ o.reservationFee }}</td>
+                                        <td>{{ o.fareRuleID }}</td>
+                                        <td>{{ o.createdDate }}</td>
 
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
