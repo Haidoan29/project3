@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project3.Data;
 
@@ -11,9 +12,11 @@ using Project3.Data;
 namespace Project3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240617092656_Update-Database")]
+    partial class UpdateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,7 +525,11 @@ namespace Project3.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassID")
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
@@ -546,7 +553,7 @@ namespace Project3.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassID");
+                    b.HasIndex("ClassId");
 
                     b.HasIndex("TrainID");
 
@@ -828,19 +835,15 @@ namespace Project3.Migrations
 
             modelBuilder.Entity("Project3.Models.Seat", b =>
                 {
-                    b.HasOne("Project3.Models.Class", "Class")
+                    b.HasOne("Project3.Models.Class", null)
                         .WithMany("Seats")
-                        .HasForeignKey("ClassID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassId");
 
                     b.HasOne("Project3.Models.Train", "Train")
                         .WithMany("Seat")
                         .HasForeignKey("TrainID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Class");
 
                     b.Navigation("Train");
                 });

@@ -129,7 +129,7 @@ export default {
                         // Hiển thị thông báo thành công
                         this.success();
                         setTimeout(() => {
-                            window.location.href = '/admin/customer'; // Thay đổi URL chuyển hướng tùy ý
+                            window.location.href = '/admin'; // Thay đổi URL chuyển hướng tùy ý
                         }, 2000); // Đợi 3 giây trước khi chuyển hướng
 
                         // // Ẩn modal
@@ -156,54 +156,7 @@ export default {
             localStorage.removeItem('token');
             this.$router.push('/login');
         },
-        // onFileChange(event) {
-        //     const file = event.target.files[0];
-        //     if (file) {
-        //         // Kiểm tra phần mở rộng của file
-        //         const validExtensions = ['.png', '.jpg', '.jpeg'];
-        //         const fileName = file.name;
-        //         const fileExtension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
 
-        //         if (!validExtensions.includes(fileExtension)) {
-        //             alert('Vui lòng chọn một file ảnh có định dạng .png, .jpg hoặc .jpeg!');
-        //             return;
-        //         }
-
-        //         const reader = new FileReader();
-        //         reader.onload = (e) => {
-        //             this.customerData.imageProduct = e.target.result;
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        // },
-        // onSubmit() {
-        //     var url = process.env.VUE_APP_BASE_URL + `Class/FullFilter`;
-
-        //     var requestData = {
-        //         filterParams: [
-        //             {
-        //                 colName: "className",
-        //                 _operator: "like",
-        //                 value: this.searchKeyword
-        //             }
-        //         ],
-        //         index: 1,
-        //         size: 10,
-        //         sortAsc: true,
-        //         sortCol: "className"
-        //     };
-
-        //     axios.post(url, requestData)
-        //         .then(response => {
-        //             this.productData = response.data;
-        //             this.totalItems = this.productData.length; // Số lượng sản phẩm trong dữ liệu nhận được
-        //             this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-        //             console.log(this.productData);
-        //         })
-        //         .catch(error => {
-        //             console.error('Lỗi khi tìm kiếm sản phẩm:', error);
-        //         });
-        // }
 
 
 

@@ -5,7 +5,7 @@ import Forgotpassword from "@/views/ForgotpasswordView.vue";
 import ResetPassword from "@/views/ResetPassword.vue";
 import Train from "@/views/admin/Train.vue";
 import Station from "@/views/admin/Station.vue";
-import Dashboard from "@/views/admin/Dashboard.vue";
+
 import Customer from "@/views/admin/Customer.vue";
 import Order from "@/views/admin/Order.vue";
 import Singinsss from "@/views/admin/singinsss.vue";
@@ -17,6 +17,10 @@ import Router from "@/views/admin/Router.vue";
 import AddRouter from "@/views/admin/AddRouter.vue";
 import DatVe from "@/views/DatVe.vue";
 import TimVe from "@/views/TimVe.vue";
+import AdminSeat from '@/views/admin/AdminSeat.vue';
+import AddSeats from '@/views/admin/AddSeat.vue';
+import Class from '@/views/admin/Class.vue';
+import AddClass from '@/views/admin/AddClass.vue'
 
 const routes = [
   {
@@ -33,6 +37,26 @@ const routes = [
     path: "/datve",
     name: "DatVe",
     component: DatVe,
+  },
+  {
+    path: "/admin/seat",
+    name: "SeatManagement",
+    component: AdminSeat,
+  },
+  {
+    path: "/admin/seat/add-seat",
+    name: "AddSeat",
+    component: AddSeats,
+  },
+  {
+    path: "/admin/class",
+    name: "ClassManagement",
+    component: Class,
+  },
+  {
+    path: "/admin/class/add-class",
+    name: "AddClass",
+    component: AddClass,
   },
   {
     path: "/timve/:startStationID/:endStationID",
@@ -71,14 +95,9 @@ const routes = [
     component: Station,
     meta: { requiresAuth: true },
   },
+
   {
     path: "/admin",
-    name: "DashBoard",
-    component: Dashboard,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/admin/customer",
     name: "customer",
     component: Customer,
     meta: { requiresAuth: true },

@@ -28,12 +28,20 @@
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
                                 </div>
                             </div>
+                            <div class=" d-flex">
+                                <form @submit.prevent="onSearchClick" class="form-input d-flex">
+                                    <input class="form-control" style="margin-right: 5px;" type="search"
+                                        placeholder="Search..." v-model="searchKeyword">
+                                    <button type="submit" class="btn" style="background-color: #27ad15;"
+                                        @click="onSearchClick()"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
                             <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th width="10"><input type="checkbox" id="all"></th>
                                         <th>Id</th>
-                                        <th>Tên thuyến đường</th>
+                                        <th>Tên tuyến đường</th>
                                         <th>Ga xuất phát</th>
                                         <th>Ga kết thúc</th>
                                         <th>Chức năng</th>
@@ -50,9 +58,10 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
+                                                    style="margin-right: 5px ;"
                                                     @click="onUpdateClick(p)">Update</button>
                                                 <button type="button" class="btn btn-danger"
-                                                    @click="onDelete()">Delete</button>
+                                                    @click="onDelete(p.id)">Delete</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -96,20 +105,36 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Mã nhà ga:</label>
-                                    <input type="text" class="form-control" id="recipient-name"
-                                        v-model="currentRouter.stationCode">
+                                    <label for="recipient-name" class="col-form-label">Tên tuyến đường:</label>
+                                    <input type="text" class="form-control" id="recipient-name" v-model="currentRouter.routeName
+                                        ">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Tên nhà ga:</label>
-                                    <input type="text" class="form-control" id="recipient-name"
-                                        v-model="currentRouter.stationName">
+                                    <div>
+                                        <label for="startStationID" class="col-form-label">Ga xuất phát:</label>
+                                    </div>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3"
+                                            v-model="currentRouter.startStationID" required>
+                                            <option disabled value="">Chọn ga xuất phát</option>
+                                            <option v-for="s in stations" :key="s.id" :value="s.id">{{ s.stationName }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Khu vực:</label>
-                                    <input type="text" class="form-control" id="recipient-name"
-                                        v-model="currentRouter.divisionName">
+                                    <div>
+                                        <label for="startStationID" class="col-form-label">Ga kết thúc:</label>
+                                    </div>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3"
+                                            v-model="currentRouter.endStation" required>
+                                            <option disabled value="">Chọn ga kết thúc</option>
+                                            <option v-for="s in stations" :key="s.id" :value="s.id">{{ s.stationName }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -129,11 +154,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Modal body text goes here.</p>
+                            <p>Bạn có chắc chắn muốn xóa ?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary" @click="onDeleteClick()">Đồng ý</button>
                         </div>
                     </div>
                 </div>
@@ -173,6 +198,7 @@ export default {
                 // stationName: "",
                 // divisionName: ""
             },
+
             searchKeyword: '',
             currentPage: 1, // Trang hiện tại
             pageSize: 3,   // Kích thước trang (số lượng sản phẩm trên mỗi trang)
@@ -181,6 +207,7 @@ export default {
 
         }
     },
+
     methods: {
         fetchStations() {
             const stationApiUrl = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
@@ -217,7 +244,7 @@ export default {
             })
         },
         onSaveClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Update`;
+            var url = process.env.VUE_APP_BASE_URL + `Routes/Update`;
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -263,6 +290,7 @@ export default {
             const station = this.stations.find(station => station.id === id);
             return station ? station.stationName : 'Unknown';
         },
+
         changePage(page) {
             this.currentPage = page;
             this.loadrouterData();
@@ -280,7 +308,7 @@ export default {
             }
         },
         onDeleteClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+            var url = process.env.VUE_APP_BASE_URL + `Routes/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -300,6 +328,7 @@ export default {
                     // Ẩn modal
                     if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
                         this.deleteModal.hide();
+                        this.loadrouterData();
                     } else {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
@@ -321,7 +350,40 @@ export default {
                     }
                 });
         },
-        onDelete() {
+        onSearchClick() {
+            if (this.searchKeyword.trim() === '') {
+                this.loadProductData();
+            } else {
+                var url = process.env.VUE_APP_BASE_URL + `Routes/FullFilter`;
+                var requestData = {
+                    filterRequests: [
+                        {
+                            colName: "name",
+                            _operator: "like",
+                            _RightSize: this.searchKeyword
+                        }
+                    ]
+                };
+
+                axios.post(url, requestData)
+                    .then(response => {
+                        this.productData = response.data;
+                        this.totalItems = this.productData.length;
+                        this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                        if (this.totalItems % this.pageSize !== 0) {
+                            this.totalPages++;
+                        }
+                        this.currentPage = 1;
+                    })
+                    .catch(error => {
+                        console.error('Error during search:', error);
+                    });
+            }
+        },
+
+        onDelete(id) {
+            this.delete = id
+            console.log(this.delete)
             this.deleteModal.show();
         },
 
@@ -337,6 +399,7 @@ export default {
             this.$router.push('/login');
         },
     },
+
     mounted() {
         this.loadrouterData();
         console.log(this.totalPages);

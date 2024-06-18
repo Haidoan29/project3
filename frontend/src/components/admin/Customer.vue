@@ -26,18 +26,14 @@
                                     <a class="btn btn-delete btn-sm" type="button" title="Xóa"
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
                                 </div>
-                                <form class="form-inline" @submit.prevent="onSubmit">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                                aria-label="Search" v-model="searchKeyword">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-outline-success my-2 my-sm-0"
-                                                type="submit">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class=" d-flex">
+                                    <form @submit.prevent="onSearchClick" class="form-input d-flex">
+                                        <input class="form-control" style="margin-right: 5px;" type="search"
+                                            placeholder="Search..." v-model="searchKeyword">
+                                        <button type="submit" class="btn" style="background-color: #27ad15;"
+                                            @click="onSearchClick()"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
 
                             </div>
 
@@ -46,14 +42,14 @@
                                 <thead>
                                     <tr>
                                         <th width="10"><input width="10" type="checkbox" id="all"></th>
-                                        <th>Mã khách hàng</th>
+                                        <th with="10">Mã khách hàng</th>
                                         <th width="150">Họ và tên</th>
                                         <th width="20">email</th>
-                                        <th width="300">phone</th>
-                                        <th>cccd</th>
-                                        <th>address</th>
+                                        <th width="30">phone</th>
+                                        <th with="40">cccd</th>
+                                        <th with="150">address</th>
 
-                                        <th width="100">Tính năng</th>
+                                        <th width="200">Tính năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,13 +70,18 @@
                                                 <button type="button" class="btn btn-danger">Delete</button>
                                             </div>
                                         </td> -->
-                                        <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                                @click="onDelete()"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                id="show-emp" data-toggle="modal" data-target="#ModalUP"
-                                                @click="onUpdateClick(p)"><i class="fas fa-edit"></i></button>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
 
+                                                <button type="button" class="btn btn-warning" title="Sửa" id="show-emp"
+                                                    data-toggle="modal" data-target="#ModalUP"
+                                                    style="margin-right: 5px ; width: 75px"
+                                                    @click=" onUpdateClick(p)"><i class="fas fa-edit"></i></button>
+                                                <button type="button" title="Xóa" class="btn btn-danger"
+                                                    style="width: 75px;" @click="onDelete(p.id)"> <i
+                                                        class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -154,7 +155,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-primary" @click="onSaveClick()">Save
+                                            changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -171,12 +173,13 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Modal body text goes here.</p>
+                                        <p>Bạn có chắc chắn muốn xóa ?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                            data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-primary" @click="onDeleteClick()">Đồng
+                                            ý</button>
                                     </div>
                                 </div>
                             </div>
@@ -252,6 +255,48 @@ export default {
                 console.log(error.response);
             })
         },
+        onSaveClick() {
+            var url = process.env.VUE_APP_BASE_URL + `Customer/Update`;
+
+            // Lấy token từ local storage
+            const token = localStorage.getItem('token');
+            axios.put(url, this.currentStation, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    // Hiển thị thông báo thành công
+                    if (typeof this.success === 'function') {
+                        this.success();
+                    } else {
+                        console.log('Hàm success không tồn tại.');
+                    }
+                    // Ẩn modal
+                    if (this.stationModal && typeof this.stationModal.hide === 'function') {
+                        this.stationModal.hide();
+                    } else {
+                        console.log('stationModal hoặc hàm hide không tồn tại.');
+                    }
+                    // Tải lại dữ liệu sản phẩm
+                    if (typeof this.loadstationData === 'function') {
+                        this.loadstationData();
+                    } else {
+                        console.log('Hàm loadstationData không tồn tại.');
+                    }
+                })
+                .catch((error) => {
+                    console.log('Lỗi Axios:', error);
+                    if (error.response) {
+                        console.log('Phản hồi từ server:', error.response.data);
+                        if (error.response.status === 401) {
+                            console.log('Token hết hạn hoặc không hợp lệ.');
+                            // Xử lý token hết hạn ở đây
+                        }
+                    }
+                });
+        },
 
         changePage(page) {
             this.currentPage = page;
@@ -285,74 +330,9 @@ export default {
             this.currentProduct = Object.assign({}, p);// clone d
             this.customerModal.show();
         },
-        onSaveClick() {
-            if (this.currentProduct.id == 0) {
-                var url = process.env.VUE_APP_BASE_URL + `Class/Create`;
 
-                // Lấy token từ local storage
-                const token = localStorage.getItem('token');
-
-                axios.post(url, this.currentProduct, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                    .then((response) => {
-                        console.log(response.data);
-
-                        // Hiển thị thông báo thành công
-                        this.success();
-
-                        // Ẩn modal
-                        this.ProductModal.hide();
-
-                        // Tải lại dữ liệu sản phẩm
-                        this.loadProductData();
-                    })
-                    .catch((error) => {
-                        if (error.response && error.response.data) {
-                            console.log(error.response.data);
-                            // Xử lý lỗi ở đây
-                        } else {
-                            console.log('Lỗi không xác định:', error);
-                        }
-                    });
-            }
-            else {
-                var url1 = process.env.VUE_APP_BASE_URL + `Class/Update`;
-
-                // Lấy token từ local storage
-                const token = localStorage.getItem('token');
-                axios.put(url1, this.currentProduct, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                    .then((response) => {
-                        console.log(response.data);
-                        // Hiển thị thông báo thành công
-                        this.success();
-                        // Ẩn modal
-                        this.ProductModal.hide();
-                        // Tải lại dữ liệu sản phẩm
-                        this.loadProductData();
-                    })
-                    .catch((error) => {
-                        console.log('Lỗi Axios:', error);
-                        if (error.response) {
-                            console.log('Phản hồi từ server:', error.response.data);
-                            if (error.response.status === 401) {
-                                console.log('Token hết hạn hoặc không hợp lệ.');
-                                // Xử lý token hết hạn ở đây
-                            }
-                        }
-                    });
-
-            }
-
-        },
         onDeleteClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+            var url = process.env.VUE_APP_BASE_URL + `Customer/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -372,6 +352,7 @@ export default {
                     // Ẩn modal
                     if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
                         this.deleteModal.hide();
+                        this.loadProductData();
                     } else {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
@@ -393,7 +374,9 @@ export default {
                     }
                 });
         },
-        onDelete() {
+        onDelete(id) {
+            this.delete = id
+            console.log(this.delete)
             this.deleteModal.show();
         },
         logout() {
@@ -402,54 +385,38 @@ export default {
             localStorage.removeItem('token');
             this.$router.push('/login');
         },
-        onFileChange(event) {
-            const file = event.target.files[0];
-            if (file) {
-                // Kiểm tra phần mở rộng của file
-                const validExtensions = ['.png', '.jpg', '.jpeg'];
-                const fileName = file.name;
-                const fileExtension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
 
-                if (!validExtensions.includes(fileExtension)) {
-                    alert('Vui lòng chọn một file ảnh có định dạng .png, .jpg hoặc .jpeg!');
-                    return;
-                }
 
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.currentProduct.imageProduct = e.target.result;
+        onSearchClick() {
+            if (this.searchKeyword.trim() === '') {
+                this.loadProductData();
+            } else {
+                var url = process.env.VUE_APP_BASE_URL + `Customer/FullFilter`;
+                var requestData = {
+                    filterRequests: [
+                        {
+                            colName: "name",
+                            _operator: "like",
+                            _RightSize: this.searchKeyword
+                        }
+                    ]
                 };
-                reader.readAsDataURL(file);
+
+                axios.post(url, requestData)
+                    .then(response => {
+                        this.productData = response.data;
+                        this.totalItems = this.productData.length;
+                        this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                        if (this.totalItems % this.pageSize !== 0) {
+                            this.totalPages++;
+                        }
+                        this.currentPage = 1;
+                    })
+                    .catch(error => {
+                        console.error('Error during search:', error);
+                    });
             }
         },
-        onSubmit() {
-            var url = process.env.VUE_APP_BASE_URL + `Class/FullFilter`;
-
-            var requestData = {
-                filterParams: [
-                    {
-                        colName: "className",
-                        _operator: "like",
-                        value: this.searchKeyword
-                    }
-                ],
-                index: 1,
-                size: 10,
-                sortAsc: true,
-                sortCol: "className"
-            };
-
-            axios.post(url, requestData)
-                .then(response => {
-                    this.productData = response.data;
-                    this.totalItems = this.productData.length; // Số lượng sản phẩm trong dữ liệu nhận được
-                    this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-                    console.log(this.productData);
-                })
-                .catch(error => {
-                    console.error('Lỗi khi tìm kiếm sản phẩm:', error);
-                });
-        }
 
 
 

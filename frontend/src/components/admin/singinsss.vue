@@ -1,16 +1,67 @@
 <template>
-    <div id="login">
-        <form @submit.prevent="singin"> <!-- Thêm kết nối sự kiện submit -->
+    <!-- <div id="login">
+        <form @submit.prevent="singin"> 
             <h1>Sign In</h1>
             <input type="text" id="loginUsername" v-model="loginForm.username" required placeholder="Username">
             <input type="password" id="loginPassword" v-model="loginForm.password" required placeholder="Password">
-            <!-- <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p> -->
+           
             <button type="submit">Sign in</button>
             <a href="/register" @click="goToRegister">Đăng ký</a>
             <a href="/forgotpassword" @click="goToForgotpassword">quên mật khẩu</a>
             <p :key="errorKey" v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
         </form>
+    </div> -->
+    <div class="row g-0 vh-100">
+        <div class="col-md-6 col-lg-6 d-none d-md-block vh-100">
+            <img src="https://halotravel.vn/wp-content/uploads/2019/10/duong-tau-ha-noi-08.jpg" alt="login form"
+                class="img-fluid h-100 w-100" />
+        </div>
+        <div class="col-md-6 col-lg-6 d-flex align-items-center"
+            style="background-color: #fbfbfb; border-radius: 0 1rem 1rem 0">
+            <div class="card-body p-4 p-lg-5 text-black w-100">
+                <form @submit.prevent="login">
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                        <i><img src="../../assets/img/logo3.png" class="img-fluid"
+                                style="height: 35px; width: 70px; margin-right: 10px" />
+                        </i>
+                        <span class="h1 fw-bold mb-0" style="
+                font-family: 'Roboto', 'Courier New', monospace;
+                font-style: oblique;
+              ">ĐƯỜNG SẮT HẢI MINH</span>
+                    </div>
+
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                        ĐĂNG NHẬP
+                    </h5>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form2Example17">Tên tài khoản</label>
+                        <input type="text" id="form2Example17" class="form-control form-control-lg"
+                            v-model="loginForm.username" required />
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form2Example27">Mật khẩu</label>
+                        <input type="password" id="form2Example27" class="form-control form-control-lg"
+                            v-model="loginForm.password" required />
+                    </div>
+
+                    <div class="pt-1 mb-4">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block"
+                            type="submit" @click="singin()">
+                            Đăng nhập
+                        </button>
+                    </div>
+
+                    <!-- <a class="text-muted" href="/forgotpassword" @click="goToForgotpassword">Quên mật khẩu ?</a>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81">
+                        Bạn chưa có tài khoản ?
+                        <a href="/register" @click="goToRegister" class="link-info">Đăng kí tại đây</a>
+                    </p> -->
+                </form>
+            </div>
+        </div>
     </div>
 </template>
 <script>

@@ -28,6 +28,14 @@
                                         onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
                                 </div>
                             </div>
+                            <div class=" d-flex">
+                                <form @submit.prevent="onSearchClick" class="form-input d-flex">
+                                    <input class="form-control" style="margin-right: 5px;" type="search"
+                                        placeholder="Search..." v-model="searchKeyword">
+                                    <button type="submit" class="btn" style="background-color: #27ad15;"
+                                        @click="onSearchClick()"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
                             <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
@@ -50,9 +58,10 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
-                                                    @click="onUpdateClick(p)">Update</button>
-                                                <button type="button" class="btn btn-danger"
-                                                    @click="onDelete()">Delete</button>
+                                                    style="margin-right: 5px ;" @click="onUpdateClick(p)"><i class="fas
+                                                    fa-edit"></i>Update</button>
+                                                <button type="button" class="btn btn-danger" @click="onDelete(p.id)"><i
+                                                        class="fas fa-trash-alt"></i>Delete</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -130,11 +139,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Modal body text goes here.</p>
+                            <p>Bạn có chắc chắn muốn xóa ?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary" @click="confirmDelete()">Đồng ý</button>
                         </div>
                     </div>
                 </div>
@@ -264,9 +273,25 @@ export default {
             }
         },
 
-        onDeleteClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.currentStation.id}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
+        onDelete(id) {
+            this.deleteid = id,
+                console.log("id sp" + this.deleteid)
+            this.deleteModal.show();
+        },
+        onUpdateClick(p) {
+            this.currentStation = Object.assign({}, p);// clone truyền dữ liệu
+            this.stationModal.show();
+        },
+        confirmDelete() {
+            // Kiểm tra nếu deleteid hợp lệ
+            if (this.deleteid) {
+                console.log('ID đối tượng để xóa ' + this.deleteid);
+
+            }
+
+            // Gọi API để xóa đối tượng
+            const url = process.env.VUE_APP_BASE_URL + `Station/Delete/${this.deleteid}`;
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
             axios.delete(url, {
@@ -275,44 +300,54 @@ export default {
                 }
             })
                 .then((response) => {
-                    console.log(response.data);
-                    // Hiển thị thông báo thành công
-                    if (typeof this.success === 'function') {
-                        this.success();
-                    } else {
-                        console.log('Hàm success không tồn tại.');
-                    }
-                    // Ẩn modal
-                    if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
-                        this.deleteModal.hide();
-                    } else {
-                        console.log('DeleteModal hoặc hàm hide không tồn tại.');
-                    }
-                    // Tải lại dữ liệu trạm
-                    if (typeof this.loadstationData === 'function') {
-                        this.loadstationData();
-                    } else {
-                        console.log('Hàm loadstationData không tồn tại.');
-                    }
+                    console.log('Xóa thành công:', response.data);
+                    this.deleteModal.hide();
+                    // Tải lại dữ liệu sau khi xóa thành công
+                    this.loadstationData();
                 })
                 .catch((error) => {
-                    console.log('Lỗi Axios:', error);
+                    // Xử lý lỗi khi gọi API
                     if (error.response) {
-                        console.log('Phản hồi từ server:', error.response.data);
-                        if (error.response.status === 401) {
-                            console.log('Token hết hạn hoặc không hợp lệ.');
-                            // Xử lý token hết hạn ở đây
+                        console.error('Lỗi khi xóa đối tượng:', error.response);
+                        if (error.response.status === 404) {
+                            console.error('Không tìm thấy đối tượng để xóa.');
                         }
+                    } else {
+                        console.error('Lỗi khi xóa đối tượng:', error);
                     }
                 });
         },
-        onDelete() {
-            this.deleteModal.show();
+        onSearchClick() {
+            if (this.searchKeyword.trim() === '') {
+                this.loadProductData();
+            } else {
+                var url = process.env.VUE_APP_BASE_URL + `Station/FullFilter`;
+                var requestData = {
+                    filterRequests: [
+                        {
+                            colName: "name",
+                            _operator: "like",
+                            _RightSize: this.searchKeyword
+                        }
+                    ]
+                };
+
+                axios.post(url, requestData)
+                    .then(response => {
+                        this.productData = response.data;
+                        this.totalItems = this.productData.length;
+                        this.totalPages = Math.floor(this.totalItems / this.pageSize);
+                        if (this.totalItems % this.pageSize !== 0) {
+                            this.totalPages++;
+                        }
+                        this.currentPage = 1;
+                    })
+                    .catch(error => {
+                        console.error('Error during search:', error);
+                    });
+            }
         },
-        onUpdateClick(p) {
-            this.currentRouter = Object.assign({}, p);// clone truyền dữ liệu
-            this.stationModal.show();
-        },
+
 
 
         logout() {

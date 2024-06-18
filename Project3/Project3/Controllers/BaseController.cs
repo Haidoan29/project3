@@ -61,12 +61,13 @@ namespace Project3.Controllers
         }
         //[Authorize(Roles = "ADMIN , SUBADMIN")]
         [HttpDelete]
-        [Route("Delete")]
-        public async Task<ActionResult> Delete([FromBody] DeleteRequest request)
+        [Route("Delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            var result = await _repository.Delete(request.Id);
+            var result = await _repository.Delete(id);
             return Ok(result);
         }
+
 
 
 

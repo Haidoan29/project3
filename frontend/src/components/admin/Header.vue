@@ -28,13 +28,8 @@
         </div>
         <hr>
         <ul class="app-menu">
-            <!-- <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i
-                        class='app-menu__icon bx bx-cart-alt'></i>
-                    <span class="app-menu__label">POS Bán Hàng</span></a></li> -->
-            <!-- <li><a class="app-menu__item active" href="/admin/dashboard"><i
-                        class='app-menu__icon bx bx-tachometer'></i><span class="app-menu__label">Bảng điều
-                        khiển</span></a></li> -->
-            <li><a class="app-menu__item" href="/admin/customer"><i class='app-menu__icon bx bx-user-voice'></i><span
+
+            <li><a class="app-menu__item" href="/admin"><i class='app-menu__icon bx bx-user-voice'></i><span
                         class="app-menu__label">Quản lý khách hàng</span></a></li>
             <li><a class="app-menu__item " href="/admin/train"><i class='app-menu__icon bx bx-train  '></i>
                     <span class="app-menu__label">Quản lý Tàu</span></a></li>
@@ -48,22 +43,11 @@
             <li><a class="app-menu__item" href="/admin/router"><i class='app-menu__icon bx bx-run'></i><span
                         class="app-menu__label">Quản lý tuyến đường
                     </span></a></li>
-            <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-                        class="app-menu__label"> Quản Lý Lịch Chạy Tàu</span></a></li>
-            <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-                        class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Quản Lý Ngày Chạy
-                        Tàu</span></a>
-            </li>
-            <li><a class="app-menu__item" href="page-calendar.html"><i
-                        class='app-menu__icon bx bx-calendar-check'></i><span class="app-menu__label">Quản Lý Quy Định
-                        Giá Vé
-                    </span></a></li>
-            <li><a class="app-menu__item" href="page-calendar.html"><i
-                        class='app-menu__icon bx bx-calendar-check'></i><span class="app-menu__label">Quản Lý Giao Dịch
-                    </span></a></li>
-            <!-- <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span
-                        class="app-menu__label">Cài
-                        đặt hệ thống</span></a></li> -->
+            <li><a class="app-menu__item" href="/admin/seat"><i class='app-menu__icon bx bx-dollar'></i><span
+                        class="app-menu__label"> Quản Lý Ghế</span></a></li>
+            <li><a class="app-menu__item" href="/admin/class"><i class='app-menu__icon bx bx-dollar'></i><span
+                        class="app-menu__label"> Quản Lý Hạng Vé</span></a></li>
+
         </ul>
     </aside>
 </template>

@@ -56,6 +56,7 @@ builder.Services.AddScoped<ITrainReponsitory, TrainReponsitory>();
 builder.Services.AddScoped<ITrainScheduleRepository, TrainScheduleRepository>();
 builder.Services.AddScoped<ICustomerRopository, CustomerRopository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
 
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
