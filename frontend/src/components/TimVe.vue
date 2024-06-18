@@ -1,106 +1,73 @@
 <template>
+
   <body data-rsssl="1">
     <div id="wrapper">
       <div id="content" style="margin-bottom: 60px; margin-top: 90px">
         <div class="main-content">
           <div class="container">
-            <h5
-              style="
+            <h5 style="
                 margin-bottom: 50px;
                 font-size: 12px;
                 font-family: Roboto;
                 color: #d82d8b;
-              "
-            >
-              <i class="fa-solid fa-arrow-right" style="padding-right: 5px"></i
-              >TÌM VÉ
+              ">
+              <i class="fa-solid fa-arrow-right" style="padding-right: 5px"></i>TÌM VÉ
             </h5>
             <div class="row">
-              <div
-                class="col-xs-12 col-sm-12 col-md-6 col-lg-3"
-                v-for="ticket in searchResult"
-                :key="ticket.id"
-              >
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" v-for="ticket in searchResult" :key="ticket.id">
                 <div class="detail-tour-list" style="background: #eeeeee">
                   <div class="img-tour">
                     <a href="#" @click="onClick()">
-                      <img
-                        src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
-                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội"
-                      />
+                      <img src="https://phongveadamviet.com/wp-content/uploads/2019/01/ve-tau-300x200.jpg"
+                        alt="Vé tàu chặng đi Vinh &#8211; Hà Nội" />
                     </a>
                   </div>
                   <div class="info-tour" style="padding: 15px">
                     <h4>
-                      <a
-                        href="#"
-                        @click.stop="onClick()"
-                        style="text-decoration: none; font-size: 15px"
-                      >
+                      <a href="#" @click.stop="onClick()" style="text-decoration: none; font-size: 15px">
                         Vé tàu chặng đi
                         {{ getStationName(ticket.startStationID) }} –
-                        {{ getStationName(ticket.endStationID) }}</a
-                      >
+                        {{ getStationName(ticket.endStationID) }}</a>
                     </h4>
-                    <p
-                      class="price"
-                      style="
+                    <p class="price" style="
                         color: #e00;
                         font: 400 18px / normal Utm-Avo-bold, sans-serif;
                         font-weight: bold;
                         padding-top: 10px;
-                      "
-                    >
+                      ">
                       {{ getTrainName(ticket.trainID) }}
                     </p>
                     <p>
                       <i class="fa fa-clock-o" style="color: red"></i>
                       Khởi hành:
-                      <span
-                        style="
+                      <span style="
                           font-weight: 500;
                           font-family: Roboto;
                           color: #000;
-                        "
-                        >{{ formatTime(ticket.departureTime) }}</span
-                      >
+                        ">{{ formatTime(ticket.departureTime) }}</span>
                     </p>
                     <p>
                       <i class="fa fa-calendar" style="color: red"></i>
                       Khởi hành:
-                      <span
-                        style="
+                      <span style="
                           font-weight: 500;
                           font-family: Roboto;
                           color: #000;
-                        "
-                        >{{ formatDate(ticket.departureTime) }}</span
-                      >
+                        ">{{ formatDate(ticket.departureTime) }}</span>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Modal -->
-            <div
-              class="modal"
-              :class="{ show: showModal }"
-              id="Modal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
+            <div class="modal" :class="{ show: showModal }" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Tiêu đề modal</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Đóng"
-                      @click.prevent
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"
+                      @click.prevent></button>
 
                     <!-- <button type="button" class="btn-close" aria-label="Đóng" @click="closeModal"></button> -->
                   </div>
@@ -109,8 +76,7 @@
                       <!-- Ví dụ bố trí chỗ ngồi -->
                       <div class="col-12 text-center">
                         <div class="d-flex justify-content-center mb-2">
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -120,12 +86,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             A1
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -135,12 +99,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             A2
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -151,13 +113,10 @@
                               color: white;
                               border: none;
                               cursor: not-allowed;
-                            "
-                            disabled
-                          >
+                            " disabled>
                             A3
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -167,14 +126,12 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             A4
                           </button>
                         </div>
                         <div class="d-flex justify-content-center mb-2">
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -184,12 +141,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             B1
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -199,12 +154,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             B2
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -214,12 +167,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             B3
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -230,15 +181,12 @@
                               color: white;
                               border: none;
                               cursor: not-allowed;
-                            "
-                            disabled
-                          >
+                            " disabled>
                             B4
                           </button>
                         </div>
                         <div class="d-flex justify-content-center mb-2">
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -248,12 +196,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             C1
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -263,12 +209,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             C2
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -278,12 +222,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             C3
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -293,14 +235,12 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             C4
                           </button>
                         </div>
                         <div class="d-flex justify-content-center mb-2">
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -311,13 +251,10 @@
                               color: white;
                               border: none;
                               cursor: not-allowed;
-                            "
-                            disabled
-                          >
+                            " disabled>
                             D1
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -327,12 +264,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             D2
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -342,12 +277,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             D3
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -357,14 +290,12 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             D4
                           </button>
                         </div>
                         <div class="d-flex justify-content-center mb-2">
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -374,12 +305,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             E1
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -389,12 +318,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             E2
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -404,12 +331,10 @@
                               background-color: #28a745;
                               color: white;
                               border: none;
-                            "
-                          >
+                            ">
                             E3
                           </button>
-                          <button
-                            style="
+                          <button style="
                               width: 40px;
                               height: 40px;
                               margin: 5px;
@@ -420,9 +345,7 @@
                               color: white;
                               border: none;
                               cursor: not-allowed;
-                            "
-                            disabled
-                          >
+                            " disabled>
                             E4
                           </button>
                         </div>
@@ -430,18 +353,10 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      @click.prevent="closeModal"
-                    >
+                    <button type="button" class="btn btn-secondary" @click.prevent="closeModal">
                       Đóng
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      @click="onSaveClick()"
-                    >
+                    <button type="button" class="btn btn-primary" @click="onSaveClick()">
                       Tiếp tục
                     </button>
                   </div>
@@ -542,6 +457,9 @@ export default {
       } catch (error) {
         console.error("Error loading stations:", error.response || error);
       }
+    },
+    onSaveClick() {
+      this.$router.push('/datve');
     },
     getStationName(id) {
       const station = this.stations.find((s) => s.id === id);
