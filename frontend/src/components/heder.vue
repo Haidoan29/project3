@@ -1,41 +1,25 @@
 <template>
   <!-- Navbar -->
-  <nav
-    class="navbar navbar-expand-lg navbar-light text-lg-start bg-body-tertiary text-muted"
-    style="height: 75px; background: #fff0f6; border-bottom: 1px solid black"
-  >
+  <nav class="navbar navbar-expand-lg navbar-light text-lg-start bg-body-tertiary text-muted"
+    style="height: 75px; background: #fff0f6; border-bottom: 1px solid black">
     <!-- Container wrapper -->
     <div class="container">
       <!-- Navbar brand -->
       <a class="navbar-brand align-items-center me-2" href="">
-        <h2
-          class="text-uppercase fw-bold mb-4"
-          style="
+        <h2 class="text-uppercase fw-bold mb-4" style="
             font-family: 'Roboto', 'Courier New', monospace;
             font-style: oblique;
             color: #e262a8;
             letter-spacing: 2px;
-          "
-        >
-          <i
-            ><img
-              src="../assets/img/logo3.png"
-              class="img-fluid"
-              style="height: 20px; width: 40px; margin-right: 10px" /></i
-          >ĐƯỜNG SẮT HẢI MINH
+          ">
+          <i><img src="../assets/img/logo3.png" class="img-fluid"
+              style="height: 20px; width: 40px; margin-right: 10px" /></i>ĐƯỜNG SẮT HẢI MINH
         </h2>
       </a>
 
       <!-- Toggle button -->
-      <button
-        data-mdb-collapse-init
-        class="navbar-toggler"
-        type="button"
-        data-mdb-target="#navbarButtonsExample"
-        aria-controls="navbarButtonsExample"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
 
@@ -44,43 +28,28 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="/"
-              style="
+            <a class="nav-link" href="/" style="
                 color: #696969;
                 font-weight: bold;
                 font-family: Roboto;
                 letter-spacing: 2px;
-              "
-              >Trang chủ</a
-            >
+              ">Trang chủ</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="/timve"
-              style="
+            <a class="nav-link" href="/timve" style="
                 color: #696969;
                 font-weight: bold;
                 font-family: Roboto;
                 letter-spacing: 2px;
-              "
-              >Tìm vé</a
-            >
+              ">Tìm vé</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="/datve"
-              style="
+            <a class="nav-link" href="/datve" style="
                 color: #696969;
                 font-weight: bold;
                 font-family: Roboto;
                 letter-spacing: 2px;
-              "
-              >Đặt vé</a
-            >
+              ">Đặt vé</a>
           </li>
         </ul>
 
@@ -94,16 +63,18 @@
           >
             Login
           </button> -->
-          <button
-            data-mdb-button-init
-            data-mdb-ripple-init
-            class="btn btn-info btn-lg btn-block"
-            type="submit"
-            style="background-color: #26a8bc"
-          >
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="button"
+            style="background-color: #26a8bc" @click="redirectToPage()" v-if="!isLoggedIn">
             <i class="fa-regular fa-user" style="margin-right: 5px"></i>
             Đăng nhập
           </button>
+
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="button"
+            style="background-color: #26a8bc" @click="redirectToPage()" v-if="isLoggedIn">
+            <i class="fa-regular fa-user" style="margin-right: 5px"></i>
+            Đăng Xuất
+          </button>
+
         </div>
       </div>
       <!-- Collapsible wrapper -->
@@ -116,14 +87,41 @@
 <script>
 export default {
   name: "YourComponentName",
+  data() {
+    return {
+      isLoggedIn: false, // Giả sử trạng thái đăng nhập ban đầu là false
+    };
+  },
   methods: {
+    checkLoginStatus() {
+      // Giả sử bạn lưu token trong localStorage
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    },
+    redirectToPage() {
+      if (this.isLoggedIn) {
+        // Xử lý đăng xuất
+        this.logout();
+      } else {
+        // Xử lý đăng nhập
+        window.location.href = '/login'; // Chuyển hướng tới trang chính
+      }
+    },
     logout() {
       // Xử lý đăng xuất ở đây
       // Ví dụ: xóa token khỏi Local Storage và chuyển hướng đến trang đăng nhập
       localStorage.removeItem("token");
+      this.isLoggedIn = false;
       this.$router.push("/login");
       window.location.reload();
-    },
+    }
   },
+  mounted() {
+    this.checkLoginStatus(); // Kiểm tra trạng thái đăng nhập khi component được mount
+  }
 };
 </script>
