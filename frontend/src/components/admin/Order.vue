@@ -39,13 +39,9 @@
                                         <th>Mã Đặt Vé (PRNNo)</th>
                                         <th>Tàu</th>
                                         <th>Khách Hàng</th>
-                                        <th>Ngày Khởi Hành</th>
-                                        <th>Ga Đi</th>
-                                        <th>Ga Đến</th>
+
                                         <th>Số Ghế</th>
-                                        <th>Số Toa</th>
                                         <th>Phí Đặt Vé</th>
-                                        <th>Ngày Tạo</th>
                                         <th>Tính năng</th>
                                     </tr>
                                 </thead>
@@ -54,15 +50,11 @@
                                         <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                         <td>{{ o.id }}</td>
                                         <td>{{ o.prnNo }}</td>
-                                        <td>{{ o.trainID }}</td>
-                                        <td>{{ o.customerID }}</td>
-                                        <td>{{ o.journeyDate }}</td>
-                                        <td>{{ o.fromStationID }}</td>
-                                        <td>{{ o.toStationID }}</td>
-                                        <td>{{ o.seatID }}</td>
-                                        <td>{{ o.coachNo }}</td>
-                                        <td>{{ o.fareRuleID }}</td>
-                                        <td>{{ o.createdDate }}</td>
+                                        <td>{{ getTrainName(o.trainID) }}</td>
+                                        <td>{{ getCustomerName(o.customerID) }}</td>
+                                        <td>{{ getSeatName(o.seatID) }}</td>
+                                        <td>{{ getFareRuleName(o.fareRuleID) }}</td>
+
 
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -191,11 +183,14 @@ export default {
         return {
             orderData: [],
             orderModal: null,
-            stationData: [],
             stations: [],
+            trains: [],
+            customer: [],
+            seat: [],
+            fareRule: [],
             currentOrder: {
                 id: 0,
-
+                prnNo: "",
                 // stationName: "",
                 // divisionName: ""
             },
@@ -215,9 +210,59 @@ export default {
                 .then(response => response.json())
                 .then(data => {
                     this.stations = data;
+
+
                 })
                 .catch(error => {
                     console.error('Error fetching stations:', error);
+                });
+        },
+        fetchTrain() {
+            const url = process.env.VUE_APP_BASE_URL + `Train/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.trains = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching train:', error);
+                });
+        },
+        fetchCustomer() {
+            const url = process.env.VUE_APP_BASE_URL + `Customer/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.customer = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching customer:', error);
+                });
+        },
+        fetchSeat() {
+            const url = process.env.VUE_APP_BASE_URL + `Seat/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.seat = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching seat:', error);
+                });
+        },
+        fetchFareRule() {
+            const url = process.env.VUE_APP_BASE_URL + `FareRule/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.fareRule = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching fareRule:', error);
                 });
         },
         loadorderData() {
@@ -289,6 +334,26 @@ export default {
             const station = this.stations.find(station => station.id === id);
             return station ? station.stationName : 'Unknown';
         },
+        getTrainName(id) {
+            const train = this.trains.find(train => train.id === id);
+
+            return train ? train.trainName : 'Unknown';
+        },
+        getCustomerName(id) {
+            const customers = this.customer.find(customers => customers.id === id);
+
+            return customers ? customers.name : 'Unknown';
+        },
+        getSeatName(id) {
+            const seats = this.seat.find(seats => seats.id === id);
+
+            return seats ? seats.seatNo : 'Unknown';
+        },
+        getFareRuleName(id) {
+            const fareRules = this.fareRule.find(fareRules => fareRules.id === id);
+
+            return fareRules ? fareRules.fare : 'Unknown';
+        },
         changePage(page) {
             this.currentPage = page;
             this.loadorderData();
@@ -331,10 +396,10 @@ export default {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu trạm
-                    if (typeof this.loadstationData === 'function') {
-                        this.loadstationData();
+                    if (typeof this.loadorderData === 'function') {
+                        this.loadorderData();
                     } else {
-                        console.log('Hàm loadstationData không tồn tại.');
+                        console.log('Hàm loadorderData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -400,7 +465,11 @@ export default {
     mounted() {
         this.loadorderData();
         console.log(this.totalPages);
-        // this.fetchStations();
+        this.fetchStations();
+        this.fetchTrain();
+        this.fetchCustomer();
+        this.fetchSeat();
+        this.fetchFareRule();
         //load Modal
         this.orderModal = new Modal(this.$refs.orderModal);
         this.deleteModal = new Modal(this.$refs.deleteModal);
