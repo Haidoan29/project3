@@ -125,10 +125,7 @@
                                                 <input type="text" class="form-control" id="recipient-name"
                                                     v-model="currentProduct.name">
                                             </div>
-                                            <!-- <div class="form-group">
-                                <label for="imageProduct" class="col-form-label">Product Image:</label>
-                                <input type="file" class="form-control" id="imageProduct" @change="onFileChange">
-                            </div> -->
+
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">email:</label>
                                                 <input type="text" class="form-control" id="recipient-name"
@@ -260,7 +257,7 @@ export default {
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
-            axios.put(url, this.currentStation, {
+            axios.put(url, this.currentProduct, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -274,16 +271,16 @@ export default {
                         console.log('Hàm success không tồn tại.');
                     }
                     // Ẩn modal
-                    if (this.stationModal && typeof this.stationModal.hide === 'function') {
-                        this.stationModal.hide();
+                    if (this.customerModal && typeof this.customerModal.hide === 'function') {
+                        this.customerModal.hide();
                     } else {
-                        console.log('stationModal hoặc hàm hide không tồn tại.');
+                        console.log('customerModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu sản phẩm
-                    if (typeof this.loadstationData === 'function') {
-                        this.loadstationData();
+                    if (typeof this.loadProductData === 'function') {
+                        this.loadProductData();
                     } else {
-                        console.log('Hàm loadstationData không tồn tại.');
+                        console.log('Hàm loadProductData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -357,10 +354,10 @@ export default {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu trạm
-                    if (typeof this.loadstationData === 'function') {
-                        this.loadstationData();
+                    if (typeof this.loadProductData === 'function') {
+                        this.loadProductData();
                     } else {
-                        console.log('Hàm loadstationData không tồn tại.');
+                        console.log('Hàm loadProductData không tồn tại.');
                     }
                 })
                 .catch((error) => {

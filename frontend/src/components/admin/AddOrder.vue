@@ -24,74 +24,23 @@
                             <div class="modal-body">
                                 <form>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Mã Đặt Vé:</label>
-                                        <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.stationCode">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Tên tàu:</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <label for="recipient-name" class="col-form-label">Tàu:</label>
+                                        <select class="form-select form-select-lg mb-3" v-model="currentOrder.TrainID">
+                                            <option value="" disabled selected>Chọn Tàu</option>
+                                            <option v-for="t in trains" :key="t.id" :value="t.id">
+                                                {{ t.trainName }}
+                                            </option>
                                         </select>
-                                        <!-- <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.stationName"> -->
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Mã khách hàng:</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <label for="recipient-name" class="col-form-label">Tên khách hàng:</label>
+                                        <select class="form-select form-select-lg mb-3"
+                                            v-model="currentOrder.CustomerID">
+                                            <option value="" disabled selected>Chọn Tên Khách Hàng</option>
+                                            <option v-for="c in customer" :key="c.id" :value="c.id">
+                                                {{ c.name }}
+                                            </option>
                                         </select>
-                                        <!-- <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName"> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Ngày Khởi Hành:</label>
-                                        <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label"> Mã ga đi:</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        <!-- <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName"> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label"> Mã ga đến:</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        <!-- <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName"> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Số ghế.:</label>
-                                        <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Số toa:</label>
-                                        <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Phí đặt vé:</label>
-                                        <input type="text" class="form-control" id="recipient-name"
-                                            v-model="currentProduct.divisionName">
                                     </div>
 
                                     <button type="button" style=" width: 100px;height: 30px; font-size: 15px;"
@@ -131,26 +80,97 @@ export default {
     },
     data() {
         return {
-            stationData: [],
-            currentProduct: {
+            orderData: [],
+            stations: [],
+            trains: [],
+            customer: [],
+            seat: [],
+            fareRule: [],
+            currentOrder: {
                 id: 0,
-                stationCode: "",
-                stationName: "",
-                divisionName: "",
+                TrainID: "",
+                CustomerID: "",
+                JourneyDate: "",
+                FromStationID: "",
+                ToStationID: "",
+                SeatID: "",
+                FareRuleID: "",
 
             },
 
         }
     },
     methods: {
+        fetchStations() {
+            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(stationApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    this.stations = data;
+
+
+                })
+                .catch(error => {
+                    console.error('Error fetching stations:', error);
+                });
+        },
+        fetchTrain() {
+            const url = process.env.VUE_APP_BASE_URL + `Train/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.trains = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching train:', error);
+                });
+        },
+        fetchCustomer() {
+            const url = process.env.VUE_APP_BASE_URL + `Customer/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.customer = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching customer:', error);
+                });
+        },
+        fetchSeat() {
+            const url = process.env.VUE_APP_BASE_URL + `Seat/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.seat = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching seat:', error);
+                });
+        },
+        fetchFareRule() {
+            const url = process.env.VUE_APP_BASE_URL + `FareRule/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.fareRule = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching fareRule:', error);
+                });
+        },
         onSaveClick() {
-            if (this.currentProduct.id == 0) {
+            if (this.currentOrder.id == 0) {
                 var url = process.env.VUE_APP_BASE_URL + `Station/Create`;
 
                 // Lấy token từ local storage
                 const token = localStorage.getItem('token');
 
-                axios.post(url, this.currentProduct, {
+                axios.post(url, this.currentOrder, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -193,11 +213,13 @@ export default {
     mounted() {
         // this.loadProductData();
         console.log(this.totalPages);
-        //load Modal
-        // this.ProductModal = new Modal(this.$refs.ProductModal);
+        this.fetchStations();
+        this.fetchTrain();
+        this.fetchCustomer();
+        this.fetchSeat();
+        this.fetchFareRule();
+
+
     }
 }
 </script>
-<style scoped>
-/* @import url("/public/login.css"); */
-</style>

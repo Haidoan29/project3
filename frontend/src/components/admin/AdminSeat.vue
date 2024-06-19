@@ -68,31 +68,33 @@
                                     </tr>
 
                                 </tbody>
+                                <div class="khoi-phan-trang">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous"
+                                                    @click="previousPage">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" v-for="page in totalPages" :key="page">
+                                                <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next" @click="nextPage">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
 
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="khoi-phan-trang">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous" @click="previousPage">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item" v-for="page in totalPages" :key="page">
-                            <a class="page-link" href="#" @click="changePage(page)">{{ page }}</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next" @click="nextPage">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
             <!-- Modal -->
             <div class="modal" ref="seatModal" id="seatModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog">
