@@ -9,8 +9,8 @@ namespace Project3.Models
         public int TrainID { get; set; }
         public int StartStationID { get; set; }
         public int EndStationID { get; set; }
-        [NotMapped]
-        public DateOnly JourneyDate { get; set; }
+        
+        public DateTime JourneyDate { get; set; }
 
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
