@@ -394,7 +394,7 @@ export default {
   created() {
     this.loadStations().then(() => {
       // Sau khi tải dữ liệu thành công, bạn có thể gọi API tìm kiếm vé
-      const { startStationID, endStationID } =
+      const { startStationID, endStationID, journeyDate } =
         this.$router.currentRoute._rawValue.params;
       axios
         .post(process.env.VUE_APP_BASE_URL + "TrainSchedule/FullFilter", {
@@ -409,7 +409,11 @@ export default {
               _RightSize: endStationID,
               _operator: "equal",
             },
-            // { colName: 'JourneyDate', _RightSize: this.departureDate.toString(), _operator: 'equal' }
+            {
+              colName: 'journeyDate',
+              _RightSize: journeyDate + 'T00:00:00',
+              _operator: 'DateTime'
+            }
           ],
         })
         .then((response) => {

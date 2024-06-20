@@ -59,7 +59,7 @@ const routes = [
     component: AddClass,
   },
   {
-    path: "/timve/:startStationID/:endStationID",
+    path: "/timve/:startStationID-:endStationID/:journeyDate",
     name: "TimVe",
     component: TimVe,
     props: true
