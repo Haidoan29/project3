@@ -43,7 +43,8 @@
                       <fieldset>
                         <label for="departure">Ngày đi:</label>
                         <input name="deparure" type="date" class="form-control date" id="deparure"
-                          placeholder="Select date..." required="" style="border: 1px solid black" />
+                          placeholder="Select date..." v-model="departureDate" required=""
+                          style="border: 1px solid black" />
                       </fieldset>
                     </div>
 
@@ -110,256 +111,7 @@
     </div>
   </section>
 
-  <!-- <div class="tabs-content" id="recommended-hotel">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h2>Recommended Hotel For You</h2>
-                    </div>
-                </div>
-                <div class="wrapper">
-                    <div class="col-md-4">
-                        <ul class="tabs clearfix" data-tabgroup="third-tab-group">
-                            <li><a href="#livingroom" class="active">Living Room <i class="fa fa-angle-right"></i></a>
-                            </li>
-                            <li><a href="#suitroom">Suit Room <i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="#swimingpool">Swiming Pool <i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="#massage">Massage Service <i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="#fitness">Fitness Life <i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="#event">Evening Event <i class="fa fa-angle-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <section id="third-tab-group" class="recommendedgroup">
-                        <div id="livingroom">
-                            <div class="text-content">
-                                <iframe width="100%" height="400px" src="https://www.youtube.com/embed/rMxTreSFMgE">
-                                </iframe>
-                            </div>
-                        </div>
-                        <div id="suitroom">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div id="owl-suiteroom" class="owl-carousel owl-theme">
-                                        <div class="item">
-                                            <div class="suiteroom-item">
-                                                <img src="img/suite-02.jpg" alt="">
-                                                <div class="text-content">
-                                                    <h4>Clean And Relaxing Room</h4>
-                                                    <span>Aurora Resort</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="suiteroom-item">
-                                                <img src="img/suite-01.jpg" alt="">
-                                                <div class="text-content">
-                                                    <h4>Special Suite Room TV</h4>
-                                                    <span>Khao Yai Hotel</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="suiteroom-item">
-                                                <img src="img/suite-03.jpg" alt="">
-                                                <div class="text-content">
-                                                    <h4>The Best Sitting</h4>
-                                                    <span>Hotel Grand</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="swimingpool">
-                            <img src="img/swiming-pool.jpg" alt="">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-content">
-                                        <h4>Lovely View Swiming Pool For Special Guests</h4>
-                                        <span>Victoria Resort and Spa</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="massage">
-                            <img src="img/massage-service.jpg" alt="">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-content">
-                                        <h4>Perfect Place For Relaxation</h4>
-                                        <span>Napali Beach</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="fitness">
-                            <img src="img/fitness-service.jpg" alt="">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-content">
-                                        <h4>Insane Street Workout</h4>
-                                        <span>Hua Hin Beach</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="event">
-                            <img src="img/evening-event.jpg" alt="">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-content">
-                                        <h4>Finest Winery Night</h4>
-                                        <span>Queen Restaurant</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
 
-
-
-
-
-    <section id="most-visited">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h2>Most Visited Places</h2>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="owl-mostvisited" class="owl-carousel owl-theme">
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-01.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>River Views</h4>
-                                    <span>New York</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-02.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Lorem ipsum dolor</h4>
-                                    <span>Tokyo</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-03.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Proin dignissim</h4>
-                                    <span>Paris</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-04.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Fusce sed ipsum</h4>
-                                    <span>Hollywood</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-02.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Vivamus egestas</h4>
-                                    <span>Tokyo</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-01.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Aliquam elit metus</h4>
-                                    <span>New York</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-03.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Phasellus pharetra</h4>
-                                    <span>Paris</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-04.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>In in quam efficitur</h4>
-                                    <span>Hollywood</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-01.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Sed faucibus odio</h4>
-                                    <span>NEW YORK</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item col-md-12">
-                            <div class="visited-item">
-                                <img src="img/place-02.jpg" alt="">
-                                <div class="text-content">
-                                    <h4>Donec varius porttitor</h4>
-                                    <span>Tokyo</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="primary-button">
-                        <a href="#" class="scroll-top">Back To Top</a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <ul class="social-icons">
-                        <li><a href="https://www.facebook.com/Share-Source-Code-Website-189970988225280/"><i
-                                    class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-12">
-                    <p>Copyright &copy; 2018 Flight Tour and Travel Company</p>
-                </div>
-            </div>
-        </div>
-    </footer> -->
 </template>
 
 <script>
@@ -372,7 +124,8 @@ export default {
       trainSchedule: [],
       stations: [],
       selectedFrom: null,
-      selectedTo: null
+      selectedTo: null,
+      departureDate: ''
 
     }
   },
@@ -449,10 +202,11 @@ export default {
         // Chuyển đổi this.selectedFrom và this.selectedTo thành chuỗi
         const selectedFromAsString = this.selectedFrom.toString();
         const selectedToAsString = this.selectedTo.toString();
+        const JourneyDateString = this.departureDate.toString();
         console.log(`selectedFromAsString = ${selectedFromAsString},selectedToAsString = ${selectedToAsString} `);
         this.$router.push({
           name: 'TimVe',
-          params: { startStationID: selectedFromAsString, endStationID: selectedToAsString }
+          params: { startStationID: selectedFromAsString, endStationID: selectedToAsString, journeyDate: JourneyDateString }
         });
 
 
