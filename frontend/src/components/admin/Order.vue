@@ -108,26 +108,39 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Họ và
-                                        tên</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Tàu</label>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3" v-model="currentOrder.trainID"
+                                            required>
+                                            <option disabled value="">Chọn ga xuất phát</option>
+                                            <option v-for="t in trains" :key="t.id" :value="t.id">{{ t.trainName }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">email:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Số ghế :</label>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3" v-model="currentOrder.seatID"
+                                            required>
+                                            <option disabled value="">Chọn ga xuất phát</option>
+                                            <option v-for="s in seat" :key="s.id" :value="s.id">{{ s.seatNo }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">phone:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Giá vé :</label>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3"
+                                            v-model="currentOrder.fareRuleID" required>
+                                            <option disabled value="">Chọn ga xuất phát</option>
+                                            <option v-for="f in fareRule" :key="f.id" :value="f.id">{{ f.fare }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">CCCD:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">address:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
+
 
                             </form>
                         </div>
