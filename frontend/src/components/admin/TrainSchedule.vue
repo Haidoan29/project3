@@ -4,7 +4,7 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="/admin/train"><b>Danh sách tàu</b></a></li>
+                    <li class="breadcrumb-item active"><a href="/admin/train"><b>Danh sách lịch trình tàu</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
