@@ -169,6 +169,15 @@ export default {
         // eslint-disable-next-line vue/no-unused-components
         Modal, toast
     },
+    setup() {
+        const success = () => {
+            toast("Success !", {
+                autoClose: 1000,
+                type: "success"
+            });
+        }
+        return { success };
+    },
 
     data() {
         return {

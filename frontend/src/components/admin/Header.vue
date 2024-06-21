@@ -34,19 +34,24 @@
             <li><a class="app-menu__item " href="/admin/train"><i class='app-menu__icon bx bx-train  '></i>
                     <span class="app-menu__label">Quản lý Tàu</span></a></li>
 
-            <li><a class="app-menu__item" href="/admin/station"><i
-                        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý nhà
+            <li><a class="app-menu__item" href="/admin/station"><i class='app-menu__icon bx bx-buildings'></i>
+
+                    <span class="app-menu__label">Quản lý nhà
                         Ga</span></a>
             </li>
-            <li><a class="app-menu__item" href="/admin/order"><i class='app-menu__icon bx bx-task'></i><span
-                        class="app-menu__label">Quản lý Vé</span></a></li>
-            <li><a class="app-menu__item" href="/admin/router"><i class='app-menu__icon bx bx-run'></i><span
-                        class="app-menu__label">Quản lý tuyến đường
+            <li><a class="app-menu__item" href="/admin/order"><i class='app-menu__icon fas fa-ticket-alt'></i>
+                    <span class="app-menu__label">Quản lý Vé</span></a></li>
+            <li><a class="app-menu__item" href="/admin/router"><i class='app-menu__icon bx bx-map'></i>
+
+                    <span class="app-menu__label">Quản lý tuyến đường
                     </span></a></li>
-            <li><a class="app-menu__item" href="/admin/seat"><i class='app-menu__icon bx bx-dollar'></i><span
-                        class="app-menu__label"> Quản Lý Ghế</span></a></li>
-            <li><a class="app-menu__item" href="/admin/class"><i class='app-menu__icon bx bx-dollar'></i><span
+            <li><a class="app-menu__item" href="/admin/seat"><i class='app-menu__icon bx bx-chair'></i>
+                    <span class="app-menu__label"> Quản Lý Ghế</span></a></li>
+            <li><a class="app-menu__item" href="/admin/class"> <i class='app-menu__icon fas fa-ticket-alt'></i><span
                         class="app-menu__label"> Quản Lý Hạng Vé</span></a></li>
+            <li><a class="app-menu__item" href="/admin/TrainSchedule"> <i
+                        class='app-menu__icon fas fa-calendar-alt'></i>
+                    <span class="app-menu__label"> Quản Lý Lịch trình tàu</span></a></li>
 
         </ul>
     </aside>
