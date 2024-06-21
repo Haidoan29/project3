@@ -20,7 +20,9 @@ import TimVe from "@/views/TimVe.vue";
 import AdminSeat from '@/views/admin/AdminSeat.vue';
 import AddSeats from '@/views/admin/AddSeat.vue';
 import Class from '@/views/admin/Class.vue';
-import AddClass from '@/views/admin/AddClass.vue'
+import AddClass from '@/views/admin/AddClass.vue';
+import TrainSchedule from '@/views/admin/TrainSchedule.vue'
+import AddTrainSchedule from '@/views/admin/AddTrainSchedule.vue'
 
 const routes = [
   {
@@ -52,6 +54,16 @@ const routes = [
     path: "/admin/class",
     name: "ClassManagement",
     component: Class,
+  },
+  {
+    path: "/admin/TrainSchedule",
+    name: "TrainSchedule",
+    component: TrainSchedule,
+  },
+  {
+    path: "/admin/TrainSchedule/add-AddTrainSchedule",
+    name: "addTrainSchedule",
+    component: AddTrainSchedule,
   },
   {
     path: "/admin/class/add-class",

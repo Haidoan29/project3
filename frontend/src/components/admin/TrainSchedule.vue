@@ -17,9 +17,9 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
 
-                                    <a class="btn btn-add btn-sm" href="/admin/train/add-train" title="Thêm"><i
-                                            class="fas fa-plus"></i>
-                                        Tạo mới tàu</a>
+                                    <a class="btn btn-add btn-sm" href="/admin/TrainSchedule/add-AddTrainSchedule"
+                                        title="Thêm"><i class="fas fa-plus"></i>
+                                        Tạo lịch mới</a>
                                 </div>
                             </div>
                             <div class=" d-flex">
@@ -37,24 +37,25 @@
                                         <th width="10"><input type="checkbox" id="all"></th>
                                         <th with="50">ID</th>
                                         <th with="50">Tên tàu</th>
-                                        <th width="200">Số lượng ghế hạng AC3 </th>
-                                        <th width="200">Số lượng ghế hạng First Class</th>
-                                        <th width="200">Số lượng ghế hạng Sleeper</th>
+                                        <th width="200">Ga bắt đầu </th>
+                                        <th width="200">Ga kết thúc</th>
+                                        <th width="200">Thời gian đi </th>
+                                        <th width="200">Thời gian đến </th>
 
-                                        <th width="200">Tuyến đường</th>
 
                                         <th width="200">Tính năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="t in trainData" :key="t.id">
+                                    <tr v-for="t in trainScheduleData" :key="t.id">
                                         <th width="10"><input type="checkbox" id="all"></th>
                                         <td>{{ t.id }}</td>
-                                        <td>{{ t.trainName }}</td>
-                                        <td>{{ t.numCoachesAC3 }}</td>
-                                        <td>{{ t.numCoachesFirstClass }}</td>
-                                        <td>{{ t.numCoachesSleeper }}</td>
-                                        <td>{{ getRouteName(t.routeID) }}</td>
+                                        <td>{{ getTrainName(t.trainID) }}</td>
+                                        <td>{{ getStationName(t.startStationID) }}</td>
+                                        <td>{{ getStationName(t.endStationID) }}</td>
+                                        <td>{{ formatDate(t.departureTime) }}</td>
+                                        <td>{{ formatDate(t.arrivalTime) }}</td>
+
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-warning"
@@ -104,39 +105,57 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Tên tàu:</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.trainName">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng AC3:</label>
-                                <input type="number" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.numCoachesAC3">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng First Class</label>
-                                <input type="number" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.numCoachesFirstClass">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Số lượng ghế hạng Sleeper</label>
-                                <input type="number" class="form-control" id="recipient-name"
-                                    v-model="currentTrain.numCoachesSleeper">
-                            </div>
-                            <div class="form-group">
                                 <div>
-                                    <label for="startStationID" class="col-form-label">Tuyến đường:</label>
+                                    <label for="startStationID" class="col-form-label">Tàu:</label>
                                 </div>
                                 <div>
                                     <select class="form-select form-select-lg mb-3 col-form-label"
-                                        v-model="currentTrain.routeID" required>
-                                        <option disabled value="">Chọn tuyến đường</option>
-                                        <option v-for="r in routes" :key="r.id" :value="r.id">{{ r.routeName }}
+                                        v-model="currentTrainSchedule.trainID" required>
+                                        <option disabled value="">Chọn tàu</option>
+                                        <option v-for="r in train" :key="r.id" :value="r.id">{{ r.trainName }}
                                         </option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="startStationID" class="col-form-label">Ga xuất phát:</label>
+                                </div>
+                                <div>
+                                    <select class="form-select form-select-lg mb-3 col-form-label"
+                                        v-model="currentTrainSchedule.startStationID" required>
+                                        <option disabled value="">Chọn ga xuất phát</option>
+                                        <option v-for="r in station" :key="r.id" :value="r.id">{{ r.stationName }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    <label for="startStationID" class="col-form-label">Ga kết thúc:</label>
+                                </div>
+                                <div>
+                                    <select class="form-select form-select-lg mb-3 col-form-label"
+                                        v-model="currentTrainSchedule.endStationID" required>
+                                        <option disabled value="">Chọn ga kết thúc</option>
+                                        <option v-for="r in station" :key="r.id" :value="r.id">{{ r.stationName }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Ngày xuất phát</label>
+                                <input type="datetime-local" class="form-control" id="recipient-name"
+                                    v-model="currentTrainSchedule.departureTime">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Ngày Đến</label>
+                                <input type="datetime-local" class="form-control" id="recipient-name"
+                                    v-model="currentTrainSchedule.arrivalTime">
+                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -199,12 +218,13 @@ export default {
 
     data() {
         return {
-            trainData: [],
+            trainScheduleData: [],
             trainModal: null,
             deleteModal: null,
 
-            routes: [],
-            currentTrain: {
+            train: [],
+            station: [],
+            currentTrainSchedule: {
                 id: 0,
                 stationCode: "stationCode",
                 // stationName: "",
@@ -222,23 +242,60 @@ export default {
 
 
     methods: {
-        fetchtrains() {
-            const stationApiUrl = process.env.VUE_APP_BASE_URL + `Routes/GetAll`; // Thay thế bằng API thực tế của bạn
+        formatDate(dateTimeString) {
+            const date = new Date(dateTimeString);
+            const options = {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                // hour: '2-digit',
+                // minute: '2-digit',
+                hour12: false // Sử dụng định dạng 24 giờ, bạn có thể bỏ nếu muốn dùng định dạng 12 giờ
+            };
+            const options1 = {
+                // year: "numeric",
+                // month: "2-digit",
+                // day: "2-digit",
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false // Sử dụng định dạng 24 giờ, bạn có thể bỏ nếu muốn dùng định dạng 12 giờ
+            };
 
-            fetch(stationApiUrl)
+            // Chuyển đổi ngày giờ thành chuỗi theo định dạng vi-VN
+            const dateString = date.toLocaleDateString("vi-VN", options);
+            const timeString = date.toLocaleTimeString("vi-VN", options1);
+
+            return `${dateString} ${timeString}`;
+        },
+        fetchtrains() {
+            const url = process.env.VUE_APP_BASE_URL + `Train/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    this.routes = data;
+                    this.train = data;
                 })
                 .catch(error => {
                     console.error('Error fetching trains:', error);
                 });
         },
-        loadtrainData() {
-            var url = process.env.VUE_APP_BASE_URL + `Train/GetAll`;
+        fetchStation() {
+            const url = process.env.VUE_APP_BASE_URL + `Station/GetAll`; // Thay thế bằng API thực tế của bạn
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.station = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching station:', error);
+                });
+        },
+        loadtrainScheduleData() {
+            var url = process.env.VUE_APP_BASE_URL + `TrainSchedule/GetAll`;
             axios.get(url).then((response) => {
                 console.log(response);
-                //this.trainData = response.data;
+                //this.trainScheduleData = response.data;
                 this.totalItems = response.data.length; // Số lượng sản phẩm trong dữ liệu nhận được
                 this.totalPages = Math.floor(this.totalItems / this.pageSize);
                 if (this.totalItems % this.pageSize !== 0) {
@@ -248,8 +305,8 @@ export default {
                 let startIndex = (this.currentPage - 1) * this.pageSize;
                 let endIndex = this.currentPage * this.pageSize;
 
-                // Cắt lát trainData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
-                this.trainData = response.data.slice(startIndex, endIndex);
+                // Cắt lát trainScheduleData để chỉ lấy số lượng sản   phẩm tương ứng với pageSize
+                this.trainScheduleData = response.data.slice(startIndex, endIndex);
                 // Nếu số lượng sản phẩm vượt quá 10, tăng số trang lên 1
 
             }).catch((error) => {
@@ -257,11 +314,11 @@ export default {
             })
         },
         onSaveClick() {
-            var url = process.env.VUE_APP_BASE_URL + `Train/Update`;
+            var url = process.env.VUE_APP_BASE_URL + `TrainSchedule/Update`;
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
-            axios.put(url, this.currentTrain, {
+            axios.put(url, this.currentTrainSchedule, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -281,10 +338,10 @@ export default {
                         console.log('trainModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu sản phẩm
-                    if (typeof this.loadtrainData === 'function') {
-                        this.loadtrainData();
+                    if (typeof this.loadtrainScheduleData === 'function') {
+                        this.loadtrainScheduleData();
                     } else {
-                        console.log('Hàm loadtrainData không tồn tại.');
+                        console.log('Hàm loadtrainScheduleData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -299,32 +356,37 @@ export default {
                 });
         },
 
-        getRouteName(id) {
-            if (!this.routes) return 'Unknown';
-            const route = this.routes.find(r => r.id === id);
-            return route ? route.routeName : 'Unknown';
+        getTrainName(id) {
+            if (!this.train) return 'Unknown';
+            const trains = this.train.find(r => r.id === id);
+            return trains ? trains.trainName : 'Unknown';
+        },
+        getStationName(id) {
+            if (!this.station) return 'Unknown';
+            const stations = this.station.find(r => r.id === id);
+            return stations ? stations.stationName : 'Unknown';
         },
 
 
         changePage(page) {
             this.currentPage = page;
-            this.loadtrainData();
+            this.loadtrainScheduleData();
         },
         previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
-                this.loadtrainData();
+                this.loadtrainScheduleData();
             }
         },
         nextPage() {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
-                this.loadtrainData();
+                this.loadtrainScheduleData();
             }
         },
         onDeleteClick() {
 
-            var url = process.env.VUE_APP_BASE_URL + `Train/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
+            var url = process.env.VUE_APP_BASE_URL + `TrainSchedule/Delete/${this.delete}`; // Thay đổi đường dẫn API delete và thêm id của trạm cần xóa
 
             // Lấy token từ local storage
             const token = localStorage.getItem('token');
@@ -344,15 +406,15 @@ export default {
                     // Ẩn modal
                     if (this.deleteModal && typeof this.deleteModal.hide === 'function') {
                         this.deleteModal.hide();
-                        this.loadtrainData();
+                        this.loadtrainScheduleData();
                     } else {
                         console.log('DeleteModal hoặc hàm hide không tồn tại.');
                     }
                     // Tải lại dữ liệu trạm
-                    if (typeof this.loadtrainData === 'function') {
-                        this.loadtrainData();
+                    if (typeof this.loadtrainScheduleData === 'function') {
+                        this.loadtrainScheduleData();
                     } else {
-                        console.log('Hàm loadtrainData không tồn tại.');
+                        console.log('Hàm loadtrainScheduleData không tồn tại.');
                     }
                 })
                 .catch((error) => {
@@ -373,12 +435,12 @@ export default {
         },
 
         onUpdateClick(t) {
-            this.currentTrain = Object.assign({}, t);// clone d
+            this.currentTrainSchedule = Object.assign({}, t);// clone d
             this.trainModal.show();
         },
         onSearchClick() {
             if (this.searchKeyword.trim() === '') {
-                this.loadtrainData();
+                this.loadtrainScheduleData();
             } else {
                 var url = process.env.VUE_APP_BASE_URL + `Train/FullFilter`;
                 var requestData = {
@@ -393,8 +455,8 @@ export default {
 
                 axios.post(url, requestData)
                     .then(response => {
-                        this.trainData = response.data;
-                        this.totalItems = this.trainData.length;
+                        this.trainScheduleData = response.data;
+                        this.totalItems = this.trainScheduleData.length;
                         this.totalPages = Math.floor(this.totalItems / this.pageSize);
                         if (this.totalItems % this.pageSize !== 0) {
                             this.totalPages++;
@@ -417,9 +479,10 @@ export default {
     },
 
     mounted() {
-        this.loadtrainData();
+        this.loadtrainScheduleData();
         console.log(this.totalPages);
         this.fetchtrains();
+        this.fetchStation();
         //load Modal
         this.trainModal = new Modal(this.$refs.trainModal);
         this.deleteModal = new Modal(this.$refs.deleteModal);
